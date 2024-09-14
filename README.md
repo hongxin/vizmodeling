@@ -2,8 +2,8 @@
 A short course of visual modeling
 
 ## Course Materials （2024-2025）
-- [Slides-1](https://github.com/hongxin/vizmodeling/2024/vizmodeling-1.pdf)
-- [Slides-2](https://github.com/hongxin/vizmodeling/2024/vizmodeling-2.pdf)
+- [Slides-1](https://github.com/hongxin/vizmodeling/blob/main/2024/vizmodeling-1.pdf)
+- [Slides-2](https://github.com/hongxin/vizmodeling/blob/main/2024/vizmodeling-2.pdf)
 
 ## Description
 This short course is designed for gaduated students of Zhejiang University. 
