@@ -1,3 +1,5 @@
+English | [中文](https://github.com/hongxin/vizmodeling/blob/main/README_cn.md)
+
 # vizmodeling
 A short course of visual modeling
 
