@@ -1,4 +1,4 @@
-[EN](https://github.com/hongxin/vizmodeling/blob/main/README.md) | CN
+[English](https://github.com/hongxin/vizmodeling/blob/main/README.md) | 中文
 
 # 可视化建模
 一个有关可视建模分析的微课程
