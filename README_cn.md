@@ -3,7 +3,12 @@
 # 可视化建模
 一个有关可视建模分析的微课程
 
-## 课程资料 （2024-2025）
+## 课程资料 
+### 2025
+- 2025-09-29 [Slides-1](https://github.com/hongxin/vizmodeling/blob/main/2025/vizmodeling-1.pdf)
+- 2025-10-08 [Slides-2](https://github.com/hongxin/vizmodeling/blob/main/2025/vizmodeling-2.pdf)
+
+### 2024
 - 2024-09-14 [Slides-1](https://github.com/hongxin/vizmodeling/blob/main/2024/vizmodeling-1.pdf)
 - 2024-09-19 [Slides-2](https://github.com/hongxin/vizmodeling/blob/main/2024/vizmodeling-2.pdf)
 
