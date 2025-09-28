@@ -3,7 +3,13 @@ English | [中文](https://github.com/hongxin/vizmodeling/blob/main/README_cn.md
 # vizmodeling
 A short course of visual modeling
 
-## Course Materials （2024-2025）
+## Course Materials
+
+### 2025
+- 2025-09-29 [Slides-1](https://github.com/hongxin/vizmodeling/blob/main/2025/vizmodeling-1.pdf)
+- 2025-10-08 [Slides-2](https://github.com/hongxin/vizmodeling/blob/main/2025/vizmodeling-2.pdf)
+
+### 2024
 - 2024-09-14 [Slides-1](https://github.com/hongxin/vizmodeling/blob/main/2024/vizmodeling-1.pdf)
 - 2024-09-19 [Slides-2](https://github.com/hongxin/vizmodeling/blob/main/2024/vizmodeling-2.pdf)
 
@@ -20,7 +26,8 @@ Moreover, this course aims to inspire students to maintain a forward-thinking pe
 Dr. Hongxin Zhang http://www.cad.zju.edu.cn/home/zhx/
 
 ## TA
-Yuxi Zhou  
+- Hongjia Wu
+- Yuxi Zhou  
 
 ## Classroom & Time
 Online
