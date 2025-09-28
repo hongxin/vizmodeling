@@ -6,7 +6,7 @@
 ## 课程资料 
 ### 2025
 - 2025-09-29 [Slides-1](https://github.com/hongxin/vizmodeling/blob/main/2025/vizmodeling-1.pdf)
-- 2025-10-08 [Slides-2](https://github.com/hongxin/vizmodeling/blob/main/2025/vizmodeling-2.pdf)
+- 2025-10-09 [Slides-2](https://github.com/hongxin/vizmodeling/blob/main/2025/vizmodeling-2.pdf)
 
 ### 2024
 - 2024-09-14 [Slides-1](https://github.com/hongxin/vizmodeling/blob/main/2024/vizmodeling-1.pdf)
