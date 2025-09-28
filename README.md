@@ -26,6 +26,7 @@ Moreover, this course aims to inspire students to maintain a forward-thinking pe
 Dr. Hongxin Zhang http://www.cad.zju.edu.cn/home/zhx/
 
 ## TA
+- Junxi Wang
 - Hongjia Wu
 - Yuxi Zhou  
 
