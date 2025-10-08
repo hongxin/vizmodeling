@@ -1,4 +1,4 @@
-const kmeans = require('ml-kmeans');
+const { kmeans } = require('ml-kmeans');
 const { Matrix } = require('ml-matrix');
 const { PCA } = require('ml-pca');
 
@@ -20,7 +20,7 @@ function performKMeans(data, options = {}) {
   });
 
   const endTime = Date.now();
-  console.log(`K-Means completed in ${endTime - startTime}ms, clusters: ${result.clusters.length}`);
+  console.log(`K-Means completed in ${endTime - startTime}ms, clusters: ${result.centroids.length}`);
 
   return {
     labels: result.clusters,
@@ -40,13 +40,25 @@ function performMeanShift(data, options = {}) {
     maxIterations = 100
   } = options;
 
+  // 对高维数据先降维（避免维度灾难）
+  let workingData = data;
+  const d = data[0].length;
+  if (d > 50) {
+    console.log(`  Reducing dimensions from ${d} to 50 for Mean-Shift...`);
+    const matrix = new Matrix(data);
+    const pca = new PCA(matrix);
+    const reduced = pca.predict(matrix, { nComponents: 50 });
+    workingData = reduced.to2DArray();
+  }
+
   // 自动估计bandwidth（如果未提供）
-  const bw = bandwidth || estimateBandwidth(data);
+  const bw = bandwidth || estimateBandwidth(workingData);
+  console.log(`  Using bandwidth: ${bw.toFixed(4)}`);
 
   // 对于大数据集，使用采样以提高性能
-  const sampleSize = Math.min(data.length, 500);
-  const sampledData = data.length > sampleSize ?
-    sampleData(data, sampleSize) : data;
+  const sampleSize = Math.min(workingData.length, 300);
+  const sampledData = workingData.length > sampleSize ?
+    sampleData(workingData, sampleSize) : workingData;
 
   const centers = [];
   const processed = new Set();
@@ -71,10 +83,11 @@ function performMeanShift(data, options = {}) {
       iter++;
     }
 
-    // 合并相近的中心
+    // 合并相近的中心（使用更大的阈值）
     let merged = false;
+    const mergeThreshold = bw * 0.5;
     for (let j = 0; j < centers.length; j++) {
-      if (euclideanDistance(current, centers[j]) < bw / 2) {
+      if (euclideanDistance(current, centers[j]) < mergeThreshold) {
         merged = true;
         break;
       }
@@ -86,8 +99,8 @@ function performMeanShift(data, options = {}) {
     processed.add(i);
   }
 
-  // 为所有数据点分配标签
-  const labels = data.map(point => {
+  // 为工作数据分配标签
+  const labels = workingData.map(point => {
     let minDist = Infinity;
     let label = 0;
     centers.forEach((center, idx) => {
@@ -137,18 +150,24 @@ function performMOG(data, options = {}) {
 
   // EM迭代
   for (let iter = 0; iter < maxIterations; iter++) {
-    // E-step: 计算后验概率
+    // E-step: 计算后验概率（使用对数空间避免下溢）
     const responsibilities = new Array(n).fill(null).map(() => new Array(k));
 
     for (let i = 0; i < n; i++) {
-      let sum = 0;
+      // 计算对数概率
+      const logProbs = new Array(k);
       for (let j = 0; j < k; j++) {
-        responsibilities[i][j] = weights[j] * gaussianPDF(data[i], means[j], covariances[j]);
-        sum += responsibilities[i][j];
+        logProbs[j] = Math.log(weights[j] + 1e-10) + gaussianLogPDF(data[i], means[j], covariances[j]);
       }
-      // 归一化
+
+      // log-sum-exp 技巧避免下溢
+      const maxLogProb = Math.max(...logProbs);
+      const sumExp = logProbs.reduce((sum, lp) => sum + Math.exp(lp - maxLogProb), 0);
+      const logSumExp = maxLogProb + Math.log(sumExp);
+
+      // 归一化后验概率
       for (let j = 0; j < k; j++) {
-        responsibilities[i][j] /= (sum + 1e-10);
+        responsibilities[i][j] = Math.exp(logProbs[j] - logSumExp);
       }
     }
 
@@ -189,14 +208,14 @@ function performMOG(data, options = {}) {
     prevLogLikelihood = logLikelihood;
   }
 
-  // 分配标签
+  // 分配标签（使用对数概率）
   const labels = data.map(point => {
-    let maxProb = -Infinity;
+    let maxLogProb = -Infinity;
     let label = 0;
     for (let j = 0; j < k; j++) {
-      const prob = weights[j] * gaussianPDF(point, means[j], covariances[j]);
-      if (prob > maxProb) {
-        maxProb = prob;
+      const logProb = Math.log(weights[j] + 1e-10) + gaussianLogPDF(point, means[j], covariances[j]);
+      if (logProb > maxLogProb) {
+        maxLogProb = logProb;
         label = j;
       }
     }
@@ -286,28 +305,40 @@ function initializeCovariances(data, means, labels, d, k) {
   return covariances;
 }
 
-function gaussianPDF(x, mean, cov) {
+// 计算高斯分布的对数概率密度（避免数值下溢）
+function gaussianLogPDF(x, mean, cov) {
   const d = x.length;
   let exponent = 0;
-  let det = 1;
+  let logDet = 0;
 
   for (let i = 0; i < d; i++) {
     const diff = x[i] - mean[i];
     exponent += (diff * diff) / cov[i];
-    det *= cov[i];
+    logDet += Math.log(cov[i]);
   }
 
-  const coefficient = 1 / Math.sqrt(Math.pow(2 * Math.PI, d) * det);
-  return coefficient * Math.exp(-0.5 * exponent);
+  const logCoefficient = -0.5 * (d * Math.log(2 * Math.PI) + logDet);
+  return logCoefficient - 0.5 * exponent;
+}
+
+// 保留原函数用于兼容，但改用对数空间
+function gaussianPDF(x, mean, cov) {
+  return Math.exp(gaussianLogPDF(x, mean, cov));
 }
 
 function computeLogLikelihood(data, weights, means, covariances) {
   return data.reduce((logLike, point) => {
-    let prob = 0;
-    for (let j = 0; j < weights.length; j++) {
-      prob += weights[j] * gaussianPDF(point, means[j], covariances[j]);
-    }
-    return logLike + Math.log(prob + 1e-10);
+    // 使用对数空间计算
+    const logProbs = weights.map((w, j) =>
+      Math.log(w + 1e-10) + gaussianLogPDF(point, means[j], covariances[j])
+    );
+
+    // log-sum-exp
+    const maxLogProb = Math.max(...logProbs);
+    const sumExp = logProbs.reduce((sum, lp) => sum + Math.exp(lp - maxLogProb), 0);
+    const logSumExp = maxLogProb + Math.log(sumExp);
+
+    return logLike + logSumExp;
   }, 0);
 }
 
