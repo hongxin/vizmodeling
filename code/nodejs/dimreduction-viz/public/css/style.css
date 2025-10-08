@@ -446,3 +446,28 @@ svg {
         flex-direction: column;
     }
 }
+
+/* Footer */
+.footer {
+    padding: 30px 35px 25px;
+    text-align: center;
+    border-top: 1px solid #f0f0f0;
+    margin-top: 30px;
+}
+
+.footer p {
+    margin: 0;
+    color: #888;
+    font-size: 0.85em;
+    line-height: 1.6;
+}
+
+.footer a {
+    color: #667eea;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #764ba2;
+}
