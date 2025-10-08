@@ -1,0 +1,18 @@
+# Node.js 项目忽略文件
+node_modules/
+*.log
+npm-debug.log*
+dist/
+build/
+.env
+.DS_Store
+coverage/
+*.tgz
+.idea/
+.vscode/
+*.swp
+*.swo
+*.tmp
+*.bak
+
+# 可根据实际情况补充

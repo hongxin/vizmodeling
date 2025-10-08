@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">高维数据降维可视化演示</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div>
+                    <h1 data-i18n="main-title">高维数据降维可视化演示</h1>
+                    <p class="subtitle" data-i18n="subtitle">对比PCA、t-SNE、UMAP三种降维方法</p>
+                </div>
+                <div class="lang-switch">
+                    <button class="lang-btn" data-lang="zh">中文</button>
+                    <button class="lang-btn" data-lang="en">English</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="controls">
+            <!-- 主要控制区域 - 横向布局 -->
+            <div class="main-controls">
+                <div class="control-group dataset-control">
+                    <label for="dataset-select" data-i18n="select-dataset">选择数据集:</label>
+                    <select id="dataset-select">
+                        <option value="" data-i18n="loading">加载中...</option>
+                    </select>
+                    <div id="dataset-info" class="info-box"></div>
+                </div>
+
+                <div class="control-group method-control">
+                    <label data-i18n="reduction-method">降维方法:</label>
+                    <div class="method-buttons">
+                        <button class="method-btn" data-method="pca">PCA</button>
+                        <button class="method-btn" data-method="tsne">t-SNE</button>
+                        <button class="method-btn" data-method="umap">UMAP</button>
+                        <button class="method-btn compare-btn" data-method="compare" data-i18n="compare-display">对比显示</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 参数控制区域 -->
+            <div class="params-controls">
+                <div class="control-group" id="tsne-params" style="display: none;">
+                    <h3 data-i18n="tsne-params-title">t-SNE 参数</h3>
+                    <label>
+                        Perplexity: <span id="perplexity-value">30</span>
+                        <input type="range" id="perplexity" min="5" max="50" value="30" step="5">
+                    </label>
+                    <label>
+                        <span data-i18n="learning-rate">Learning Rate</span>: <span id="epsilon-value">10</span>
+                        <input type="range" id="epsilon" min="1" max="100" value="10" step="5">
+                    </label>
+                </div>
+
+                <div class="control-group" id="umap-params" style="display: none;">
+                    <h3 data-i18n="umap-params-title">UMAP 参数</h3>
+                    <label>
+                        <span data-i18n="n-neighbors">N Neighbors</span>: <span id="nNeighbors-value">15</span>
+                        <input type="range" id="nNeighbors" min="5" max="50" value="15" step="5">
+                    </label>
+                    <label>
+                        <span data-i18n="min-distance">Min Distance</span>: <span id="minDist-value">0.1</span>
+                        <input type="range" id="minDist" min="0.01" max="0.5" value="0.1" step="0.05">
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p data-i18n="computing">计算中...</p>
+        </div>
+
+        <div id="visualization-container">
+            <div class="vis-section" id="single-view" style="display: none;">
+                <div class="vis-header">
+                    <h2 id="single-title"></h2>
+                    <div class="metrics" id="single-metrics"></div>
+                </div>
+                <svg id="single-viz"></svg>
+                <div class="legend" id="single-legend"></div>
+            </div>
+
+            <div class="vis-section" id="compare-view" style="display: none;">
+                <div class="comparison-grid">
+                    <div class="compare-item">
+                        <div class="vis-header">
+                            <h3>
+                                PCA <span data-i18n="pca-desc">(线性降维)</span>
+                            </h3>
+                            <div class="metrics" id="pca-metrics"></div>
+                        </div>
+                        <svg id="pca-viz"></svg>
+                    </div>
+                    <div class="compare-item">
+                        <div class="vis-header">
+                            <h3>
+                                t-SNE <span data-i18n="tsne-desc">(非线性降维)</span>
+                            </h3>
+                            <div class="metrics" id="tsne-metrics"></div>
+                        </div>
+                        <svg id="tsne-viz"></svg>
+                    </div>
+                    <div class="compare-item">
+                        <div class="vis-header">
+                            <h3>
+                                UMAP <span data-i18n="umap-desc">(非线性降维)</span>
+                            </h3>
+                            <div class="metrics" id="umap-metrics"></div>
+                        </div>
+                        <svg id="umap-viz"></svg>
+                    </div>
+                </div>
+                <div class="legend" id="compare-legend"></div>
+                <div class="comparison-notes">
+                    <h3 data-i18n="comparison-title">方法对比说明</h3>
+                    <ul>
+                        <li data-i18n="pca-note"><strong>PCA</strong>: 线性降维方法，保持全局结构，计算速度快</li>
+                        <li data-i18n="tsne-note"><strong>t-SNE</strong>: 非线性降维，擅长保持局部结构，聚类效果好</li>
+                        <li data-i18n="umap-note"><strong>UMAP</strong>: 非线性降维，同时保持局部和全局结构，速度较快</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
