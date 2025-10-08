@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">数据聚类可视化演示</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div>
+                    <h1 data-i18n="main-title">数据聚类可视化演示</h1>
+                    <p class="subtitle" data-i18n="subtitle">对比K-Means、Mean-Shift、MOG三种聚类方法</p>
+                </div>
+                <div class="lang-switch">
+                    <button class="lang-btn active" data-lang="zh">中文</button>
+                    <button class="lang-btn" data-lang="en">English</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="controls">
+            <div class="main-controls">
+                <div class="control-group dataset-control">
+                    <label for="dataset-select" data-i18n="select-dataset">选择数据集:</label>
+                    <select id="dataset-select">
+                        <option value="" data-i18n="loading">加载中...</option>
+                    </select>
+                    <div id="dataset-info" class="info-box"></div>
+                </div>
+
+                <div class="control-group method-control">
+                    <label data-i18n="clustering-method">聚类方法:</label>
+                    <div class="method-buttons">
+                        <button class="method-btn" data-method="kmeans">K-Means</button>
+                        <button class="method-btn" data-method="meanshift">Mean-Shift</button>
+                        <button class="method-btn" data-method="mog">MOG</button>
+                        <button class="method-btn compare-btn" data-method="compare" data-i18n="compare-display">对比显示</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="params-controls">
+                <div class="control-group" id="kmeans-params" style="display: none;">
+                    <h3 data-i18n="kmeans-params-title">K-Means 参数</h3>
+                    <label>
+                        <span data-i18n="n-clusters">聚类数 K</span>: <span id="k-value">10</span>
+                        <input type="range" id="k" min="2" max="15" value="10" step="1">
+                    </label>
+                </div>
+
+                <div class="control-group" id="meanshift-params" style="display: none;">
+                    <h3 data-i18n="meanshift-params-title">Mean-Shift 参数</h3>
+                    <label>
+                        <span data-i18n="bandwidth">带宽 (Bandwidth)</span>: <span id="bandwidth-value">自动</span>
+                        <input type="range" id="bandwidth" min="0.1" max="2" value="0" step="0.1">
+                    </label>
+                </div>
+
+                <div class="control-group" id="mog-params" style="display: none;">
+                    <h3 data-i18n="mog-params-title">MOG 参数</h3>
+                    <label>
+                        <span data-i18n="n-components">混合成分数 K</span>: <span id="mog-k-value">10</span>
+                        <input type="range" id="mog-k" min="2" max="15" value="10" step="1">
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p data-i18n="computing">计算中...</p>
+        </div>
+
+        <div id="visualization-container">
+            <div class="vis-section" id="single-view" style="display: none;">
+                <div class="vis-header">
+                    <h2 id="single-title"></h2>
+                    <div class="metrics" id="single-metrics"></div>
+                </div>
+                <svg id="single-viz"></svg>
+                <div class="legend" id="single-legend"></div>
+            </div>
+
+            <div class="vis-section" id="compare-view" style="display: none;">
+                <div class="comparison-grid">
+                    <div class="compare-item">
+                        <div class="vis-header">
+                            <h3>K-Means</h3>
+                            <div class="metrics" id="kmeans-metrics"></div>
+                        </div>
+                        <svg id="kmeans-viz"></svg>
+                    </div>
+                    <div class="compare-item">
+                        <div class="vis-header">
+                            <h3>Mean-Shift</h3>
+                            <div class="metrics" id="meanshift-metrics"></div>
+                        </div>
+                        <svg id="meanshift-viz"></svg>
+                    </div>
+                    <div class="compare-item">
+                        <div class="vis-header">
+                            <h3>MOG</h3>
+                            <div class="metrics" id="mog-metrics"></div>
+                        </div>
+                        <svg id="mog-viz"></svg>
+                    </div>
+                </div>
+                <div class="legend" id="compare-legend"></div>
+                <div class="comparison-notes">
+                    <h3 data-i18n="comparison-title">方法对比说明</h3>
+                    <ul>
+                        <li data-i18n="kmeans-note"><strong>K-Means</strong>: 快速高效，需指定聚类数，适合球形簇</li>
+                        <li data-i18n="meanshift-note"><strong>Mean-Shift</strong>: 自动发现聚类数，基于密度，适合任意形状</li>
+                        <li data-i18n="mog-note"><strong>MOG</strong>: 概率模型，软聚类，适合重叠数据</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

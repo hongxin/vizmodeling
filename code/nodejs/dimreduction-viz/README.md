@@ -205,5 +205,5 @@ function prepareYourDataset() {
 ISC
 
 ## 作者
-
+Hongxin Zhang (hongxin.zhang@gmail.com) @ Zhejiang University
 Created for educational and research purposes in dimensionality reduction visualization.

@@ -1,0 +1,21 @@
+{
+  "name": "clustering-viz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "csv-parser": "^3.2.0",
+    "express": "^5.1.0",
+    "ml-kmeans": "^6.0.0",
+    "ml-matrix": "^6.12.1",
+    "ml-pca": "^4.1.1",
+    "mnist": "^1.1.0"
+  }
+}
