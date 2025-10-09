@@ -32,3 +32,19 @@ Dr. Hongxin Zhang http://www.cad.zju.edu.cn/home/zhx/
 
 ## Classroom & Time
 Online
+
+## Demo Applications
+
+This course provides two interactive machine learning visualization demo applications to help students intuitively understand the principles and effects of dimensionality reduction and clustering algorithms.
+
+### Dimensionality Reduction Visualization
+Demonstrates the comparison of three dimensionality reduction methods: PCA, t-SNE, and UMAP, with support for multiple datasets and parameter adjustments.
+
+![Dimensionality Reduction Demo](image/dimreduction-viz-demo.png)
+
+### Clustering Visualization
+Demonstrates the comparison of three clustering methods: K-Means, Mean-Shift, and MOG, providing real-time interaction and performance metrics.
+
+![Clustering Demo](image/clustering-viz-demo.png)
+
+For detailed usage instructions, please refer to [code/nodejs/README.md](code/nodejs/README.md)

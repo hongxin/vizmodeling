@@ -31,3 +31,19 @@
 
 ## 授课方式
 钉钉在线直播
+
+## 演示程序
+
+本课程提供了两个交互式的机器学习可视化演示应用，帮助学生直观理解降维和聚类算法的原理与效果。
+
+### 降维可视化演示
+展示 PCA、t-SNE 和 UMAP 三种降维方法的对比效果，支持多种数据集和参数调节。
+
+![降维可视化演示](image/dimreduction-viz-demo.png)
+
+### 聚类可视化演示
+展示 K-Means、Mean-Shift 和 MOG 三种聚类方法的对比效果，提供实时交互和性能指标。
+
+![聚类可视化演示](image/clustering-viz-demo.png)
+
+详细使用说明请参考 [code/nodejs/README.md](code/nodejs/README.md)
