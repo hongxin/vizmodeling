@@ -4,6 +4,7 @@ const path = require('path');
 
 const { prepareMNISTSmall, prepareMNISTMedium, prepareIris, prepareWine } = require('./datasets');
 const { performKMeans, performMeanShift, performMOG, reduceDimensionsForViz } = require('./clustering');
+const { computeReducedCentroids } = require('./visualization');
 
 const app = express();
 const PORT = 3001;
@@ -54,7 +55,7 @@ app.get('/api/dataset/:id', (req, res) => {
 // 执行聚类
 app.post('/api/cluster', async (req, res) => {
   try {
-    const { datasetId, method, options = {} } = req.body;
+    const { datasetId, method, options = {}, dimReduction = 'pca', dimReductionOptions = {} } = req.body;
 
     if (!datasetId || !method) {
       return res.status(400).json({ error: 'Missing datasetId or method' });
@@ -66,6 +67,7 @@ app.post('/api/cluster', async (req, res) => {
     }
 
     console.log(`\nProcessing: ${dataset.name} with ${method.toUpperCase()}`);
+    console.log(`Dimension reduction: ${dimReduction.toUpperCase()}`);
 
     let result;
     switch (method.toLowerCase()) {
@@ -83,10 +85,16 @@ app.post('/api/cluster', async (req, res) => {
     }
 
     // 降维用于可视化
-    const reducedData = reduceDimensionsForViz(dataset.data);
+    const reducedData = reduceDimensionsForViz(dataset.data, dimReduction, dimReductionOptions);
+
+    // 在降维后的空间重新计算聚类中心（确保代表性）
+    const reducedCentroids = computeReducedCentroids(reducedData, result.labels);
+
+    console.log(`  Computed ${reducedCentroids.length} centroids in reduced space`);
 
     res.json({
       method: method,
+      dimReduction: dimReduction,
       dataset: {
         id: datasetId,
         name: dataset.name,
@@ -98,7 +106,7 @@ app.post('/api/cluster', async (req, res) => {
         labels: result.labels,
         predictedLabels: result.labels,
         trueLabels: dataset.labels,
-        centroids: result.centroids ? reduceDimensionsForViz(result.centroids) : null,
+        centroids: reducedCentroids,  // 使用降维空间中重新计算的中心
         time: result.time,
         numClusters: result.centroids ? result.centroids.length : new Set(result.labels).size
       }
@@ -113,7 +121,7 @@ app.post('/api/cluster', async (req, res) => {
 // 批量对比聚类方法
 app.post('/api/compare', async (req, res) => {
   try {
-    const { datasetId, methods = ['kmeans', 'meanshift', 'mog'], options = {} } = req.body;
+    const { datasetId, methods = ['kmeans', 'meanshift', 'mog'], options = {}, dimReduction = 'pca', dimReductionOptions = {} } = req.body;
 
     if (!datasetId) {
       return res.status(400).json({ error: 'Missing datasetId' });
@@ -125,8 +133,9 @@ app.post('/api/compare', async (req, res) => {
     }
 
     console.log(`\nComparing methods for ${dataset.name}:`, methods);
+    console.log(`Dimension reduction: ${dimReduction.toUpperCase()}`);
 
-    const reducedData = reduceDimensionsForViz(dataset.data);
+    const reducedData = reduceDimensionsForViz(dataset.data, dimReduction, dimReductionOptions);
     const results = {};
 
     for (const method of methods) {
@@ -147,9 +156,12 @@ app.post('/api/compare', async (req, res) => {
           continue;
       }
 
+      // 在降维空间中重新计算中心（确保代表性）
+      const methodReducedCentroids = computeReducedCentroids(reducedData, result.labels);
+
       results[method] = {
         labels: result.labels,
-        centroids: result.centroids ? reduceDimensionsForViz(result.centroids) : null,
+        centroids: methodReducedCentroids,  // 使用降维空间中重新计算的中心
         time: result.time,
         numClusters: result.centroids ? result.centroids.length : new Set(result.labels).size
       };
@@ -162,6 +174,7 @@ app.post('/api/compare', async (req, res) => {
         samples: dataset.samples,
         features: dataset.features
       },
+      dimReduction: dimReduction,
       points: reducedData,
       trueLabels: dataset.labels,
       results: results

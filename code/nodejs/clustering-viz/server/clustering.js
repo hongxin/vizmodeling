@@ -1,6 +1,7 @@
 const { kmeans } = require('ml-kmeans');
 const { Matrix } = require('ml-matrix');
 const { PCA } = require('ml-pca');
+const { UMAP } = require('umap-js');
 
 // K-Means聚类
 function performKMeans(data, options = {}) {
@@ -342,17 +343,62 @@ function computeLogLikelihood(data, weights, means, covariances) {
   }, 0);
 }
 
-// 使用PCA降维用于可视化
-function reduceDimensionsForViz(data) {
+// 使用PCA或UMAP降维用于可视化
+function reduceDimensionsForViz(data, method = 'pca', options = {}) {
   if (data[0].length <= 2) {
     return data;
   }
 
-  const matrix = new Matrix(data);
-  const pca = new PCA(matrix);
-  const reduced = pca.predict(matrix, { nComponents: 2 });
+  const startTime = Date.now();
 
-  return reduced.to2DArray();
+  if (method === 'umap') {
+    // UMAP 需要足够的数据点
+    // 如果数据点太少，回退到 PCA
+    const minSamplesForUMAP = 10;
+
+    if (data.length < minSamplesForUMAP) {
+      console.log(`  Too few samples (${data.length}) for UMAP, falling back to PCA...`);
+      const matrix = new Matrix(data);
+      const pca = new PCA(matrix);
+      const reduced = pca.predict(matrix, { nComponents: 2 });
+      const elapsed = Date.now() - startTime;
+      console.log(`  PCA completed in ${elapsed}ms`);
+      return reduced.to2DArray();
+    }
+
+    console.log(`  Using UMAP for dimension reduction (${data.length} samples, ${data[0].length} dims -> 2 dims)...`);
+
+    const {
+      nNeighbors = Math.min(15, Math.floor(data.length / 2)),  // 动态调整邻居数
+      minDist = 0.1,        // UMAP 参数：最小距离
+      nEpochs = 200         // UMAP 参数：训练轮数
+    } = options;
+
+    const umap = new UMAP({
+      nComponents: 2,
+      nNeighbors: Math.max(2, nNeighbors),  // 至少 2 个邻居
+      minDist: minDist,
+      nEpochs: nEpochs
+    });
+
+    const reduced = umap.fit(data);
+    const elapsed = Date.now() - startTime;
+    console.log(`  UMAP completed in ${elapsed}ms`);
+
+    return reduced;
+  } else {
+    // 默认使用 PCA
+    console.log(`  Using PCA for dimension reduction (${data.length} samples, ${data[0].length} dims -> 2 dims)...`);
+
+    const matrix = new Matrix(data);
+    const pca = new PCA(matrix);
+    const reduced = pca.predict(matrix, { nComponents: 2 });
+
+    const elapsed = Date.now() - startTime;
+    console.log(`  PCA completed in ${elapsed}ms`);
+
+    return reduced.to2DArray();
+  }
 }
 
 module.exports = {

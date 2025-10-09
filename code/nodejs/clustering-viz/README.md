@@ -15,6 +15,11 @@
   - **Mean-Shift**: 基于密度的聚类，自动发现聚类数，适合任意形状
   - **MOG (Mixture of Gaussians)**: 概率混合模型，支持软聚类，适合重叠数据
 
+- **两种降维方法** ✨ NEW
+  - **PCA (主成分分析)**: 快速线性降维，适合快速预览
+  - **UMAP (流形学习)**: 非线性降维，更好地保留局部结构
+  - 可实时切换降维方法，智能处理小样本量
+
 - **多个数据集**
   - MNIST 手写数字（小规模 1000 样本）
   - MNIST 手写数字（中规模 3000 样本）
@@ -28,6 +33,7 @@
   - 横向对比模式：同时展示三种算法的聚类效果
   - 参数实时调节：可调整聚类数、带宽等参数
   - 计算性能指标：显示计算时间、聚类数等信息
+  - 简洁设计：无坐标轴干扰，聚焦聚类结果 ✨ NEW
 
 ## 技术栈
 
@@ -35,17 +41,20 @@
 - **Node.js** + **Express**: Web 服务器
 - **ml-kmeans**: K-Means 聚类实现
 - **ml-pca**: PCA 降维（用于可视化）
+- **umap-js**: UMAP 非线性降维 ✨ NEW
 - **ml-matrix**: 矩阵运算
 - **mnist**: MNIST 数据集加载
 
 ### 前端
-- **D3.js**: 数据可视化
+- **D3.js v7**: 数据可视化
 - **HTML/CSS/JavaScript**: 界面开发
 
 ### 算法实现
-- **K-Means**: 使用 ml-kmeans 库
+- **K-Means**: 使用 ml-kmeans 库（v6.0.0）
 - **Mean-Shift**: 自实现，包含带宽自动估计
 - **MOG**: 自实现 EM 算法，使用对角协方差矩阵
+- **降维**: PCA (ml-pca) 和 UMAP (umap-js) ✨ NEW
+- **可视化辅助**: 降维空间中心点计算（server/visualization.js）✨ NEW
 
 ## 安装和运行
 
@@ -77,12 +86,15 @@ http://localhost:3001
 ### 基本操作
 
 1. **选择数据集**: 从下拉菜单中选择要使用的数据集
-2. **选择聚类方法**: 点击 K-Means、Mean-Shift、MOG 或"对比显示"按钮
-3. **调整参数**: 根据需要调整相应算法的参数
+2. **选择降维方法** ✨ NEW: 点击 PCA 或 UMAP 按钮选择降维算法
+   - **PCA**: 快速，适合快速预览和线性数据
+   - **UMAP**: 较慢，更好地保留局部结构，适合复杂数据
+3. **选择聚类方法**: 点击 K-Means、Mean-Shift、MOG 或"对比显示"按钮
+4. **调整参数**: 根据需要调整相应算法的参数
    - K-Means: 聚类数 K (2-15)
    - Mean-Shift: 带宽 (0 表示自动估计)
    - MOG: 混合成分数 K (2-15)
-4. **查看结果**: 可视化图表和性能指标会自动更新
+5. **查看结果**: 可视化图表和性能指标会自动更新
 
 ### 可视化说明
 
@@ -115,7 +127,8 @@ http://localhost:3001
 clustering-viz/
 ├── server/
 │   ├── index.js          # Express 服务器入口
-│   ├── clustering.js     # 聚类算法实现
+│   ├── clustering.js     # 聚类算法和降维实现
+│   ├── visualization.js  # 可视化辅助函数（降维空间中心点）✨ NEW
 │   └── datasets.js       # 数据集加载和处理
 ├── public/
 │   ├── index.html        # 主页面
@@ -123,6 +136,11 @@ clustering-viz/
 │   │   └── style.css     # 样式文件
 │   └── js/
 │       └── app.js        # 前端逻辑和可视化
+├── test/
+│   └── kmeans-test.js    # 测试套件
+├── CHANGELOG.md          # 版本更新日志 ✨ NEW
+├── UMAP_FEATURE.md       # UMAP 功能说明文档 ✨ NEW
+├── REVIEW_REPORT.md      # 技术审查报告
 ├── package.json
 └── README.md
 ```
@@ -156,9 +174,15 @@ clustering-viz/
 {
   "datasetId": "mnist-small",
   "method": "kmeans",
-  "options": { "k": 10 }
+  "options": { "k": 10 },
+  "dimReduction": "pca",
+  "dimReductionOptions": {}
 }
 ```
+
+**参数说明**:
+- `dimReduction`: 降维方法，可选 `"pca"` 或 `"umap"`（默认 `"pca"`）✨ NEW
+- `dimReductionOptions`: 降维方法的额外参数（可选）✨ NEW
 
 ### POST /api/compare
 批量对比多个聚类方法
@@ -172,9 +196,22 @@ clustering-viz/
     "kmeans": { "k": 10 },
     "meanshift": { "bandwidth": 0 },
     "mog": { "k": 10 }
+  },
+  "dimReduction": "umap",
+  "dimReductionOptions": {
+    "nNeighbors": 15,
+    "minDist": 0.1,
+    "nEpochs": 200
   }
 }
 ```
+
+**参数说明**:
+- `dimReduction`: 降维方法，可选 `"pca"` 或 `"umap"`（默认 `"pca"`）✨ NEW
+- `dimReductionOptions`: UMAP 参数（可选）✨ NEW
+  - `nNeighbors`: 邻居数（默认 15）
+  - `minDist`: 最小距离（默认 0.1）
+  - `nEpochs`: 训练轮数（默认 200）
 
 ## 算法详解
 
@@ -219,8 +256,12 @@ clustering-viz/
 
 ## 性能优化
 
-- **Mean-Shift**: 对大数据集使用采样（最多 500 样本）
-- **可视化**: 使用 PCA 降维到 2D
+- **Mean-Shift**: 对大数据集使用采样（最多 300 样本）
+- **可视化降维**: 支持 PCA 和 UMAP 两种降维方法
+  - **PCA**: ~2ms (Iris) / ~2.8s (MNIST-1000)，适合快速预览
+  - **UMAP**: ~150ms (Iris) / ~1.2s (MNIST-1000)，高维数据反而更快
+  - 智能回退：样本数 < 10 时自动使用 PCA
+- **聚类中心**: 在降维后的 2D 空间中重新计算，确保可视化准确性 ✨ NEW
 - **缓存**: 服务器启动时预加载数据集
 
 ## 开发者信息
@@ -242,6 +283,18 @@ clustering-viz/
 1. 在 `server/clustering.js` 中实现算法函数
 2. 在 `server/index.js` 的 API 路由中添加处理逻辑
 3. 更新前端界面和参数控制
+
+## 更新日志
+
+详见 [CHANGELOG.md](./CHANGELOG.md) 查看完整的版本更新历史。
+
+### 最新更新 (v1.2.0 - 2025-10-09)
+- ✨ 新增 UMAP 降维支持
+- 🐛 修复聚类中心可视化代表性问题
+- 🎨 简洁可视化设计（移除坐标轴）
+- 📚 新增 `server/visualization.js` 模块
+
+详细功能说明见 [UMAP_FEATURE.md](./UMAP_FEATURE.md)
 
 ## 许可证
 

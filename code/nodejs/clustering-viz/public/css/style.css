@@ -186,6 +186,41 @@ select:focus {
     color: white;
 }
 
+/* Dimension Reduction Buttons */
+.dim-reduction-control {
+    flex: 1;
+    min-width: 200px;
+}
+
+.dim-reduction-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.dim-reduction-btn {
+    flex: 1;
+    min-width: 80px;
+    padding: 10px 16px;
+    border: 2px solid #28a745;
+    background: white;
+    color: #28a745;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.dim-reduction-btn:hover {
+    background: #e8f5e9;
+}
+
+.dim-reduction-btn.active {
+    background: #28a745;
+    color: white;
+}
+
 /* Parameter Controls */
 .params-controls {
     margin-top: 15px;

@@ -7,6 +7,7 @@ const i18n = {
     'select-dataset': '选择数据集:',
     'loading': '加载中...',
     'clustering-method': '聚类方法:',
+    'dim-reduction-method': '降维方法:',
     'compare-display': '对比显示',
     'kmeans-params-title': 'K-Means 参数',
     'meanshift-params-title': 'Mean-Shift 参数',
@@ -32,6 +33,7 @@ const i18n = {
     'select-dataset': 'Select Dataset:',
     'loading': 'Loading...',
     'clustering-method': 'Clustering Method:',
+    'dim-reduction-method': 'Dimension Reduction:',
     'compare-display': 'Compare',
     'kmeans-params-title': 'K-Means Parameters',
     'meanshift-params-title': 'Mean-Shift Parameters',
@@ -92,6 +94,7 @@ let datasets = [];
 let currentDataset = null;
 let currentMethod = null;
 let currentResult = null;
+let currentDimReduction = 'pca';  // 当前降维方法
 
 // 颜色方案
 const colorScheme = d3.schemeCategory10.concat(d3.schemePaired);
@@ -182,6 +185,29 @@ function setupEventListeners() {
     });
   });
 
+  // 降维方法选择
+  document.querySelectorAll('.dim-reduction-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const dimReduction = btn.dataset.dimreduction;
+
+      // 更新按钮状态
+      document.querySelectorAll('.dim-reduction-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // 更新当前降维方法
+      currentDimReduction = dimReduction;
+
+      // 如果已经选择了聚类方法，重新执行
+      if (currentMethod) {
+        if (currentMethod === 'compare') {
+          performComparison();
+        } else {
+          performClustering(currentMethod);
+        }
+      }
+    });
+  });
+
   // 参数控制
   const kSlider = document.getElementById('k');
   kSlider.addEventListener('input', (e) => {
@@ -225,7 +251,8 @@ async function performClustering(method) {
       body: JSON.stringify({
         datasetId: currentDataset.id,
         method: method,
-        options: options
+        options: options,
+        dimReduction: currentDimReduction
       })
     });
 
@@ -267,7 +294,8 @@ async function performComparison() {
           kmeans: { k: k },
           meanshift: bandwidth > 0 ? { bandwidth: bandwidth } : {},
           mog: { k: mogK }
-        }
+        },
+        dimReduction: currentDimReduction
       })
     });
 
@@ -380,7 +408,7 @@ function drawScatterPlot(svg, points, labels, centroids, width, height) {
   const xExtent = d3.extent(points, d => d[0]);
   const yExtent = d3.extent(points, d => d[1]);
 
-  const margin = { top: 20, right: 20, bottom: 40, left: 50 };
+  const margin = { top: 20, right: 20, bottom: 20, left: 20 };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
@@ -395,16 +423,6 @@ function drawScatterPlot(svg, points, labels, centroids, width, height) {
 
   const g = svg.append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`);
-
-  // 坐标轴
-  g.append('g')
-    .attr('transform', `translate(0,${innerHeight})`)
-    .call(d3.axisBottom(xScale).ticks(5))
-    .style('color', '#666');
-
-  g.append('g')
-    .call(d3.axisLeft(yScale).ticks(5))
-    .style('color', '#666');
 
   // 数据点
   g.selectAll('.point')

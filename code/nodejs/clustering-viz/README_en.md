@@ -15,6 +15,11 @@ This project is a Node.js and D3.js based web application designed to help under
   - **Mean-Shift**: Density-based clustering, automatically discovers number of clusters, suitable for arbitrary shapes
   - **MOG (Mixture of Gaussians)**: Probabilistic mixture model, supports soft clustering, suitable for overlapping data
 
+- **Two Dimensionality Reduction Methods** ✨ NEW
+  - **PCA (Principal Component Analysis)**: Fast linear reduction, suitable for quick preview
+  - **UMAP (Manifold Learning)**: Non-linear reduction, better preserves local structure
+  - Real-time switching between methods, intelligent handling of small samples
+
 - **Multiple Datasets**
   - MNIST Handwritten Digits (Small - 1000 samples)
   - MNIST Handwritten Digits (Medium - 3000 samples)
@@ -28,6 +33,7 @@ This project is a Node.js and D3.js based web application designed to help under
   - Comparison mode: Side-by-side visualization of all three algorithms
   - Real-time parameter adjustment: Tune clusters, bandwidth, etc.
   - Performance metrics: Display computation time, number of clusters, etc.
+  - Clean design: No axis clutter, focus on clustering results ✨ NEW
 
 ## Tech Stack
 
@@ -35,17 +41,20 @@ This project is a Node.js and D3.js based web application designed to help under
 - **Node.js** + **Express**: Web server
 - **ml-kmeans**: K-Means clustering implementation
 - **ml-pca**: PCA dimensionality reduction (for visualization)
+- **umap-js**: UMAP non-linear dimensionality reduction ✨ NEW
 - **ml-matrix**: Matrix operations
 - **mnist**: MNIST dataset loader
 
 ### Frontend
-- **D3.js**: Data visualization
+- **D3.js v7**: Data visualization
 - **HTML/CSS/JavaScript**: Interface development
 
 ### Algorithm Implementation
-- **K-Means**: Using ml-kmeans library
+- **K-Means**: Using ml-kmeans library (v6.0.0)
 - **Mean-Shift**: Custom implementation with automatic bandwidth estimation
 - **MOG**: Custom EM algorithm implementation with diagonal covariance matrices
+- **Dimensionality Reduction**: PCA (ml-pca) and UMAP (umap-js) ✨ NEW
+- **Visualization Helpers**: Centroid computation in reduced space (server/visualization.js) ✨ NEW
 
 ## Installation and Running
 
@@ -77,12 +86,15 @@ http://localhost:3001
 ### Basic Operations
 
 1. **Select Dataset**: Choose a dataset from the dropdown menu
-2. **Select Clustering Method**: Click K-Means, Mean-Shift, MOG, or "Compare" button
-3. **Adjust Parameters**: Tune algorithm-specific parameters as needed
+2. **Select Dimensionality Reduction Method** ✨ NEW: Click PCA or UMAP button to choose reduction algorithm
+   - **PCA**: Fast, suitable for quick preview and linear data
+   - **UMAP**: Slower, better preserves local structure, suitable for complex data
+3. **Select Clustering Method**: Click K-Means, Mean-Shift, MOG, or "Compare" button
+4. **Adjust Parameters**: Tune algorithm-specific parameters as needed
    - K-Means: Number of clusters K (2-15)
    - Mean-Shift: Bandwidth (0 for automatic estimation)
    - MOG: Number of components K (2-15)
-4. **View Results**: Visualization and performance metrics update automatically
+5. **View Results**: Visualization and performance metrics update automatically
 
 ### Visualization Elements
 
@@ -115,7 +127,8 @@ http://localhost:3001
 clustering-viz/
 ├── server/
 │   ├── index.js          # Express server entry point
-│   ├── clustering.js     # Clustering algorithm implementations
+│   ├── clustering.js     # Clustering algorithms and dimensionality reduction
+│   ├── visualization.js  # Visualization helpers (centroids in reduced space) ✨ NEW
 │   └── datasets.js       # Dataset loading and processing
 ├── public/
 │   ├── index.html        # Main page
@@ -123,6 +136,11 @@ clustering-viz/
 │   │   └── style.css     # Stylesheet
 │   └── js/
 │       └── app.js        # Frontend logic and visualization
+├── test/
+│   └── kmeans-test.js    # Test suite
+├── CHANGELOG.md          # Version changelog ✨ NEW
+├── UMAP_FEATURE.md       # UMAP feature documentation ✨ NEW
+├── REVIEW_REPORT.md      # Technical review report
 ├── package.json
 └── README.md
 ```
@@ -156,9 +174,15 @@ Perform clustering with a single algorithm
 {
   "datasetId": "mnist-small",
   "method": "kmeans",
-  "options": { "k": 10 }
+  "options": { "k": 10 },
+  "dimReduction": "pca",
+  "dimReductionOptions": {}
 }
 ```
+
+**Parameters**:
+- `dimReduction`: Reduction method, either `"pca"` or `"umap"` (default `"pca"`) ✨ NEW
+- `dimReductionOptions`: Additional parameters for reduction method (optional) ✨ NEW
 
 ### POST /api/compare
 Batch comparison of multiple clustering methods
@@ -172,9 +196,22 @@ Batch comparison of multiple clustering methods
     "kmeans": { "k": 10 },
     "meanshift": { "bandwidth": 0 },
     "mog": { "k": 10 }
+  },
+  "dimReduction": "umap",
+  "dimReductionOptions": {
+    "nNeighbors": 15,
+    "minDist": 0.1,
+    "nEpochs": 200
   }
 }
 ```
+
+**Parameters**:
+- `dimReduction`: Reduction method, either `"pca"` or `"umap"` (default `"pca"`) ✨ NEW
+- `dimReductionOptions`: UMAP parameters (optional) ✨ NEW
+  - `nNeighbors`: Number of neighbors (default 15)
+  - `minDist`: Minimum distance (default 0.1)
+  - `nEpochs`: Training epochs (default 200)
 
 ## Algorithm Details
 
@@ -219,8 +256,12 @@ Probabilistic generative model optimized using EM algorithm.
 
 ## Performance Optimizations
 
-- **Mean-Shift**: Uses sampling for large datasets (max 500 samples)
-- **Visualization**: PCA dimensionality reduction to 2D
+- **Mean-Shift**: Uses sampling for large datasets (max 300 samples)
+- **Visualization Reduction**: Supports both PCA and UMAP
+  - **PCA**: ~2ms (Iris) / ~2.8s (MNIST-1000), suitable for quick preview
+  - **UMAP**: ~150ms (Iris) / ~1.2s (MNIST-1000), faster for high-dimensional data
+  - Intelligent fallback: Automatically uses PCA when samples < 10
+- **Centroids**: Recomputed in reduced 2D space to ensure visualization accuracy ✨ NEW
 - **Caching**: Datasets pre-loaded at server startup
 
 ## Developer Information
@@ -242,6 +283,18 @@ Adding new algorithms:
 1. Implement algorithm function in `server/clustering.js`
 2. Add handling logic in `server/index.js` API routes
 3. Update frontend interface and parameter controls
+
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md) for complete version history.
+
+### Latest Update (v1.2.0 - 2025-10-09)
+- ✨ Added UMAP dimensionality reduction support
+- 🐛 Fixed centroid visualization representativeness issue
+- 🎨 Clean visualization design (removed axes)
+- 📚 Added `server/visualization.js` module
+
+For detailed feature documentation, see [UMAP_FEATURE.md](./UMAP_FEATURE.md)
 
 ## License
 
