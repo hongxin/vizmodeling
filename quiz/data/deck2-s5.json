@@ -1,1 +1,163 @@
-[]
+[
+  {
+    "id": "d2s5q1",
+    "type": "single",
+    "topic": "application-domains",
+    "question": {
+      "zh": "下列哪一组全部属于课件第67页列出的大数据可视化重要应用领域？",
+      "en": "Which of the following groups consists entirely of important big-data visualization application areas listed on p.67?"
+    },
+    "options": {
+      "zh": ["农业、林业、牧业、渔业", "数学、物理、化学、生物", "大安全、互联网与社交媒体、大工程、大科学、物联网与智慧城市", "电影、电视剧、综艺节目"],
+      "en": ["Agriculture, forestry, animal husbandry, fishery", "Mathematics, physics, chemistry, biology", "Big security, Internet & social media, big engineering, big science, IoT & smart cities", "Movies, TV series, variety shows"]
+    },
+    "answer": [2],
+    "hint": {
+      "zh": "第67页围绕「大数据可视化」列了五个带「大」字或具联网特色的应用领域。",
+      "en": "P.67 lists five application areas around 'big-data visualization', most with a 'big' prefix or an Internet flavor."
+    },
+    "explanation": {
+      "zh": "课件第67页「大数据可视化的重要应用领域」列出五项：大安全、互联网与社交媒体、大工程、大科学、物联网与智慧城市。农林牧渔与数理化生属于产业或学科分类，影视综艺亦不在页面所列，均与课件不符（见课件二第67页）。",
+      "en": "P.67, 'important application areas of big-data visualization', lists five items: big security, Internet and social media, big engineering, big science, IoT and smart cities. Agriculture/forestry/herding/fishery and math/physics/chemistry/biology are industry or discipline classifications, and movies/TV/variety shows are also absent from the page — none matches the slides (Deck 2, p.67)."
+    },
+    "ref": { "deck": 2, "page": 67 }
+  },
+  {
+    "id": "d2s5q2",
+    "type": "single",
+    "topic": "domain-vs-general-ai",
+    "question": {
+      "zh": "关于「领域人工智能」与「通用（跨领域）人工智能」的对比（第68页），正确的说法是？",
+      "en": "Regarding the contrast between domain AI and general (cross-domain) AI on p.68, which statement is correct?"
+    },
+    "options": {
+      "zh": ["领域人工智能依葫芦画瓢、任务导向，如Deep Blue和AlphaGo；通用人工智能举一反三、从经验中学习，如「人类」智能", "领域人工智能通过学习获得能力，通用人工智能通过编程注入行动", "两者完全相同，只是叫法不同", "通用人工智能只能处理单一领域内的规则推理问题"],
+      "en": ["Domain AI imitates by example and is task-oriented, like Deep Blue and AlphaGo; general AI draws inferences from experience, like 'human' intelligence", "Domain AI acquires ability via learning while general AI acquires actions via programming", "The two are exactly the same, just different names", "General AI can only handle rule-based reasoning within a single domain"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "第68页左列 Traditional AI「依葫芦画瓢」，右列 AGI「举一反三」；注意 acquiring 的方向别记反。",
+      "en": "On p.68 the left column, Traditional AI, 'imitates by example' while the right column, AGI, 'draws inferences'; be careful not to reverse the acquiring direction."
+    },
+    "explanation": {
+      "zh": "课件第68页对比：领域（传统）人工智能「依葫芦画瓢、任务导向」，代表如Deep Blue和AlphaGo，重在已拥有知识与技能、行动靠编程获得（rule-based、exemplar-based）；通用或跨领域人工智能「举一反三、从经验中学习」，如「人类」智能，重在获取知识与技能的能力（Learning to learn），靠抽象直觉与常识情境获得通用能力。选项1恰好把两者的能力获取方向说反，选项2、3也与该页的对比不符（见课件二第68页）。",
+      "en": "P.68 contrasts: domain (traditional) AI 'imitates by example and is task-oriented', exemplified by Deep Blue and AlphaGo — it focuses on having knowledge and skills, with actions acquired via programming (rule-based and exemplar-based); general or cross-domain AI 'draws inferences and learns from experience', like 'human' intelligence — it focuses on acquiring knowledge and skills (learning to learn), gaining general ability via abstraction (intuition) and context (common sense). Option 1 reverses exactly the acquiring direction of the two, and options 2 and 3 also contradict the page's contrast (Deck 2, p.68)."
+    },
+    "ref": { "deck": 2, "page": 68 }
+  },
+  {
+    "id": "d2s5q3",
+    "type": "single",
+    "topic": "rule-based-ai",
+    "question": {
+      "zh": "「用规则教」即符号主义人工智能（符号逻辑表示下的推理）。课件举出的代表是？",
+      "en": "'Teaching by rules' is Symbolic AI (reasoning over symbolic-logic representations). Which representatives does the course cite?"
+    },
+    "options": {
+      "zh": ["AlphaGo与波士顿动力机器人：以符号逻辑表示下的推理为核心", "Jill Watson与深蓝：以自我对弈的强化学习为核心", "该方法没有任何代表系统，只停留在纸面理论", "1997年IBM「深蓝」和2011年IBM「沃森」：以推理为核心的人工智能的代表"],
+      "en": ["AlphaGo and Boston Dynamics robots: centered on reasoning over symbolic-logic representations", "Jill Watson and Deep Blue: centered on self-play reinforcement learning", "The approach has no representative system and remains pure theory", "IBM's Deep Blue (1997) and Watson (2011): representatives of reasoning-centered AI"]
+    },
+    "answer": [3],
+    "hint": {
+      "zh": "第71页最后一句点名了两个IBM系统及其年份。",
+      "en": "The last sentence of p.71 names two IBM systems together with their years."
+    },
+    "explanation": {
+      "zh": "课件第70页把「用规则教」对应符号主义人工智能（Symbolic AI）：符号逻辑表示下的推理（知识图谱为其知识表示相关内容）；第71页明确「1997年IBM『深蓝』和2011年IBM『沃森』是以推理为核心的人工智能的代表」。AlphaGo属数据/经验学习路线而非符号推理；波士顿动力机器人对应第76页分层控制的经验学习路线；Jill Watson基于IBM Watson平台用问题-答案数据训练（第74页），并非自我对弈的强化学习；「没有任何代表系统」与第71页直接矛盾（见课件二第70-71页）。",
+      "en": "P.70 maps 'teaching by rules' to Symbolic AI: reasoning over symbolic-logic representations (with knowledge graphs as related knowledge representation); p.71 states that 'IBM's Deep Blue (1997) and Watson (2011) are representatives of reasoning-centered AI'. AlphaGo belongs to the data/experience-learning route rather than symbolic reasoning; Boston Dynamics robots correspond to the layered-control experience-learning route on p.76; Jill Watson was trained on question-answer data on the IBM Watson platform (p.74), not by self-play reinforcement learning; and 'no representative system' directly contradicts p.71 (Deck 2, pp.70-71)."
+    },
+    "ref": { "deck": 2, "page": 71 }
+  },
+  {
+    "id": "d2s5q4",
+    "type": "single",
+    "topic": "jill-watson",
+    "question": {
+      "zh": "关于AI助教Jill Watson（第74页），下列说法正确的是？",
+      "en": "Which statement about the AI teaching assistant Jill Watson (p.74) is correct?"
+    },
+    "options": {
+      "zh": ["她是1997年IBM「深蓝」系统的另一个名字", "她在美国佐治亚理工的在线课程KBAI中担任助教，基于IBM Watson平台用四万多个问题-答案训练，2016年春季上岗三个月未被学生发现", "她通过自我对弈下棋来不断提升棋力", "她只能给试卷打分，从不回答学生的提问"],
+      "en": ["She is another name for IBM's 1997 Deep Blue system", "She served as a teaching assistant in Georgia Tech's online KBAI course, trained on over forty thousand question-answer pairs on the IBM Watson platform, and worked for three months in spring 2016 without students finding out", "She keeps improving her chess strength through self-play", "She can only grade exam papers and never answers student questions"]
+    },
+    "answer": [1],
+    "hint": {
+      "zh": "记住三组数字：400个学生、一学期约1万个问题、4万多条问答；2016年春季上岗。",
+      "en": "Remember three numbers: 400 students, about ten thousand questions per semester, over forty thousand Q&A pairs; deployed in spring 2016."
+    },
+    "explanation": {
+      "zh": "课件第74页：美国佐治亚理工的AI助教Jill Watson服务于在线课程「Knowledge Based Artificial Intelligence（KBAI）」，400个学生、一学期约有1万个问题；她基于IBM's Watson平台、用2014年以来的4万多个问题-答案进行训练，2016年春季上岗，三个月下来未被学生发现。「深蓝的别名」「自我对弈下棋」「只打分不答问」均与该页记载不符（见课件二第74页）。",
+      "en": "P.74: the Georgia Tech AI teaching assistant Jill Watson served the online course 'Knowledge Based Artificial Intelligence (KBAI)' with 400 students and about ten thousand questions per semester; built on IBM's Watson platform and trained on over forty thousand question-answer pairs since 2014, she started in spring 2016 and was not detected by students for three months. 'Alias of Deep Blue', 'self-play chess', and 'only grading, never answering' all contradict that page (Deck 2, p.74)."
+    },
+    "ref": { "deck": 2, "page": 74 }
+  },
+  {
+    "id": "d2s5q5",
+    "type": "multi",
+    "topic": "learning-from-data",
+    "question": {
+      "zh": "关于AI历史上的主流方法之二「用数据学」（第72-73页），课件中有哪些表述？",
+      "en": "Which of the following does the course say about the second mainstream AI approach, 'learning from data' (pp.72-73)?"
+    },
+    "options": {
+      "zh": ["用数据学的两种方式都必须先人工编写完备的规则库", "用大数据学（有监督）：挖掘数据所蕴含的内在模式", "用小数据学（无监督/半监督）：解析数据所蕴含的内在模式，稀缺数据辅以组合性、因果性等先验知识", "这一路线即数据驱动的人工智能（data-driven AI）"],
+      "en": ["Both ways of learning from data require a complete hand-written rule base in advance", "Learning from big data (supervised): mining the intrinsic patterns contained in the data", "Learning from small data (unsupervised/semi-supervised): parsing the intrinsic patterns contained in the data, with scarce data aided by priors such as compositionality and causality", "This route is exactly data-driven AI"]
+    },
+    "answer": [1, 2, 3],
+    "hint": {
+      "zh": "「先写规则」是方法一的事；第72页是用大数据学（有监督），第73页是用小数据学（无监督/半监督）。",
+      "en": "'Writing rules first' belongs to the first approach; p.72 is learning from big data (supervised) and p.73 learning from small data (unsupervised/semi-supervised)."
+    },
+    "explanation": {
+      "zh": "课件第72页「用数据学」之下给出「用大数据学（有监督）：挖掘数据所蕴含的内在模式」，并称之为数据驱动的人工智能（data-driven AI）；第73页给出「用小数据学（无监督/半监督）：解析数据所蕴含的内在模式」，以贝叶斯概率学习处理稀缺数据，辅以组合性、因果性等先验知识。「先人工编写完备规则库」是「用规则教」一节的内容，而且恰是第77页指出其「难以构建完备的知识规则库」的不足，并非用数据学的前提，故该项错误（见课件二第72-73页）。",
+      "en": "Under 'learning from data', p.72 gives 'learning from big data (supervised): mining the intrinsic patterns contained in the data' and calls it data-driven AI; p.73 gives 'learning from small data (unsupervised/semi-supervised): parsing the intrinsic patterns contained in the data', handling scarce data with Bayesian probabilistic learning aided by priors such as compositionality and causality. 'A complete hand-written rule base in advance' belongs to the 'teaching by rules' approach — indeed p.77 lists 'hard to build a complete knowledge rule base' as its weakness — and is not a precondition of learning from data, so that option is false (Deck 2, pp.72-73)."
+    },
+    "ref": { "deck": 2, "page": 72 }
+  },
+  {
+    "id": "d2s5q6",
+    "type": "multi",
+    "topic": "three-methods-summary",
+    "question": {
+      "zh": "按第77页「AI历史上的主流方法小结」表，下列优势/不足的配对哪些符合课件原意？",
+      "en": "Which of the following advantage/weakness pairings match the course's summary table of mainstream AI methods on p.77?"
+    },
+    "options": {
+      "zh": ["用规则教：优势是与人类逻辑推理相似、解释性强；不足是难以构建完备的知识规则库", "用数据学：优势是直接从数据中学；不足是以深度学习为例依赖于数据、解释性不强", "用问题引导：优势是从经验中进行能力的持续学习；不足是非穷举式搜索而需更好策略", "用问题引导：优势是与人类逻辑推理相似、解释性强"],
+      "en": ["Teaching by rules: similar to human logical reasoning and highly interpretable; hard to build a complete knowledge rule base", "Learning from data: learns directly from data; taking deep learning as an example, data-dependent and weakly interpretable", "Problem-guided: continuous capability learning from experience; non-exhaustive search calls for better strategies", "Problem-guided: similar to human logical reasoning and highly interpretable"]
+    },
+    "answer": [0, 1, 2],
+    "hint": {
+      "zh": "小结表三个方法各占一行；选项4把「用规则教」的优势安到了「用问题引导」头上。",
+      "en": "Each method occupies one row in the summary table; option 4 assigns the advantage of 'teaching by rules' to 'problem-guided'."
+    },
+    "explanation": {
+      "zh": "课件第77页小结表逐行给出：用规则教——优势与人类逻辑推理相似、解释性强，不足是难以构建完备的知识规则库；用数据学——优势直接从数据中学，不足是以深度学习为例依赖于数据、解释性不强；用问题引导——优势是从经验中进行能力的持续学习，不足是非穷举式搜索而需更好策略。选项4的「与人类逻辑推理相似、解释性强」是「用规则教」的优势，配给「用问题引导」不符合课件，故该项错误；页面还强调「从数据到知识与能力，能力增强是最终目标」「三种学习方法的综合利用值得关注」（见课件二第77页）。",
+      "en": "The p.77 summary table gives row by row: teaching by rules — similar to human logical reasoning and highly interpretable, but hard to build a complete knowledge rule base; learning from data — learns directly from data, but, taking deep learning as an example, is data-dependent and weakly interpretable; problem-guided — continuous capability learning from experience, but non-exhaustive search calls for better strategies. In option 4, 'similar to human logical reasoning and highly interpretable' is the advantage of teaching by rules, so pairing it with problem-guided does not match the course and that option is false; the page also stresses 'from data to knowledge and capability, capability enhancement is the ultimate goal' and 'the combined use of the three learning methods deserves attention' (Deck 2, p.77)."
+    },
+    "ref": { "deck": 2, "page": 77 }
+  },
+  {
+    "id": "d2s5q7",
+    "type": "judge",
+    "topic": "ternary-space",
+    "question": {
+      "zh": "课件第79页的「三元空间」指物理空间、人类社会与信息空间。",
+      "en": "The 'ternary space' on p.79 refers to physical space, human society, and information space."
+    },
+    "options": {
+      "zh": ["对", "错"],
+      "en": ["True", "False"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "第79页「三元空间」旁标注的三个空间名称分别是：物理空间、人类社会、信息空间。",
+      "en": "The three space names labeled beside 'ternary space' on p.79 are: physical space, human society, and information space."
+    },
+    "explanation": {
+      "zh": "课件第79页在「可视化与知识工程：大数据智能」处给出「三元空间」：物理空间、人类社会、信息空间，并主张在基础架构和平台中整合数据驱动、符号逻辑和概率等模型，以可视化交互、增强现实等对话交互连接人与信息空间。本题说法与页面一致，判断为「对」（见课件二第79页）。",
+      "en": "On p.79, under 'visualization and knowledge engineering: big-data intelligence', the 'ternary space' comprises physical space, human society, and information space; the basic architecture and platform are to integrate data-driven, symbolic-logic and probabilistic models, connecting humans with information space through dialogue interactions such as visualization interaction and augmented reality. The statement matches the page, so the judgment is True (Deck 2, p.79)."
+    },
+    "ref": { "deck": 2, "page": 79 }
+  }
+]

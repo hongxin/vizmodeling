@@ -1,1 +1,163 @@
-[]
+[
+  {
+    "id": "d2s1q1",
+    "type": "single",
+    "topic": "heatmap-hotspot",
+    "question": {
+      "zh": "按课件第11页，热力图分析中「如何计算热点集中区域」？",
+      "en": "According to p.11, how does the course compute concentrated hot-spot regions in heatmap analysis?"
+    },
+    "options": {
+      "zh": ["对每个网格的数值做线性回归，再用回归线外推热点位置", "用非参数方法计算分布的最近模式（nearest mode），因为密度随靠近「中心」而增大", "人工目测圈定若干固定大小的圆形区域", "只保留数值排名前三的网格，其余一律置为空白"],
+      "en": ["Run a linear regression on every cell value and extrapolate hot-spot positions from the regression line", "Use a non-parametric method to compute the nearest mode of the distribution, since density increases as we get near the 'center'", "Manually eyeball and circle several fixed-size circular regions", "Keep only the top-three cells by value and blank out all the rest"]
+    },
+    "answer": [1],
+    "hint": {
+      "zh": "第11页的三行原文：如何计算热点集中区域？Non-parametric method...Density increases as we get near 'center'。",
+      "en": "The three lines on p.11: how to compute concentrated hot spots? Non-parametric method...; density increases as we get near the 'center'."
+    },
+    "explanation": {
+      "zh": "课件第11页在热力图处设问「如何计算热点集中区域？」并给出思路：用非参数方法计算分布的最近模式（nearest mode of a distribution），且密度在靠近「中心」时增大——这正是聚类一节 Mean-Shift 所依据的原理（见课件二第15-16页）；第9-10页的手机日志热力图即其应用场景。回归外推、人工圈定、只留前三格都不是课件给出的方法（见课件二第9-11页）。",
+      "en": "On p.11 the course asks 'how to compute concentrated hot-spot regions?' for heatmaps and answers with a non-parametric method to compute the nearest mode of a distribution, noting that density increases as we get near the 'center' — the very principle Mean-Shift relies on in the clustering section (Deck 2, pp.15-16); the mobile-log heatmaps on pp.9-10 show the application scenario. Regression extrapolation, manual circling, and keeping only the top-three cells are not the course's method (Deck 2, pp.9-11)."
+    },
+    "ref": { "deck": 2, "page": 11 }
+  },
+  {
+    "id": "d2s1q2",
+    "type": "single",
+    "topic": "treemap",
+    "question": {
+      "zh": "Treemap（矩形树图）的基本框架最适合展示什么？其核心视觉编码是什么？",
+      "en": "What is the basic framework of a Treemap best suited to display, and what is its core visual encoding?"
+    },
+    "options": {
+      "zh": ["展示时间序列的趋势：用矩形的宽度表示时间步", "展示网络中的连接关系：用矩形之间的连线表示边", "只展示一维数据的排序，与层次结构无关", "展示数据的层次结构：把层次结点映射为相互嵌套的矩形，用面积编码数值大小，并可用颜色等通道编码类别或另一属性"],
+      "en": ["Showing trends of time series: rectangle width encodes the time step", "Showing connections in a network: lines between rectangles encode edges", "Showing only the ordering of 1D data, with nothing to do with hierarchy", "Showing hierarchical structure: hierarchy nodes map to nested rectangles, area encodes the numeric value, and color etc. can encode category or another attribute"]
+    },
+    "answer": [3],
+    "hint": {
+      "zh": "第26-27页的标题是「数据层次 - Treemap」：先讲基本框架，再讲图例。",
+      "en": "The pp.26-27 heading is 'data hierarchy - Treemap': first the basic framework, then the legend."
+    },
+    "explanation": {
+      "zh": "课件第26-27页把Treemap放在「数据层次」标题下，先给基本框架、再给图例：Treemap将层次化数据的结点映射为相互嵌套的矩形，矩形的面积编码对应数值的大小，并可通过颜色等通道编码类别或另一属性（第27页图例部分），便于同时呈现层次结构与整体-部分占比。用宽度表时间步、用连线表网络的边、只做一维排序，都不是Treemap的框架（见课件二第26-27页）。",
+      "en": "Under the 'data hierarchy' heading, pp.26-27 give Treemap's basic framework and then its legend: nodes of hierarchical data map to mutually nested rectangles, the rectangle area encodes the numeric value, and channels such as color can encode category or another attribute (the legend on p.27), so hierarchy and part-whole shares are shown at once. Width-as-time-step, lines-as-network-edges, and plain 1D ordering are not Treemap's framework (Deck 2, pp.26-27)."
+    },
+    "ref": { "deck": 2, "page": 26 }
+  },
+  {
+    "id": "d2s1q3",
+    "type": "single",
+    "topic": "splom-framework",
+    "question": {
+      "zh": "散点图矩阵（scatterplot matrix）的基本框架是？",
+      "en": "What is the basic framework of a scatterplot matrix?"
+    },
+    "options": {
+      "zh": ["把各维变量两两配对，在矩阵的每个格子中绘制对应变量对的散点，从整体上浏览变量间的相关关系", "只绘制一张全局散点图，其余格子全部用来放置图例文字", "每个格子各绘制一条贯穿全图的平行坐标折线", "按行优先把数据排序后切成等宽的柱形条带"],
+      "en": ["Pair up all variables two by two, draw the scatterplot of the corresponding variable pair in each matrix cell, and survey variable correlations at a glance", "Draw only one global scatterplot and use all remaining cells for legend text", "Draw one parallel-coordinates polyline crossing the whole figure in each cell", "Sort the data row-major and cut it into equal-width bar strips"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "名字里就藏着框架：第 i 行第 j 列的格子画的是变量 i 与变量 j 的散点。",
+      "en": "The framework hides in the name: the cell at row i, column j plots variable i against variable j."
+    },
+    "explanation": {
+      "zh": "课件第29页给出散点图矩阵的基本框架：把多维数据的变量两两组合，第 i 行第 j 列的格子绘制变量 i 对变量 j 的散点，从而在一张图内集中浏览任意两维之间的相关关系；第30页「美国各州犯罪率的散点图矩阵」即其图例实例。单张散点加图例、格子里画折线、切成柱形条带都不符合该框架（见课件二第29-30页）。",
+      "en": "P.29 gives the basic framework of the scatterplot matrix: variables of multivariate data are paired up, and the cell at row i, column j plots variable i against variable j, so correlations between any two dimensions can be surveyed in one figure; p.30, 'the scatterplot matrix of US state crime rates', is the legend example. One global scatter plus legend text, polylines in cells, and bar strips all violate this framework (Deck 2, pp.29-30)."
+    },
+    "ref": { "deck": 2, "page": 29 }
+  },
+  {
+    "id": "d2s1q4",
+    "type": "single",
+    "topic": "parallel-coordinates",
+    "question": {
+      "zh": "平行坐标图（parallel coordinates）的基本框架与读图方式是？",
+      "en": "What are the basic framework and the way to read a parallel coordinates plot?"
+    },
+    "options": {
+      "zh": ["把所有维度叠加绘制在同一根坐标轴上，仅用颜色区分各维", "一次只能展示两个维度，其余维度必须舍弃", "每个维度对应一根相互平行的坐标轴，每个数据项画成一条依次穿过所有轴的折线", "每个维度分别绘制一个独立的饼图，再拼成矩阵"],
+      "en": ["Stack all dimensions onto one single axis and distinguish them only by color", "Only two dimensions can be shown at a time; the rest must be discarded", "Each dimension corresponds to a parallel axis, and each data item is drawn as one polyline crossing all the axes in turn", "Draw an independent pie chart for each dimension and tile them into a matrix"]
+    },
+    "answer": [2],
+    "hint": {
+      "zh": "第34页框架：相互平行的各维坐标轴 + 每个数据点一条折线；第35页图例是美国各州高中生SAT平均成绩数据。",
+      "en": "The p.34 framework: parallel per-dimension axes plus one polyline per data point; the p.35 legend is the average SAT scores of US high-school students by state."
+    },
+    "explanation": {
+      "zh": "课件第34页给出平行坐标图的基本框架：各维变量分别对应一根相互平行的坐标轴，一个数据项表现为一条依次穿过所有轴的折线，借此比较高维数据在各维上的取值；第35页以「美国各州高中生SAT平均成绩数据」为图例。把维度叠加到单轴、只保留两维、每维画饼图都与该框架不符（见课件二第34-35页）。",
+      "en": "P.34 gives the basic framework of parallel coordinates: each variable gets its own parallel axis and each data item becomes one polyline crossing all axes in turn, which supports comparing high-dimensional values; p.35 uses 'the average SAT scores of US high-school students by state' as the legend example. Stacking dimensions onto one axis, keeping only two dimensions, and one pie chart per dimension all contradict the framework (Deck 2, pp.34-35)."
+    },
+    "ref": { "deck": 2, "page": 34 }
+  },
+  {
+    "id": "d2s1q5",
+    "type": "multi",
+    "topic": "hierarchical-bubble-voronoi",
+    "question": {
+      "zh": "关于第28页「层次气泡图与Voronoi图」的例子，下列哪些说法是正确的？",
+      "en": "Which of the following statements about the hierarchical bubble chart and Voronoi diagram example on p.28 are correct?"
+    },
+    "options": {
+      "zh": ["Voronoi图只能用于一维数据的排序展示", "该例根据手机应用情况对人群进行聚类", "层次气泡图用大小嵌套的气泡表达数据的层次结构", "Voronoi图把平面按「到给定点最近」的原则划分为一个个单元"],
+      "en": ["A Voronoi diagram can only be used for ordering 1D data", "The example clusters people according to their mobile app usage", "A hierarchical bubble chart expresses the data hierarchy via size-nested bubbles", "A Voronoi diagram partitions the plane into cells by the 'closest to a given site' rule"]
+    },
+    "answer": [1, 2, 3],
+    "hint": {
+      "zh": "第28页标题下方一行原文是「根据手机应用情况对人群进行聚类」；再想想Voronoi单元是如何划分的。",
+      "en": "The line under the p.28 title reads 'cluster people according to mobile app usage'; then recall how Voronoi cells are partitioned."
+    },
+    "explanation": {
+      "zh": "课件第28页在「数据层次 – 气泡图」标题下给出层次气泡图与Voronoi图的例子，并注明「根据手机应用情况对人群进行聚类」：层次气泡图以大小嵌套的气泡呈现层次与数值，Voronoi图则按「到给定点（站点）最近」的原则把平面划分为一个个单元，两者都服务于层次数据的展示。「Voronoi图只能用于一维排序」与其平面划分的本义及页面图示相矛盾，故该项错误（见课件二第28页）。",
+      "en": "Under the 'data hierarchy - bubble chart' heading, p.28 shows an example of hierarchical bubbles and a Voronoi diagram, noted as 'clustering people according to mobile app usage': the hierarchical bubble chart presents hierarchy and values via size-nested bubbles, while the Voronoi diagram partitions the plane into cells by the closest-to-a-given-site rule — both serve hierarchical data display. 'A Voronoi diagram can only order 1D data' contradicts its plane-partition nature and the page's figure, so that option is false (Deck 2, p.28)."
+    },
+    "ref": { "deck": 2, "page": 28 }
+  },
+  {
+    "id": "d2s1q6",
+    "type": "multi",
+    "topic": "crime-splom-case",
+    "question": {
+      "zh": "关于「美国各州犯罪率数据」的分析案例，课件中出现了哪些内容？",
+      "en": "Which of the following appear in the course's case study of US state crime-rate data?"
+    },
+    "options": {
+      "zh": ["美国各州犯罪率的散点图矩阵（作为散点图矩阵的图例）", "采用贝叶斯网络方法的分析结果", "BN-Mapping：基于贝叶斯网络的地理空间数据可视分析", "该数据仅用饼图展示各州占比，未使用任何多维图表"],
+      "en": ["The scatterplot matrix of US state crime rates (as the legend example of scatterplot matrices)", "Analysis results obtained with a Bayesian-network method", "BN-Mapping: visual analysis of geospatial data based on Bayesian networks", "The data is shown only with pie charts of state shares, with no multivariate chart at all"]
+    },
+    "answer": [0, 1, 2],
+    "hint": {
+      "zh": "第30页是散点图矩阵图例；第31页接着给出贝叶斯网络方法的分析结果及BN-Mapping一文。",
+      "en": "P.30 is the scatterplot-matrix legend; p.31 continues with the Bayesian-network analysis result and the BN-Mapping paper."
+    },
+    "explanation": {
+      "zh": "课件第30页以「美国各州犯罪率的散点图矩阵」作为散点图矩阵的图例；第31页继续给出「采用贝叶斯网络方法的分析结果」，并引用「BN-Mapping：基于贝叶斯网络的地理空间数据可视分析」。「仅用饼图展示、未用多维图表」与这两页的图示相反，故该项错误（见课件二第30-31页）。",
+      "en": "P.30 uses 'the scatterplot matrix of US state crime rates' as the legend example of scatterplot matrices; p.31 continues with 'analysis results obtained with a Bayesian-network method' and cites 'BN-Mapping: visual analysis of geospatial data based on Bayesian networks'. 'Only pie charts, no multivariate chart' contradicts the figures on these two pages, so that option is false (Deck 2, pp.30-31)."
+    },
+    "ref": { "deck": 2, "page": 30 }
+  },
+  {
+    "id": "d2s1q7",
+    "type": "judge",
+    "topic": "histogram-matrix",
+    "question": {
+      "zh": "第33页直方图矩阵的案例数据是全球出生率，第30页散点图矩阵的案例数据是美国各州犯罪率。",
+      "en": "The histogram-matrix example on p.33 uses global birth-rate data, while the scatterplot-matrix example on p.30 uses US state crime-rate data."
+    },
+    "options": {
+      "zh": ["对", "错"],
+      "en": ["True", "False"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "两个图例的标题都写在页面顶部：全球出生率的直方图矩阵 vs 美国各州犯罪率的散点图矩阵。",
+      "en": "Both legend titles sit at the top of their pages: histogram matrix of global birth rates vs scatterplot matrix of US state crime rates."
+    },
+    "explanation": {
+      "zh": "课件第33页为「直方图矩阵图例：全球出生率的直方图矩阵」（并附思考题：我国建国以来的人口出生率变化趋势分析）；第30页为「散点图矩阵图例：美国各州犯罪率的散点图矩阵」。两处案例数据与本题说法完全一致，故判断为「对」（见课件二第30、33页）。",
+      "en": "P.33 is the 'histogram matrix legend: histogram matrix of global birth rates' (with the reflection question on China's birth-rate trend since 1949); p.30 is the 'scatterplot matrix legend: scatterplot matrix of US state crime rates'. Both case datasets match the statement exactly, so the judgment is True (Deck 2, pp.30 and 33)."
+    },
+    "ref": { "deck": 2, "page": 33 }
+  }
+]

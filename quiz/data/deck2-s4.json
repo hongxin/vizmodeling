@@ -1,1 +1,117 @@
-[]
+[
+  {
+    "id": "d2s4q1",
+    "type": "single",
+    "topic": "unstructured-challenge",
+    "question": {
+      "zh": "按课件第51页，手机日志数据分析这类非结构化数据的主要难点是什么？",
+      "en": "According to p.51, what is the main difficulty of mobile-log data analysis as unstructured data?"
+    },
+    "options": {
+      "zh": ["采集到的数据量太小，不足以绘制任何图表", "日志中只包含黑白图像信息，没有任何数值", "数据本身已经是规整的表格，无需预处理", "每个人手机里安装的应用个数不同，难以统一处理"],
+      "en": ["The collected data volume is too small to draw any chart", "The logs contain only black-and-white image information with no numeric values", "The data is already a well-formed table and needs no preprocessing", "Different people have different numbers of apps installed on their phones, making uniform processing hard"]
+    },
+    "answer": [3],
+    "hint": {
+      "zh": "第51页「难点」一行说的是应用个数——各用户的特征维度对不齐。",
+      "en": "The 'difficulty' line on p.51 is about app counts — per-user feature dimensions do not align."
+    },
+    "explanation": {
+      "zh": "课件第51页指出非结构化数据处理中手机日志数据分析的难点：「每个人手机里安装的应用个数不同，难以统一处理」，即各样本的特征维度不一致，无法直接对齐成统一的数据表格。数据量太小、只有图像信息、已经规整成表，均与该页描述不符（见课件二第51页）。",
+      "en": "P.51 states the difficulty of mobile-log data analysis under unstructured data: 'different people have different numbers of installed apps, making uniform processing hard' — i.e., feature dimensions differ across samples and cannot be aligned into one uniform table. Too little data, image-only logs, or already-regular tables all contradict that page (Deck 2, p.51)."
+    },
+    "ref": { "deck": 2, "page": 51 }
+  },
+  {
+    "id": "d2s4q2",
+    "type": "single",
+    "topic": "lda-solution",
+    "question": {
+      "zh": "课件第53页针对上述难点给出的解决方案是？",
+      "en": "What solution does p.53 offer for the difficulty above?"
+    },
+    "options": {
+      "zh": ["通过LDA等方法进行统一的数据量化", "要求每位用户安装相同数量的应用后再采集数据", "直接删除应用个数偏多或偏少的用户样本", "放弃日志数据，改为发放纸质问卷调研"],
+      "en": ["Perform unified data quantification via LDA and similar methods", "Require every user to install the same number of apps before data collection", "Simply discard user samples with too many or too few apps", "Abandon log data and switch to paper questionnaires"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "第53页只有一句「解决方案：……」，关键词是统一量化。",
+      "en": "P.53 has a single 'solution: ...' sentence; the key phrase is unified quantification."
+    },
+    "explanation": {
+      "zh": "课件第53页给出「解决方案：通过LDA等方法进行统一的数据量化」，即用主题模型等方法把长短不一的应用清单映射为统一的量化表示，与第52页的「LDA主题模型」相衔接。强制安装同数应用、删除用户、改发问卷都不是课件的做法（见课件二第52-53页）。",
+      "en": "P.53 gives the 'solution: perform unified data quantification via methods such as LDA', mapping app lists of different lengths onto a unified quantitative representation with topic models, following the LDA topic model on p.52. Forcing equal app counts, deleting users, or switching to questionnaires are not the course's approach (Deck 2, pp.52-53)."
+    },
+    "ref": { "deck": 2, "page": 53 }
+  },
+  {
+    "id": "d2s4q3",
+    "type": "single",
+    "topic": "spatio-temporal-grid",
+    "question": {
+      "zh": "「对轨迹数据进行时空网格量化」（第57页）的含义是？",
+      "en": "What does 'spatio-temporal grid quantization of trajectory data' (p.57) mean?"
+    },
+    "options": {
+      "zh": ["只保留每条轨迹的起点和终点，忽略全部中间过程", "把整条轨迹压缩成一张缩略图片", "把空间划分为网格、时间划分为区间，用轨迹落入的时空单元来统一量化表示", "按用户姓名的字典序给各条轨迹编号排序"],
+      "en": ["Keep only the start and end points of each trajectory and ignore the whole middle", "Compress each whole trajectory into one thumbnail image", "Partition space into grid cells and time into intervals, and quantify each trajectory by the spatio-temporal cells it falls into", "Number and sort the trajectories by the dictionary order of user names"]
+    },
+    "answer": [2],
+    "hint": {
+      "zh": "「时空网格」＝空间网格 × 时间区间；轨迹被量化为单元表示。",
+      "en": "'Spatio-temporal grid' = spatial grid x time intervals; the trajectory is quantized into a cell representation."
+    },
+    "explanation": {
+      "zh": "课件第57页提出「对轨迹数据进行时空网格量化」：将空间划分为网格单元、时间划分为区间，轨迹按其落入的时空单元被量化为统一的表示，从而把长度不一、自由形态的轨迹转为可统一处理的结构化数据，同属把非结构化数据转为统一量化表示的处理思路。只留起终点、压缩成图片、按姓名排序都不是时空网格量化（见课件二第57页）。",
+      "en": "P.57 proposes 'spatio-temporal grid quantization of trajectory data': space is partitioned into grid cells and time into intervals, and each trajectory is quantized by the spatio-temporal cells it falls into, turning trajectories of uneven length and free form into structured data that can be processed uniformly — the same idea of converting unstructured data into a unified quantitative representation. Keeping only endpoints, thumbnailing, and name-order numbering are not spatio-temporal grid quantization (Deck 2, p.57)."
+    },
+    "ref": { "deck": 2, "page": 57 }
+  },
+  {
+    "id": "d2s4q4",
+    "type": "multi",
+    "topic": "lda-basics",
+    "question": {
+      "zh": "关于LDA主题模型（第52-53页），下列哪些说法是正确的？",
+      "en": "Which of the following statements about the LDA topic model (pp.52-53) are correct?"
+    },
+    "options": {
+      "zh": ["LDA必须在人工标注好每个样本的类别之后才能训练", "LDA是一种无监督的概率主题模型，可从文档集合中发现潜在主题", "每篇文档可看作多个主题的混合，每个主题又对应词语上的概率分布", "LDA能把长短不一的非结构化文本映射为定长的主题分布向量，实现统一量化"],
+      "en": ["LDA can only be trained after every sample is manually labeled with its class", "LDA is an unsupervised probabilistic topic model that discovers latent topics in a document collection", "Each document can be viewed as a mixture of multiple topics, and each topic is a probability distribution over words", "LDA maps unstructured texts of unequal length onto fixed-length topic-distribution vectors, achieving unified quantification"]
+    },
+    "answer": [1, 2, 3],
+    "hint": {
+      "zh": "想想「主题模型」：无监督、文档-主题-词三层结构；再联系第53页「统一的数据量化」。",
+      "en": "Think 'topic model': unsupervised, with the document-topic-word three-layer structure; then link it to 'unified data quantification' on p.53."
+    },
+    "explanation": {
+      "zh": "课件第52页介绍LDA主题模型，第53页用它做「统一的数据量化」。其标准含义：LDA是无监督的概率主题模型，假设每篇文档是多个主题的混合、每个主题是词语上的概率分布，从而把长短不一的文本映射为定长的主题分布向量，恰好回应第51页「应用个数不同、难以统一处理」的难点。「必须人工标注类别」把无监督方法误说成有监督方法，故该项错误（见课件二第52-53页）。",
+      "en": "P.52 introduces the LDA topic model and p.53 uses it for 'unified data quantification'. Its standard meaning: LDA is an unsupervised probabilistic topic model assuming each document is a mixture of topics and each topic is a probability distribution over words, which maps texts of unequal length onto fixed-length topic-distribution vectors — exactly answering the p.51 difficulty that 'app counts differ and uniform processing is hard'. 'Requires manual class labels' misdescribes an unsupervised method as supervised, so that option is false (Deck 2, pp.52-53)."
+    },
+    "ref": { "deck": 2, "page": 52 }
+  },
+  {
+    "id": "d2s4q5",
+    "type": "multi",
+    "topic": "combination-cases",
+    "question": {
+      "zh": "在「非结构化数据」的组合应用案例中，课件出现了哪些工作？",
+      "en": "Which of the following works appear in the course's combined application cases for unstructured data?"
+    },
+    "options": {
+      "zh": ["智慧城市：交通流量精准预测与分析——图卷积方法（2020）", "基于时空图与交互式主题建模的交通数据可视分析（ChinaVis 2018, JOV）", "数字货币新闻可视化——基于情感分数与主题模型的互联网新闻可视探索（CVMJ 2021）", "以上案例全部只使用饼图进行展示"],
+      "en": ["Smart-city traffic-flow prediction and analysis via graph convolution (2020)", "Visual analysis of traffic data via spatio-temporal graphs and interactive topic modeling (ChinaVis 2018, JOV)", "Cryptocurrency news visualization — Visual exploration of Internet news via sentiment score and topic models (CVMJ 2021)", "All of the above cases are presented only with pie charts"]
+    },
+    "answer": [0, 1, 2],
+    "hint": {
+      "zh": "第60页图卷积交通流量、第61页时空图+交互式主题建模、第62页数字货币新闻，三页三个案例。",
+      "en": "P.60 graph-convolution traffic flow, p.61 spatio-temporal graphs + interactive topic modeling, p.62 cryptocurrency news — three cases on three pages."
+    },
+    "explanation": {
+      "zh": "课件第60页「智慧城市：交通流量精准预测与分析：图卷积方法（2020）」；第61页「Visual analysis of traffic data via spatio-temporal graphs and interactive topic modeling（ChinaVis 2018, JOV）」；第62页「案例：数字货币新闻可视化——Visual exploration of Internet news via sentiment score and topic models（CVMJ 2021）」。三个案例分别用到图卷积、时空图与交互式主题建模、情感分数与主题模型，并非只用饼图，故末项错误（见课件二第59-62页）。",
+      "en": "P.60: 'smart city: precise traffic-flow prediction and analysis: graph convolution method (2020)'; p.61: 'Visual analysis of traffic data via spatio-temporal graphs and interactive topic modeling (ChinaVis 2018, JOV)'; p.62: 'case: cryptocurrency news visualization — Visual exploration of Internet news via sentiment score and topic models (CVMJ 2021)'. The three cases use graph convolution, spatio-temporal graphs with interactive topic modeling, and sentiment scores with topic models respectively — not merely pie charts, so the last option is false (Deck 2, pp.59-62)."
+    },
+    "ref": { "deck": 2, "page": 60 }
+  }
+]
