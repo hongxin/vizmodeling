@@ -16,6 +16,11 @@
 - 2024-09-14 [Slides-1](https://github.com/hongxin/vizmodeling/blob/main/2024/vizmodeling-1.pdf)
 - 2024-09-19 [Slides-2](https://github.com/hongxin/vizmodeling/blob/main/2024/vizmodeling-2.pdf)
 
+## 自学自测
+配套课件的自测练习——9 个小节共 62 题，中英双语、即时反馈与解析，无需账号：
+
+👉 https://hongxin.github.io/vizmodeling/quiz/
+
 ## 简介
 本课程的主要授课对象是浙江大学电子信息专业的研究生。
 

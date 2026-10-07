@@ -17,6 +17,11 @@ A short course of visual modeling
 - 2024-09-14 [Slides-1](https://github.com/hongxin/vizmodeling/blob/main/2024/vizmodeling-1.pdf)
 - 2024-09-19 [Slides-2](https://github.com/hongxin/vizmodeling/blob/main/2024/vizmodeling-2.pdf)
 
+## Self-Test
+Practice what you learned — 9 short bilingual quizzes (62 questions) with instant feedback, no account needed:
+
+👉 https://hongxin.github.io/vizmodeling/quiz/
+
 ## Description
 This short course is designed for gaduated students of Zhejiang University. 
 
