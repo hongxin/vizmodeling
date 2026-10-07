@@ -32,6 +32,7 @@ const T = {
     loadError: 'Failed to load questions. Refresh or check your network.', noHintNote: 'Answers correct after viewing a hint do not count as independent mastery.', langBtn: '中文' },
 };
 const t = k => T[lang][k] ?? k;
+const badgeKey = m => m === 'in-progress' ? 'inProgress' : m === 'not-started' ? 'notStarted' : 'mastered';
 
 let sections = [];
 const bankCache = new Map();
@@ -97,7 +98,7 @@ function viewOverview() {
     if (p && p.attempts) meta.push(`${t('best')} ${p.best}`, `${t('wrongBank')} ${wrong}`);
     return `<div class="card" data-quiz="${s.id}">
       <h3>${esc(s.title[lang])}</h3>
-      <span class="badge ${badge}">${esc(t(badge))}</span>
+      <span class="badge ${badge}">${esc(t(badgeKey(m)))}</span>
       <div class="meta">${meta.map(esc).join(' · ')}</div>
     </div>`;
   }).join('');
@@ -247,7 +248,7 @@ function drawResult() {
       <p>${esc(t('resultTitle'))} · ${esc(meta.title[lang])}</p>
       <div class="big">${score}</div>
       <p>${esc(t('attemptCorrect'))}：${correctCount} / ${bank.length}
-        &nbsp;<span class="badge ${badge}">${esc(t(badge))}</span></p>
+        &nbsp;<span class="badge ${badge}">${esc(t(badgeKey(mastery)))}</span></p>
       <div class="actions" style="justify-content:center">
         <button class="btn primary" id="retry-btn" type="button">${esc(t('retry'))}</button>
         <button class="btn ghost" id="home-btn" type="button">${esc(t('backHome'))}</button>
