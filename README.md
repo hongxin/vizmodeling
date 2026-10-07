@@ -6,8 +6,8 @@ A short course of visual modeling
 ## Course Materials
 
 ### 2026
-- 2026-09-28 Slides-1 (to be updated)
-- 2026-10-08 Slides-2 (to be updated)
+- 2026-09-28 [Slides-1](https://github.com/hongxin/vizmodeling/blob/main/2026/vizmodeling-1.pdf)
+- 2026-10-08 [Slides-2](https://github.com/hongxin/vizmodeling/blob/main/2026/vizmodeling-2.pdf)
 
 ### 2025
 - 2025-09-29 [Slides-1](https://github.com/hongxin/vizmodeling/blob/main/2025/vizmodeling-1.pdf)
