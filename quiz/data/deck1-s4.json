@@ -123,17 +123,17 @@
       "en": "Which of the following does the course say about histogram drawbacks and density charts?"
     },
     "options": {
-      "zh": ["密度图曲线以下的总面积代表整体 1", "直方图对采样率（分箱数）敏感，不同分箱数下形状差异明显", "核密度估计在每个数据点处放置核函数并叠加得到密度曲线", "直方图的形状与分箱数无关"],
-      "en": ["The total area under a density curve represents the whole, i.e., 1", "Histograms are sensitive to the sampling rate (bin count), with clearly different shapes across bin counts", "Kernel density estimation places a kernel at each data point and sums them into a density curve", "A histogram's shape is independent of the bin count"]
+      "zh": ["密度图的高度直接等于落在该位置的样本个数", "直方图对采样率（分箱数）敏感，不同分箱数下形状差异明显", "核密度估计在每个数据点处放置核函数并叠加得到密度曲线", "直方图的柱形高度表现其所在取值域内取值出现的频率或可能性"],
+      "en": ["The height of a density curve directly equals the number of samples at that location", "Histograms are sensitive to the sampling rate (bin count), with clearly different shapes across bin counts", "Kernel density estimation places a kernel at each data point and sums them into a density curve", "The bar height of a histogram shows the frequency or likelihood of values falling within the bar's value range"]
     },
     "answer": [1, 2, 3],
     "hint": {
-      "zh": "回忆第74页三幅不同分箱数的直方图，以及第75页密度图框架中关于「面积」的标注。",
-      "en": "Recall the three histograms with different bin counts on p.74 and the 'area' annotation in the density framework on p.75."
+      "zh": "回忆第72页直方图框架中「柱形高度」的标注、第74页三幅不同分箱数的直方图，以及第75页密度图框架中「曲线高度」与「面积」的标注。",
+      "en": "Recall the 'bar height' annotation in the histogram framework on p.72, the three histograms with different bin counts on p.74, and the 'curve height' and 'area' annotations in the density framework on p.75."
     },
     "explanation": {
-      "zh": "课件第74页对比 10/20/90 个分箱的直方图，形状差异明显（对采样率敏感）；第75页指出密度图曲线以下的总面积代表整体 1；第78-79页说明核密度估计在每个数据点处放置核再叠加。因此「形状与分箱数无关」不符合课件（见课件一第74-75、78-79页）。",
-      "en": "P.74 compares histograms with 10/20/90 bins whose shapes differ markedly (sensitivity to sampling rate); p.75 notes the area under a density curve is 1 for the whole population; pp.78-79 explain that KDE places a kernel at each point and sums them. So 'independent of bin count' contradicts the course (Deck 1, pp.74-75, 78-79)."
+      "zh": "课件第72页说明直方图的柱形高度表现其所在取值域内取值出现的频率或可能性；第74页对比 10/20/90 个分箱的直方图，形状差异明显（对采样率敏感）；第75页说明密度图经过归一化，曲线以下的总面积代表整体 1，曲线高度是相应值发生可能性的估计（比例值），而非样本个数；第78-79页说明核密度估计在每个数据点处放置核再叠加。因此「密度图高度直接等于样本个数」不符合课件（见课件一第72、74-75、78-79页）。",
+      "en": "P.72 explains that a histogram's bar height shows the frequency or likelihood of values falling within the bar's value range; p.74 compares histograms with 10/20/90 bins whose shapes differ markedly (sensitivity to sampling rate); p.75 shows the density chart is normalized so the total area under the curve represents the whole (1), and the curve height estimates the likelihood of a value occurring (a proportion), not a sample count; pp.78-79 explain that KDE places a kernel at each point and sums them. So 'a density curve's height directly equals the sample count' contradicts the course (Deck 1, pp.72, 74-75, 78-79)."
     },
     "ref": { "deck": 1, "page": 74 }
   },
