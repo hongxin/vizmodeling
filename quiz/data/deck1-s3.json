@@ -1,1 +1,186 @@
-[]
+[
+  {
+    "id": "d1s3q1",
+    "type": "single",
+    "topic": "interpolation",
+    "question": {
+      "zh": "课件从最近邻插值讲到线性插值，两者分别存在什么问题？",
+      "en": "The course moves from nearest-neighbor to linear interpolation; what problem does each have?"
+    },
+    "options": {
+      "zh": ["最近邻插值的值不连续，线性插值的导数不连续", "最近邻插值的导数不连续，线性插值的值不连续", "两者的值都不连续", "两者都已完全光滑，没有问题"],
+      "en": ["Nearest-neighbor gives discontinuous values; linear interpolation has discontinuous derivatives", "Nearest-neighbor has discontinuous derivatives; linear interpolation gives discontinuous values", "Both give discontinuous values", "Neither has any problem — both are fully smooth"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "回忆两页图下方的 Problem 标注：一个关于 values，一个关于 derivatives。",
+      "en": "Recall the 'Problem:' captions under the two figures — one concerns values, the other derivatives."
+    },
+    "explanation": {
+      "zh": "课件第40页指出最近邻插值的问题是 values not continuous（结果呈阶梯状跳变），第41页指出线性插值的问题是 derivatives not continuous（折点处导数突变），由此引出第42页的平滑插值（见课件一第40-41页）。",
+      "en": "P.40 notes nearest-neighbor interpolation yields discontinuous values (a staircase), and p.41 notes linear interpolation has discontinuous derivatives (kinks at data points), motivating smooth interpolation on p.42 (Deck 1, pp.40-41)."
+    },
+    "ref": { "deck": 1, "page": 41 }
+  },
+  {
+    "id": "d1s3q2",
+    "type": "single",
+    "topic": "cubic-hermite",
+    "question": {
+      "zh": "三次埃尔米特插值假设 P(t)=at³+bt²+ct+d，课件给出「为什么是三次」的理由是？",
+      "en": "Cubic Hermite interpolation assumes P(t)=at³+bt²+ct+d; what reason does the course give for choosing a cubic?"
+    },
+    "options": {
+      "zh": ["三次多项式的计算速度最快", "三次是允许使用的最高次数", "更低次的多项式画不出曲线", "两点的值与导数共 4 个约束，需要 4 个系数（自由度）与之匹配"],
+      "en": ["Cubic polynomials are the fastest to compute", "Cubic is the highest degree allowed", "Lower-degree polynomials cannot draw curves", "The values and derivatives at two points give 4 constraints, matched by 4 coefficients (degrees of freedom)"]
+    },
+    "answer": [3],
+    "hint": {
+      "zh": "数一数给定条件：两个点的值，加上两个点的导数。",
+      "en": "Count the given conditions: the values at two points plus the derivatives at two points."
+    },
+    "explanation": {
+      "zh": "课件第44页：三次多项式有 a、b、c、d 四个待定系数，正好匹配「两点的值 + 两点的导数」共 4 个约束，即 4 constraints => need 4 degrees of freedom（见课件一第44页）。",
+      "en": "On p.44, a cubic has four unknown coefficients a, b, c, d matching the four constraints given by the values and derivatives at two points: '4 constraints => need 4 degrees of freedom' (Deck 1, p.44)."
+    },
+    "ref": { "deck": 1, "page": 44 }
+  },
+  {
+    "id": "d1s3q3",
+    "type": "single",
+    "topic": "hermite-basis",
+    "question": {
+      "zh": "Hermite 基函数 H₀(t) 与 H₁(t) 在端点 t=0 和 t=1 处的取值有什么特点？",
+      "en": "What are the endpoint values of the Hermite basis functions H₀(t) and H₁(t) at t=0 and t=1?"
+    },
+    "options": {
+      "zh": ["两个基函数在端点处的取值完全相同", "H₀ 在 t=0 处为 1、t=1 处为 0，H₁ 在 t=0 处为 0、t=1 处为 1", "两个基函数在两个端点处都为 0", "两个基函数在两个端点处都为 1"],
+      "en": ["Both take identical values at the endpoints", "H₀ equals 1 at t=0 and 0 at t=1, while H₁ equals 0 at t=0 and 1 at t=1", "Both vanish at both endpoints", "Both equal 1 at both endpoints"]
+    },
+    "answer": [1],
+    "hint": {
+      "zh": "回忆第50页右侧四条基函数曲线图中 H₀ 与 H₁ 的走向。",
+      "en": "Recall the trajectories of H₀ and H₁ among the four basis curves plotted on p.50."
+    },
+    "explanation": {
+      "zh": "课件第50页：H₀(t)=2t³−3t²+1 在 t=0 处为 1、t=1 处为 0；H₁(t)=−2t³+3t² 恰好相反。二者分别控制两端点的取值，而 H₂、H₃ 在端点处为 0、控制导数（见课件一第50页）。",
+      "en": "On p.50, H₀(t)=2t³−3t²+1 is 1 at t=0 and 0 at t=1, and H₁(t)=−2t³+3t² is the mirror image; they control the endpoint values, while H₂ and H₃ vanish at the endpoints and control derivatives (Deck 1, p.50)."
+    },
+    "ref": { "deck": 1, "page": 50 }
+  },
+  {
+    "id": "d1s3q4",
+    "type": "single",
+    "topic": "catmull-rom",
+    "question": {
+      "zh": "Catmull-Rom 插值处理「只给数据点、未给定斜率」的情况，它的关键做法是？",
+      "en": "Catmull-Rom interpolation handles the case where only points are given and slopes are not; what is its key idea?"
+    },
+    "options": {
+      "zh": ["用首末两端点连线的斜率作为公共切向量", "不使用切向量，直接用折线连接各点", "用相邻两点差值的一半作为切向量，如 T₀=½(P₂−P₀)", "要求用户为每个点手工指定斜率"],
+      "en": ["Use the slope of the line through the first and last points as a shared tangent", "Avoid tangents and simply connect the points with a polyline", "Use half the difference of neighboring points as the tangent, e.g., T₀=½(P₂−P₀)", "Require the user to specify a slope at every point manually"]
+    },
+    "answer": [2],
+    "hint": {
+      "zh": "课件说「We can interpolate points as easily as values」，注意切向量公式里相邻点的下标。",
+      "en": "The slide says 'we can interpolate points as easily as values'; check the subscripts of neighboring points in the tangent formula."
+    },
+    "explanation": {
+      "zh": "课件第52-53页：斜率未给定时，用相邻两点之差的一半估计切向量（T₀=½(P₂−P₀)、T₁=½(P₃−P₁)），再代入 Hermite 公式，从而像插值数值一样平滑地插值点位（见课件一第52-53页）。",
+      "en": "On pp.52-53, when slopes are not given, tangents are estimated as half the difference of adjacent points (T₀=½(P₂−P₀), T₁=½(P₃−P₁)) and substituted into the Hermite formula, interpolating points as easily as values (Deck 1, pp.52-53)."
+    },
+    "ref": { "deck": 1, "page": 53 }
+  },
+  {
+    "id": "d1s3q5",
+    "type": "single",
+    "topic": "overfitting",
+    "question": {
+      "zh": "多项式拟合中，阶数过高会导致过拟合。课件中给出的解法是什么？",
+      "en": "When a high polynomial order causes overfitting, what remedy does the course give?"
+    },
+    "options": {
+      "zh": ["继续提高阶数", "在误差函数中加入正则项", "删除部分训练数据", "改用分段插值"],
+      "en": ["Increase the order further", "Add a regularization term to the error function", "Delete some training data", "Switch to piecewise interpolation"]
+    },
+    "answer": [1],
+    "hint": {
+      "zh": "回忆课件中平方和误差函数旁边的「正则函数校正」。",
+      "en": "Recall the 'regularization' shown beside the sum-of-squares error function."
+    },
+    "explanation": {
+      "zh": "正则项惩罚过大的权重、抑制曲线剧烈震荡，是课件给出的过拟合解法（见课件一第61-62页）。",
+      "en": "A regularization term penalizes large weights and damps oscillation — the remedy shown in the slides (Deck 1, pp.61-62)."
+    },
+    "ref": { "deck": 1, "page": 62 }
+  },
+  {
+    "id": "d1s3q6",
+    "type": "multi",
+    "topic": "overfitting",
+    "question": {
+      "zh": "课件对比了不同多项式阶数 M 与数据量 N 的拟合效果，下列哪些结论符合课件？",
+      "en": "The course compares fits across polynomial order M and data size N; which conclusions match the slides?"
+    },
+    "options": {
+      "zh": ["M=0 或 M=1 时多项式过于简单，出现欠拟合", "M=9 时曲线在数据点间剧烈振荡，出现过拟合", "数据量 N 增大（如 N=100）有助于缓解过拟合", "阶数 M 越大，拟合效果总是越好"],
+      "en": ["M=0 or M=1 polynomials are too simple and underfit", "With M=9 the curve oscillates violently between data points and overfits", "More data (e.g., N=100) helps mitigate overfitting", "A larger order M always gives a better fit"]
+    },
+    "answer": [0, 1, 2],
+    "hint": {
+      "zh": "回忆第60页的六张小图：上排改变阶数 M，下排改变数据量 N。",
+      "en": "Recall the six panels on p.60: the top row varies the order M, the bottom varies the data size N."
+    },
+    "explanation": {
+      "zh": "课件第60页：M=0、M=1 明显欠拟合，M=3 较好，M=9 剧烈振荡过拟合；N 从 15 增至 100 时拟合明显改善，说明增多数据可缓解过拟合，而不是一味加大阶数（见课件一第60页）。",
+      "en": "On p.60, M=0/1 underfit, M=3 fits well, and M=9 oscillates wildly (overfit); increasing N from 15 to 100 clearly improves the fit — more data mitigates overfitting rather than raising the order (Deck 1, p.60)."
+    },
+    "ref": { "deck": 1, "page": 60 }
+  },
+  {
+    "id": "d1s3q7",
+    "type": "multi",
+    "topic": "least-squares",
+    "question": {
+      "zh": "关于多项式拟合的最小二乘求解，课件中有哪些内容？",
+      "en": "Which of the following are part of the course's least-squares treatment of polynomial fitting?"
+    },
+    "options": {
+      "zh": ["正则方程要求所有系数都为正数", "多项式拟合可写成矩阵形式 y = P(x)w", "最小二乘的目标是最小化平方和误差", "正则方程给出解 w = (PᵀP)⁻¹Pᵀy"],
+      "en": ["The normal equation requires all coefficients to be positive", "Polynomial fitting can be written in matrix form y = P(x)w", "Least squares minimizes the sum-of-squares error", "The normal equation gives w = (PᵀP)⁻¹Pᵀy"]
+    },
+    "answer": [1, 2, 3],
+    "hint": {
+      "zh": "回忆第59页从左到右的三个标签：Matrix form、Least squares、Normal equation。",
+      "en": "Recall the three labels across p.59: Matrix form, Least squares, Normal equation."
+    },
+    "explanation": {
+      "zh": "课件第59页：多项式拟合写成矩阵形式 y=P(x)w，最小二乘即 arg min‖y−P(x)w‖²，由正则方程解得 w=(PᵀP)⁻¹Pᵀy；正则方程并不要求系数为正（见课件一第59页）。",
+      "en": "On p.59, the fit is written as y=P(x)w, least squares solves arg min‖y−P(x)w‖², and the normal equation yields w=(PᵀP)⁻¹Pᵀy; positivity of coefficients is never required (Deck 1, p.59)."
+    },
+    "ref": { "deck": 1, "page": 59 }
+  },
+  {
+    "id": "d1s3q8",
+    "type": "judge",
+    "topic": "fitting",
+    "question": {
+      "zh": "与插值不同，拟合（如对失业率散点作直线拟合）并不要求曲线通过所有数据点。",
+      "en": "Unlike interpolation, fitting (e.g., a straight line through unemployment scatter data) does not require the curve to pass through every data point."
+    },
+    "options": {
+      "zh": ["对", "错"],
+      "en": ["True", "False"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "观察第56页拟合直线与散点的相对位置：点在线上，还是分布在线的两侧？",
+      "en": "Look at p.56: do the points sit exactly on the line, or scatter around it?"
+    },
+    "explanation": {
+      "zh": "课件第56页对失业率散点作直线拟合，直线从点群中间穿过以反映总体趋势；而插值要求曲线严格通过全部给定点，这是拟合与插值的本质区别（见课件一第56页）。",
+      "en": "On p.56 the straight line passes through the middle of the scatter to capture the overall trend, whereas interpolation must pass through all given points exactly — the essential difference between fitting and interpolation (Deck 1, p.56)."
+    },
+    "ref": { "deck": 1, "page": 56 }
+  }
+]

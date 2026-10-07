@@ -1,1 +1,163 @@
-[]
+[
+  {
+    "id": "d1s1q1",
+    "type": "single",
+    "topic": "definition",
+    "question": {
+      "zh": "按照课件的定义，数据可视化的输入、输出与目标分别是什么？",
+      "en": "According to the course definition, what are the input, output, and goal of data visualization?"
+    },
+    "options": {
+      "zh": ["输入是数据，输出是视觉形式，目标是深入理解", "输入是视觉形式，输出是数据，目标是深入理解", "输入是数据，输出是深入理解，目标是视觉形式", "输入是模型，输出是预测，目标是决策"],
+      "en": ["Input is data, output is visual form, and the goal is insight", "Input is visual form, output is data, and the goal is insight", "Input is data, output is insight, and the goal is visual form", "Input is a model, output is a prediction, and the goal is decision-making"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "回忆课件「数据 → 视觉形式 → 深入理解」的流程图。",
+      "en": "Recall the pipeline 'data → visual form → insight' from the slides."
+    },
+    "explanation": {
+      "zh": "课件指出数据可视化是创建并研究数据的视觉表达：输入数据，输出视觉形式，目标是深入理解（见课件一第8页）。",
+      "en": "The course defines visualization as creating and studying the visual representation of data: input data, output visual form, goal insight (Deck 1, p.8)."
+    },
+    "ref": { "deck": 1, "page": 8 }
+  },
+  {
+    "id": "d1s1q2",
+    "type": "single",
+    "topic": "tasks",
+    "question": {
+      "zh": "以下哪一项不属于课件列举的数据可视化三大任务？",
+      "en": "Which of the following is NOT one of the three major tasks of data visualization listed in the course?"
+    },
+    "options": {
+      "zh": ["表示数据 (Represent)", "分析数据 (Analyze)", "渲染数据 (Render)", "交流数据 (Communicate)"],
+      "en": ["Represent data", "Analyze data", "Render data", "Communicate data"]
+    },
+    "answer": [2],
+    "hint": {
+      "zh": "三大任务都以「数据」为宾语，想想哪个动词其实来自图形学。",
+      "en": "All three tasks take 'data' as their object; think about which verb actually comes from graphics."
+    },
+    "explanation": {
+      "zh": "课件列举的三大任务是表示数据 (Represent)、分析数据 (Analyze)、交流数据 (Communicate)；「渲染 (Render)」是图形学的概念，不在三大任务之列（见课件一第9页）。",
+      "en": "The three tasks are Represent, Analyze, and Communicate data; 'Render' belongs to computer graphics and is not one of them (Deck 1, p.9)."
+    },
+    "ref": { "deck": 1, "page": 9 }
+  },
+  {
+    "id": "d1s1q3",
+    "type": "single",
+    "topic": "classic-case",
+    "question": {
+      "zh": "1854 年伦敦苏活区宽街霍乱爆发事件成为数据可视化的经典案例，主要因为？",
+      "en": "Why is the 1854 Broad Street cholera outbreak in London's Soho district a classic visualization case?"
+    },
+    "options": {
+      "zh": ["它首次用计算机生成了疫情地图", "它把病例分布标注在地图上，帮助追查霍乱的传播源头", "它用三维效果图展示了死亡人数", "它用折线图预测了疫情的发展走势"],
+      "en": ["It was the first computer-generated epidemic map", "It plotted cholera cases on a map, helping trace the source of the outbreak", "It showed death counts with a 3D rendering", "It forecast the epidemic with a line chart"]
+    },
+    "answer": [1],
+    "hint": {
+      "zh": "想一想约翰·斯诺（John Snow）那张街区地图：病例点的聚集揭露了什么。",
+      "en": "Think about John Snow's street map: what did the clustering of case dots reveal?"
+    },
+    "explanation": {
+      "zh": "课件以宽街霍乱为例：把病例的分布标注在街区地图上，点在水泵附近的聚集帮助定位了传染源头，体现了可视化辅助分析的力量（见课件一第11页）。",
+      "en": "The course uses this case: plotting case locations on a street map revealed clustering around the pump and helped locate the source of infection — the analytic power of visualization (Deck 1, p.11)."
+    },
+    "ref": { "deck": 1, "page": 11 }
+  },
+  {
+    "id": "d1s1q4",
+    "type": "single",
+    "topic": "field-boundary",
+    "question": {
+      "zh": "关于可视化与图形学的关系，下列哪组关键词符合课件的对比？",
+      "en": "Which pairing matches the course's contrast between visualization and computer graphics?"
+    },
+    "options": {
+      "zh": ["图形学侧重描述性，可视化侧重照片真实感", "图形学主要处理数据，可视化主要处理几何造型", "两者目标完全相同，只是使用的工具不同", "图形学侧重照片真实感与模拟，可视化侧重描述性、增强理解与传达信息"],
+      "en": ["Graphics is descriptive, while visualization pursues photorealism", "Graphics mainly handles data, while visualization mainly handles geometric modeling", "They share exactly the same goal and differ only in tools", "Graphics pursues photorealism and simulation, while visualization is descriptive, enhancing understanding and conveying information"]
+    },
+    "answer": [3],
+    "hint": {
+      "zh": "回忆课件的两列关键词：一列是「照片真实感、模拟」，另一列是「描述性、增强理解、传达信息」。",
+      "en": "Recall the two keyword lists: 'photorealism, simulation' on one side and 'descriptive, enhance understanding, convey information' on the other."
+    },
+    "explanation": {
+      "zh": "课件对比：图形学强调照片真实感、模拟、现实世界的视觉媒介；可视化强调描述性、增强理解、传达信息，两者侧重点不同（见课件一第23页）。",
+      "en": "The course contrasts graphics (photorealism, simulation, visual medium of the real world) with visualization (descriptive, enhancing understanding, conveying information) (Deck 1, p.23)."
+    },
+    "ref": { "deck": 1, "page": 23 }
+  },
+  {
+    "id": "d1s1q5",
+    "type": "multi",
+    "topic": "why-visualization",
+    "question": {
+      "zh": "课件给出了「为什么要用数据可视化」的哪些理由？",
+      "en": "Which of the following are reasons for using data visualization given in the course?"
+    },
+    "options": {
+      "zh": ["可视化能让统计指标计算得更精确", "统计数据存在盲区（如 Anscombe 四重奏）", "人类认知存在天生的缺陷（如变化盲视）", "可视化是可解释性的一种途径（如大模型可视化）"],
+      "en": ["Visualization improves the precision of statistical measures", "Statistics has blind spots (e.g., Anscombe's quartet)", "Human cognition has innate defects (e.g., change blindness)", "Visualization offers one path to interpretability (e.g., LLM visualization)"]
+    },
+    "answer": [1, 2, 3],
+    "hint": {
+      "zh": "课件从「认知缺陷」「统计盲区」「可解释性」三个角度回答了这个问题。",
+      "en": "The course answers from three angles: cognitive defects, statistical blind spots, and interpretability."
+    },
+    "explanation": {
+      "zh": "课件给出三方面理由：人类认知存在天生的缺陷（变化盲视实验）、统计数据存在盲区（Anscombe 四重奏）、可视化是可解释性的一种途径（LLM visualization）；可视化并不改变统计量本身的精确性（见课件一第14页）。",
+      "en": "The course gives three reasons: innate defects of human cognition (change blindness), blind spots of statistics (Anscombe's quartet), and visualization as a path to interpretability (LLM visualization); it does not make statistical measures more precise (Deck 1, p.14)."
+    },
+    "ref": { "deck": 1, "page": 14 }
+  },
+  {
+    "id": "d1s1q6",
+    "type": "multi",
+    "topic": "field-boundary",
+    "question": {
+      "zh": "关于可视化与相邻学科的关系，课件中有哪些说法？",
+      "en": "Which statements about visualization and neighboring fields appear in the course?"
+    },
+    "options": {
+      "zh": ["可视化主要处理数据", "人机交互主要关注人与机器之间的交互行为", "数据挖掘更关注自动化的算法", "可视化的核心目标是照片真实感渲染"],
+      "en": ["Visualization mainly deals with data", "HCI mainly concerns the interaction between humans and machines", "Data mining focuses more on automated algorithms", "The core goal of visualization is photorealistic rendering"]
+    },
+    "answer": [0, 1, 2],
+    "hint": {
+      "zh": "回忆第24-26页的三张对比页，以及可视分析由哪些学科交叉而来的示意图。",
+      "en": "Recall the three comparison pages (pp.24-26) and the diagram of which fields visual analytics draws upon."
+    },
+    "explanation": {
+      "zh": "课件指出：可视化主要处理数据，人机交互主要关注人与机器之间的交互行为，数据挖掘更关注自动化的算法，可视化通过让人类参与实现交互式分析；照片真实感渲染是图形学的目标，不是可视化的（见课件一第24-26页）。",
+      "en": "The course states that visualization mainly handles data, HCI focuses on human-machine interaction, and data mining emphasizes automated algorithms, while visualization enables interactive analysis with humans in the loop; photorealistic rendering is a graphics goal, not a visualization one (Deck 1, pp.24-26)."
+    },
+    "ref": { "deck": 1, "page": 26 }
+  },
+  {
+    "id": "d1s1q7",
+    "type": "judge",
+    "topic": "anscombe",
+    "question": {
+      "zh": "Anscombe 四重奏的四组数据统计摘要几乎相同（均值、方差、回归直线），但散点形态完全不同，说明仅凭统计量可能掩盖数据的真实结构。",
+      "en": "In Anscombe's quartet, the four datasets share nearly identical summary statistics (means, variances, regression line) yet completely different scatter patterns, showing that statistics alone can mask the true structure of data."
+    },
+    "options": {
+      "zh": ["对", "错"],
+      "en": ["True", "False"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "对比第16页的统计量汇总表与第17页的四张散点图。",
+      "en": "Compare the summary-statistics table on p.16 with the four scatterplots on p.17."
+    },
+    "explanation": {
+      "zh": "课件第16-17页：四组数据的均值、标准差、回归直线 Y=3+0.5X 与 R² 几乎一致，但散点分别是线性、弯曲、受离群点影响和近似垂直分布四种形态，这正是「统计数据的盲区」（见课件一第16-17页）。",
+      "en": "On pp.16-17, the four sets share nearly the same means, standard deviations, regression line Y=3+0.5X and R², yet show linear, curved, outlier-driven, and near-vertical patterns — a blind spot of statistics (Deck 1, pp.16-17)."
+    },
+    "ref": { "deck": 1, "page": 17 }
+  }
+]

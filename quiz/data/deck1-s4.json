@@ -1,1 +1,163 @@
-[]
+[
+  {
+    "id": "d1s4q1",
+    "type": "single",
+    "topic": "loess",
+    "question": {
+      "zh": "LOESS（稳健局部加权回归散点平滑）方法出自下列哪项工作？",
+      "en": "LOESS (robust locally weighted regression for smoothing scatterplots) originates from which of the following?"
+    },
+    "options": {
+      "zh": ["Anscombe 1973 年关于统计图形的论文", "William Cleveland 1979 年发表于 JASA 的论文", "Hastie 等人的《统计学习基础》教材", "Epanechnikov 1969 年关于核函数的论文"],
+      "en": ["Anscombe's 1973 paper on statistical graphs", "William Cleveland's 1979 paper in JASA", "Hastie et al.'s textbook The Elements of Statistical Learning", "Epanechnikov's 1969 paper on kernel functions"]
+    },
+    "answer": [1],
+    "hint": {
+      "zh": "回忆课件展示的那篇论文网页截图的标题与作者。",
+      "en": "Recall the title and author on the journal-page screenshot shown in the slides."
+    },
+    "explanation": {
+      "zh": "课件第63页引用 William Cleveland 的 Robust Locally Weighted Regression and Smoothing Scatterplots（JASA 74.368, 1979: 829-836），即 LOESS 的出处；Hastie 与 Epanechnikov 出现在密度估计部分，Anscombe 出现在统计盲区部分（见课件一第63页）。",
+      "en": "P.63 cites William Cleveland, 'Robust Locally Weighted Regression and Smoothing Scatterplots' (JASA 74.368, 1979: 829-836), the origin of LOESS; Hastie and Epanechnikov appear in the density-estimation part, and Anscombe in the statistics blind-spot part (Deck 1, p.63)."
+    },
+    "ref": { "deck": 1, "page": 63 }
+  },
+  {
+    "id": "d1s4q2",
+    "type": "single",
+    "topic": "kernel-vs-knn",
+    "question": {
+      "zh": "课件对比了 K-NN 平均回归与核 (Kernel) 加权方法用于散点平滑，结论是？",
+      "en": "The course compares K-NN average regression with kernel weighting for smoothing scatterplots; what is the conclusion?"
+    },
+    "options": {
+      "zh": ["K-NN 平均回归造成结果不连续，Kernel 方法带来连续光滑的结果", "K-NN 平均回归连续光滑，Kernel 方法造成结果不连续", "两种方法的结果完全相同", "两种方法都不适合散点平滑"],
+      "en": ["K-NN averaging yields discontinuous results, while the kernel method yields continuous, smooth results", "K-NN averaging is smooth, while the kernel method is discontinuous", "The two methods give identical results", "Neither method suits scatterplot smoothing"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "回忆第66页左右两图下方的蓝字结论。",
+      "en": "Recall the blue captions under the left and right figures on p.66."
+    },
+    "explanation": {
+      "zh": "课件第66页：K-NN 平均回归 f̂(x)=Ave(yᵢ|xᵢ∈Nₖ(x)) 造成结果不连续（窗口内等权、随窗口移动跳变），而以核函数加权的 f̂(x₀)=ΣK_λ(x₀,xᵢ)yᵢ/ΣK_λ(x₀,xᵢ) 带来连续光滑的结果（见课件一第66页）。",
+      "en": "On p.66, K-NN averaging f̂(x)=Ave(yᵢ|xᵢ∈Nₖ(x)) produces discontinuous results (equal weights inside the window jump as it shifts), whereas kernel weighting f̂(x₀)=ΣK_λ(x₀,xᵢ)yᵢ/ΣK_λ(x₀,xᵢ) gives continuous, smooth results (Deck 1, p.66)."
+    },
+    "ref": { "deck": 1, "page": 66 }
+  },
+  {
+    "id": "d1s4q3",
+    "type": "single",
+    "topic": "epanechnikov",
+    "question": {
+      "zh": "课件中 Epanechnikov 二次核函数的形态与取值范围是？",
+      "en": "What is the shape and support of the Epanechnikov quadratic kernel in the course?"
+    },
+    "options": {
+      "zh": ["在整个实轴上无限延伸的高斯钟形曲线", "在 |t|<1 内为常数 1、其余为 0 的方波", "一条随 |t| 线性衰减的折线", "在 |t|<1 内为二次函数 (3/4)(1−t²)，其余为 0"],
+      "en": ["A Gaussian bell curve extending over the whole real line", "A square wave equal to 1 inside |t|<1 and 0 elsewhere", "A piecewise-linear decay in |t|", "The quadratic (3/4)(1−t²) inside |t|<1 and 0 elsewhere"]
+    },
+    "answer": [3],
+    "hint": {
+      "zh": "「二次 kernel」这个名字提示了它的函数形式；注意它并非处处非零。",
+      "en": "The name 'quadratic kernel' hints at its form; note that it is not nonzero everywhere."
+    },
+    "explanation": {
+      "zh": "课件第67页：K_λ(x₀,xᵢ)=D(|x₀−xᵢ|/λ)，其中 D(t)=(3/4)(1−t²)（当 |t|<1，否则为 0）——一个紧支撑的二次（抛物线）核；无限延伸的钟形是高斯核（见课件一第67页）。",
+      "en": "On p.67, K_λ(x₀,xᵢ)=D(|x₀−xᵢ|/λ) with D(t)=(3/4)(1−t²) for |t|<1 and 0 otherwise — a compactly supported quadratic kernel; the unbounded bell is the Gaussian kernel (Deck 1, p.67)."
+    },
+    "ref": { "deck": 1, "page": 67 }
+  },
+  {
+    "id": "d1s4q4",
+    "type": "single",
+    "topic": "robust-loess",
+    "question": {
+      "zh": "Robust LOESS 剔除残差较大的异常点对回归的影响，课件给出的具体做法是？",
+      "en": "Robust LOESS guards against the influence of large-residual outliers; what is the procedure given in the course?"
+    },
+    "options": {
+      "zh": ["直接删除残差最大的若干数据点后重新拟合", "把所有数据点的权重设为相同再拟合", "根据残差计算 robustness weight（bisquare 函数、以残差绝对值的中位数为尺度），乘以 kernel weight 作为新权重", "改用更高阶的多项式以覆盖异常点"],
+      "en": ["Delete the points with the largest residuals and refit", "Set all points to equal weight and refit", "Compute a robustness weight from the residuals (bisquare function scaled by the median absolute residual) and multiply it with the kernel weight", "Switch to a higher-degree polynomial to cover the outliers"]
+    },
+    "answer": [2],
+    "hint": {
+      "zh": "回忆第71页的步骤：计算残差 → 根据残差计算 Robust Weight → 与 kernel weight 相乘。",
+      "en": "Recall the steps on p.71: compute residuals → compute robust weights from them → multiply with the kernel weight."
+    },
+    "explanation": {
+      "zh": "课件第71页：先计算残差 eᵢ=yᵢ−f̂(xᵢ)，再以残差绝对值序列的中位数 s 为尺度、用 bisquare 函数 B 计算 robustness weight，乘以 kernel weight 作为新权重，从而降低残差大的异常点的影响，而不是物理删除数据点（见课件一第71页）。",
+      "en": "On p.71: compute residuals eᵢ=yᵢ−f̂(xᵢ), then a robustness weight via the bisquare function B scaled by s, the median of |eᵢ|, and multiply it with the kernel weight — statistically downweighting outliers rather than deleting them (Deck 1, p.71)."
+    },
+    "ref": { "deck": 1, "page": 71 }
+  },
+  {
+    "id": "d1s4q5",
+    "type": "multi",
+    "topic": "boundary-problem",
+    "question": {
+      "zh": "关于核方法 LOESS 的边界问题，课件中有哪些论述？",
+      "en": "Which of the following does the course say about the boundary problem of kernel-based LOESS?"
+    },
+    "options": {
+      "zh": ["数据开始与结束区段的点，其左右邻域是不对称的", "邻域不对称导致平滑后的值偏大或偏小", "课件采用局部线性回归对权值做再修正", "边界问题只出现在数据的正中间区段"],
+      "en": ["Points near the start and end of the data have asymmetric neighborhoods", "The asymmetry makes the smoothed values biased too large or too small", "The course applies local linear regression to re-adjust the weights", "The boundary problem occurs only in the middle of the data"]
+    },
+    "answer": [0, 1, 2],
+    "hint": {
+      "zh": "回忆第68页左右两图的对比：N-W Kernel at Boundary 与 Local Linear Regression at Boundary。",
+      "en": "Recall the contrast on p.68: 'N-W Kernel at Boundary' versus 'Local Linear Regression at Boundary'."
+    },
+    "explanation": {
+      "zh": "课件第68页：数据开始与结束区段的点左右邻域不对称，导致平滑后的值偏大或偏小（边界问题）；右图用局部线性回归对权值做再修正，改善了边界处的估计（见课件一第68页）。",
+      "en": "On p.68, points near the boundaries have asymmetric neighborhoods, biasing smoothed values high or low; local linear regression re-adjusts the weights and fixes the boundary estimates (Deck 1, p.68)."
+    },
+    "ref": { "deck": 1, "page": 68 }
+  },
+  {
+    "id": "d1s4q6",
+    "type": "multi",
+    "topic": "histogram-density",
+    "question": {
+      "zh": "关于直方图的缺点与密度图，课件中有哪些说法？",
+      "en": "Which of the following does the course say about histogram drawbacks and density charts?"
+    },
+    "options": {
+      "zh": ["密度图曲线以下的总面积代表整体 1", "直方图对采样率（分箱数）敏感，不同分箱数下形状差异明显", "核密度估计在每个数据点处放置核函数并叠加得到密度曲线", "直方图的形状与分箱数无关"],
+      "en": ["The total area under a density curve represents the whole, i.e., 1", "Histograms are sensitive to the sampling rate (bin count), with clearly different shapes across bin counts", "Kernel density estimation places a kernel at each data point and sums them into a density curve", "A histogram's shape is independent of the bin count"]
+    },
+    "answer": [1, 2, 3],
+    "hint": {
+      "zh": "回忆第74页三幅不同分箱数的直方图，以及第75页密度图框架中关于「面积」的标注。",
+      "en": "Recall the three histograms with different bin counts on p.74 and the 'area' annotation in the density framework on p.75."
+    },
+    "explanation": {
+      "zh": "课件第74页对比 10/20/90 个分箱的直方图，形状差异明显（对采样率敏感）；第75页指出密度图曲线以下的总面积代表整体 1；第78-79页说明核密度估计在每个数据点处放置核再叠加。因此「形状与分箱数无关」不符合课件（见课件一第74-75、78-79页）。",
+      "en": "P.74 compares histograms with 10/20/90 bins whose shapes differ markedly (sensitivity to sampling rate); p.75 notes the area under a density curve is 1 for the whole population; pp.78-79 explain that KDE places a kernel at each point and sums them. So 'independent of bin count' contradicts the course (Deck 1, pp.74-75, 78-79)."
+    },
+    "ref": { "deck": 1, "page": 74 }
+  },
+  {
+    "id": "d1s4q7",
+    "type": "judge",
+    "topic": "kde",
+    "question": {
+      "zh": "核密度估计中，课件同时列出了高斯 (Gaussian) 核与 Epanechnikov 核两种可选的核函数。",
+      "en": "In kernel density estimation, the course lists both the Gaussian kernel and the Epanechnikov kernel as usable kernels."
+    },
+    "options": {
+      "zh": ["对", "错"],
+      "en": ["True", "False"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "回忆第79页「Kernels」标题下面列出的条目。",
+      "en": "Recall the entries listed under the 'Kernels' heading on p.79."
+    },
+    "explanation": {
+      "zh": "课件第79页在核密度估计下列出 Kernels：Gaussian（(2π)^(−d/2)exp(−‖x‖²/2)）与 Epanechnikov（‖x‖<1 内的二次紧支撑核）两种核函数（见课件一第79页）。",
+      "en": "On p.79, the KDE slide lists two kernels: Gaussian ((2π)^(−d/2)exp(−‖x‖²/2)) and Epanechnikov (a compactly supported quadratic kernel for ‖x‖<1) (Deck 1, p.79)."
+    },
+    "ref": { "deck": 1, "page": 79 }
+  }
+]

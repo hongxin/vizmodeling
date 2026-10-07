@@ -1,1 +1,140 @@
-[]
+[
+  {
+    "id": "d1s2q1",
+    "type": "single",
+    "topic": "bar-chart",
+    "question": {
+      "zh": "柱形图的基本框架中，课件对「数值轴」的说明是？",
+      "en": "In the basic framework of a bar chart, what does the course say about the value axis?"
+    },
+    "options": {
+      "zh": ["刻度从 0 开始，标识出应变量数值的大小", "刻度从数据最小值开始，以放大差异", "刻度从 1 开始，避免出现空柱", "刻度可以任意截取，以突出变化幅度"],
+      "en": ["Its scale starts from 0 to mark the magnitude of the dependent variable", "Its scale starts from the data minimum to amplify differences", "Its scale starts from 1 to avoid empty bars", "Its scale may be truncated arbitrarily to highlight variation"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "注意课件在数值轴旁的蓝字标注「（应变量）」以及刻度的起点说明。",
+      "en": "Note the blue annotation beside the axis — '(dependent variable)' — and where the course says the scale begins."
+    },
+    "explanation": {
+      "zh": "课件柱形图框架：横轴时间轴为自变量，纵轴数值轴为应变量，通过从 0 开始的数值标识图表刻度，柱形高度代表各取值的数值；从 0 开始才能保证柱高的比较不失真（见课件一第30页）。",
+      "en": "In the framework, the time axis is the independent variable and the value axis the dependent variable, with a scale starting at 0; bar height encodes each value, and starting at 0 keeps height comparisons faithful (Deck 1, p.30)."
+    },
+    "ref": { "deck": 1, "page": 30 }
+  },
+  {
+    "id": "d1s2q2",
+    "type": "single",
+    "topic": "stacked-bar",
+    "question": {
+      "zh": "堆叠柱形图中，「内部柱形高度」与「整根柱形高度」分别代表什么？",
+      "en": "In a stacked bar chart, what do an inner segment's height and the total bar height represent?"
+    },
+    "options": {
+      "zh": ["内部柱形高度代表总数值，整根柱高代表子类别的数值", "内部柱形高度代表均值，整根柱高代表方差", "内部柱形高度代表增量，整根柱高代表累计值", "内部柱形高度代表该子类别的数值，整根柱高代表总数值"],
+      "en": ["Inner height is the total, bar height is the subcategory value", "Inner height is the mean, bar height is the variance", "Inner height is the increment, bar height is the cumulative value", "Inner height is the subcategory's value, and the total bar height is the overall value"]
+    },
+    "answer": [3],
+    "hint": {
+      "zh": "回忆课件对堆叠柱的两条高度标注：一条指向内部色段，一条指向整根柱子。",
+      "en": "Recall the two height annotations: one pointing to an inner segment, one to the whole bar."
+    },
+    "explanation": {
+      "zh": "课件堆叠柱形图框架：整根柱形高度代表每月（该自变量取值下）的总数值，内部柱形高度代表该子类别的数值——这是堆叠柱与普通柱形图的关键区别（见课件一第32页）。",
+      "en": "In the stacked bar framework, the total bar height encodes the overall value for that independent-variable entry (each month), while an inner segment's height encodes its subcategory's value — the key difference from a plain bar chart (Deck 1, p.32)."
+    },
+    "ref": { "deck": 1, "page": 32 }
+  },
+  {
+    "id": "d1s2q3",
+    "type": "single",
+    "topic": "scatter",
+    "question": {
+      "zh": "散点图的基本框架中，每个数据点是如何编码数据的？",
+      "en": "In the basic framework of a scatter plot, how does each point encode data?"
+    },
+    "options": {
+      "zh": ["每个点通过面积大小编码数值", "每个点都有对应 x 轴和 y 轴的坐标", "每个点通过颜色深浅编码数值", "每个点必须与相邻点连线"],
+      "en": ["Each point encodes a value by its area", "Each point has coordinates on both the x-axis and the y-axis", "Each point encodes a value by color depth", "Each point must be connected to its neighbors"]
+    },
+    "answer": [1],
+    "hint": {
+      "zh": "课件用虚线从一个示例点引出了两条标注，分别指向哪两个轴？",
+      "en": "The course draws two dashed annotations from one sample point — toward which two axes?"
+    },
+    "explanation": {
+      "zh": "课件散点图框架：每个点都有对应 x 轴（自变量）和 y 轴（应变量）的坐标，通过位置编码数据，而不是面积或颜色（见课件一第34页）。",
+      "en": "In the scatter framework, each point has an x-coordinate (independent variable) and a y-coordinate (dependent variable); data is encoded by position, not area or color (Deck 1, p.34)."
+    },
+    "ref": { "deck": 1, "page": 34 }
+  },
+  {
+    "id": "d1s2q4",
+    "type": "single",
+    "topic": "step-chart",
+    "question": {
+      "zh": "阶梯图的基本框架中，水平线与垂直线分别表达什么？",
+      "en": "In the framework of a step chart, what do the horizontal and vertical segments express?"
+    },
+    "options": {
+      "zh": ["水平线表示数值的突变，垂直线表示数值持续不变", "水平线表示数据缺失，垂直线表示数据完整", "水平线表示数值持续不变，垂直线表示数值的突变", "水平线与垂直线没有数据含义，仅是绘图装饰"],
+      "en": ["Horizontal segments mark sudden changes; vertical ones mark constant values", "Horizontal segments mark missing data; vertical ones mark complete data", "Horizontal segments mark a value held constant; vertical segments mark a sudden change", "Neither carries meaning; they are merely decorative"]
+    },
+    "answer": [2],
+    "hint": {
+      "zh": "回忆课件的两条标注：「持续该数值不变」与「表示数值的突变」。",
+      "en": "Recall the two annotations: 'the value stays unchanged' and 'marks a sudden change in value'."
+    },
+    "explanation": {
+      "zh": "课件阶梯图框架：水平线表示数值在该区间持续不变，垂直线表示数值的突变，阶梯高度代表该区间的数值；因此阶梯图适合表达分段保持、瞬间跳变的数据（见课件一第37页）。",
+      "en": "In the step framework, a horizontal segment means the value stays constant over the interval, a vertical segment marks a sudden jump, and the step height is the interval's value — suited to data that holds and then jumps (Deck 1, p.37)."
+    },
+    "ref": { "deck": 1, "page": 37 }
+  },
+  {
+    "id": "d1s2q5",
+    "type": "judge",
+    "topic": "line-chart",
+    "question": {
+      "zh": "折线图的基本框架中，连接各节点的「边线」有助于显示各节点之间的变化趋势。",
+      "en": "In the line-chart framework, the 'edges' connecting the nodes help reveal the trend of change between nodes."
+    },
+    "options": {
+      "zh": ["对", "错"],
+      "en": ["True", "False"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "回忆课件对「节点」与「边线」两条标注各自的作用描述。",
+      "en": "Recall how the course annotates the roles of 'nodes' versus 'edges'."
+    },
+    "explanation": {
+      "zh": "课件折线图框架：节点分别对应 x 轴和 y 轴的坐标，边线是连接各节点的线条，有助于显示各节点间的变化趋势，这体现了折线图的延续型表达（见课件一第36页）。",
+      "en": "In the framework, nodes correspond to x/y coordinates and edges connect the nodes, helping show the trend between them — the continuous style of expression of line charts (Deck 1, p.36)."
+    },
+    "ref": { "deck": 1, "page": 36 }
+  },
+  {
+    "id": "d1s2q6",
+    "type": "judge",
+    "topic": "step-chart",
+    "question": {
+      "zh": "对于美国邮费这类「区间内保持不变、调整时突变」的数据，课件选用的图表是折线图。",
+      "en": "For data like US postage rates that stay constant within an interval and jump at adjustments, the course uses a line chart."
+    },
+    "options": {
+      "zh": ["对", "错"],
+      "en": ["True", "False"]
+    },
+    "answer": [1],
+    "hint": {
+      "zh": "想一想哪种图表用水平段表达「保持不变」、用垂直段表达「突变」。",
+      "en": "Which chart type uses a horizontal segment for 'holding constant' and a vertical jump for a 'sudden change'?"
+    },
+    "explanation": {
+      "zh": "课件用阶梯图展示美国邮费的变化：邮费在两次调整之间保持不变、调整时发生突变，正对应阶梯图水平线（持续不变）与垂直线（突变）的语义，而不是折线图所表达的连续变化趋势（见课件一第37-38页）。",
+      "en": "The course shows US postage changes with a step chart: rates hold between adjustments and jump at them, matching the semantics of horizontal (constant) and vertical (jump) segments rather than the continuous trend of a line chart (Deck 1, pp.37-38)."
+    },
+    "ref": { "deck": 1, "page": 38 }
+  }
+]
