@@ -1,1 +1,186 @@
-[]
+[
+  {
+    "id": "d2s2q1",
+    "type": "single",
+    "topic": "mean-shift-vector",
+    "question": {
+      "zh": "Mean-Shift 中使用对称核时，均值移动向量（mean shift vector）与核密度估计的梯度 ∇f̂(x) 是什么关系？",
+      "en": "In Mean-Shift with a symmetric kernel, what is the relation between the mean shift vector and the gradient of the kernel density estimate ∇f̂(x)?"
+    },
+    "options": {
+      "zh": ["两者方向恰好垂直，互不相关", "两者方向相反，均值移动向量指向密度减小的一侧", "两者成比例、方向一致，均值移动向量总指向密度增大最快的方向", "两者大小相等，但方向由带宽 h 随机决定"],
+      "en": ["They are perpendicular and unrelated in direction", "They point in opposite directions, the mean shift vector heading toward lower density", "They are proportional and aligned — the mean shift vector always points in the direction of fastest density increase", "They have equal magnitude, but the direction is decided randomly by the bandwidth h"]
+    },
+    "answer": [2],
+    "hint": {
+      "zh": "第15页的标题就是 Gradient computation：对称核下均值移动向量与梯度估计方向一致。",
+      "en": "The p.15 heading is 'Gradient computation': with a symmetric kernel the mean shift vector aligns with the gradient estimate."
+    },
+    "explanation": {
+      "zh": "课件第15页在「Gradient computation」「For symmetric kernel」标题下推导：均值移动向量与核密度估计的梯度 ∇f̂(x) 成比例、方向一致，因此每步移动都朝密度增大最快的方向，并保证「Always converges to the local maximum」。垂直、反向、随机方向的说法均与此矛盾（见课件二第15页）。可配合仓库演示程序练习：code/nodejs/clustering-viz",
+      "en": "Under 'Gradient computation' and 'For symmetric kernel' (p.15), the mean shift vector is proportional to and aligned with the density gradient estimate ∇f̂(x), so each move heads in the direction of fastest density increase — 'always converges to the local maximum'; perpendicular, opposite, or random directions contradict this (Deck 2, p.15). Try the live demo: code/nodejs/clustering-viz."
+    },
+    "ref": { "deck": 2, "page": 15 }
+  },
+  {
+    "id": "d2s2q2",
+    "type": "single",
+    "topic": "mean-shift-iteration",
+    "question": {
+      "zh": "按课件第16页，Mean-Shift 从给定点 x 开始的迭代过程是？",
+      "en": "According to p.16, what is the Mean-Shift iteration starting from a given point x?"
+    },
+    "options": {
+      "zh": ["先计算均值移动向量，再据此平移密度估计窗口，如此反复直至收敛（∇f̂(x)→0）", "保持窗口位置不动，反复缩小带宽 h 直至 h 为 0", "一步把窗口中心直接搬到全局密度最大值处，无需迭代", "每次将窗口随机平移一个固定步长，直到达到预设的迭代次数"],
+      "en": ["Compute the mean shift vector, translate the density-estimation window by it, and repeat until convergence (∇f̂(x)→0)", "Keep the window fixed and repeatedly shrink the bandwidth h until it reaches 0", "Move the window center directly to the global density maximum in one step, no iteration needed", "Translate the window by a random fixed step each time, until a preset number of iterations is reached"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "第16页列出三步：1. Compute the mean shift vector；2. Translate density estimation window；3. Iterate until convergence。",
+      "en": "P.16 lists the three steps: 1. compute the mean shift vector; 2. translate the density estimation window; 3. iterate until convergence."
+    },
+    "explanation": {
+      "zh": "课件第16页：给定一点 x，每轮先计算均值移动向量，再据此平移密度估计窗口（x(t+1)=x(t)+移动向量），反复迭代直至收敛，收敛条件即 ∇f̂(x)→0（到达密度局部极大值）。缩小带宽、一步跳到全局极大值、随机游走都不是课件的迭代方式（见课件二第16页）。可配合仓库演示程序练习：code/nodejs/clustering-viz",
+      "en": "On p.16, starting from a point x, each round computes the mean shift vector and translates the density-estimation window by it (x(t+1)=x(t)+shift vector), iterating until convergence, i.e., ∇f̂(x)→0 (a local density maximum). Shrinking the bandwidth, jumping to the global maximum in one step, and random walks are not the course's iteration scheme (Deck 2, p.16). Try the live demo: code/nodejs/clustering-viz."
+    },
+    "ref": { "deck": 2, "page": 16 }
+  },
+  {
+    "id": "d2s2q3",
+    "type": "single",
+    "topic": "mean-shift-segmentation",
+    "question": {
+      "zh": "Mean-Shift 用于图像分割（mean-shift segmentation）的基本思路是？",
+      "en": "What is the key idea of using Mean-Shift for image segmentation (mean-shift segmentation)?"
+    },
+    "options": {
+      "zh": ["按像素的行列顺序把图像切成等大的方块区域", "先用监督分类器标注训练样本，再对标注结果做平滑", "只适用于二值图像，且需先手动选定簇数 K", "把像素映射到特征空间运行 Mean-Shift，收敛到同一局部极大值（模式）的像素划入同一区域"],
+      "en": ["Cut the image into equal-sized blocks following pixel row/column order", "Label training samples with a supervised classifier first, then smooth the labels", "It only works on binary images and requires manually presetting the cluster count K", "Map pixels into a feature space and run Mean-Shift there; pixels converging to the same local maximum (mode) form one region"]
+    },
+    "answer": [3],
+    "hint": {
+      "zh": "结合前两页：Mean-Shift 迭代收敛到局部极大值；分割就是把到达同一模式的点归并起来。",
+      "en": "Combine the previous two pages: Mean-Shift converges to a local maximum; segmentation groups points reaching the same mode."
+    },
+    "explanation": {
+      "zh": "课件第17页展示 Mean-shift segmentation：将像素按颜色等特征映射到特征空间后运行 Mean-Shift，凡收敛到同一密度局部极大值（模式）的像素归入同一区域，从而形成分割；簇数由模式个数决定、无需预先指定，也不依赖监督标注或按行列切块（见课件二第17页）。可配合仓库演示程序练习：code/nodejs/clustering-viz",
+      "en": "P.17 shows mean-shift segmentation: pixels are mapped into a feature space (e.g., color) where Mean-Shift runs, and pixels converging to the same local density maximum (mode) are grouped into one region; the cluster count follows from the number of modes rather than being preset, and no supervised labels or row/column cutting are involved (Deck 2, p.17). Try the live demo: code/nodejs/clustering-viz."
+    },
+    "ref": { "deck": 2, "page": 17 }
+  },
+  {
+    "id": "d2s2q4",
+    "type": "multi",
+    "topic": "mog",
+    "question": {
+      "zh": "关于 MOG（高斯混合模型，Mixture of Gaussians），课件中有哪些表述？",
+      "en": "Which of the following statements about MOG (Mixture of Gaussians) appear in the course?"
+    },
+    "options": {
+      "zh": ["假设 P(x) 是 K 个不同高斯分量的混合分布（加权和）", "每个数据点由两步过程生成：先从 K 个高斯中选定一个作为标签 z，再由该高斯 N(μz,Σz) 生成 x", "待优化的目标函数是最大化数据似然（maximize data likelihood）", "整个数据集被假设服从单一一个高斯分布"],
+      "en": ["P(x) is assumed to be a mixture distribution of K different Gaussians (a weighted sum)", "Each data point is generated by a 2-step process: choose one of the K Gaussians as label z, then generate x from that Gaussian N(μz,Σz)", "The object function to optimize is to maximize the data likelihood", "The whole dataset is assumed to follow a single Gaussian distribution"]
+    },
+    "answer": [0, 1, 2],
+    "hint": {
+      "zh": "第18-19页的三个关键词：Mixture distribution、2-step process、What object function shall we optimize?",
+      "en": "Three key phrases from pp.18-19: mixture distribution, 2-step process, and 'What object function shall we optimize?'"
+    },
+    "explanation": {
+      "zh": "课件第19页：混合分布 P(x)=Σ P(z)P(x|z)，即 K 个高斯的加权和；每个数据点由两步生成——先从 K 个高斯中选定一个作为标签 z，再按对应高斯 N(μz,Σz) 生成 x；优化目标是最大化数据似然。「只服从单一高斯」与「K 个分量的混合」假设矛盾，故该项错误（见课件二第18-19页）。可配合仓库演示程序练习：code/nodejs/clustering-viz",
+      "en": "On p.19, the mixture distribution P(x)=Σ P(z)P(x|z) is a weighted sum of K Gaussians; each data point is generated in two steps — choose one of the K Gaussians as label z, then draw x from the corresponding N(μz,Σz); the object function maximizes the data likelihood. 'A single Gaussian for the whole dataset' contradicts the K-component mixture assumption, so that option is false (Deck 2, pp.18-19). Try the live demo: code/nodejs/clustering-viz."
+    },
+    "ref": { "deck": 2, "page": 19 }
+  },
+  {
+    "id": "d2s2q5",
+    "type": "single",
+    "topic": "em",
+    "question": {
+      "zh": "用 EM 算法求解 MOG 时，E 步与 M 步分别做什么？",
+      "en": "When solving MOG with the EM algorithm, what do the E-step and M-step do respectively?"
+    },
+    "options": {
+      "zh": ["E 步删除离群点，M 步补充采集新样本", "E 步估计每个点属于各高斯分量的（后验）概率；M 步据此重新估计各分量参数以提升数据似然", "E 步把数据降到二维，M 步再重建出高维数据", "E 步随机重设簇中心后保持不动，M 步只微调核带宽"],
+      "en": ["The E-step deletes outliers and the M-step collects new samples", "The E-step estimates each point's (posterior) probability of belonging to each Gaussian component; the M-step then re-estimates the component parameters to improve the data likelihood", "The E-step embeds the data in 2D and the M-step reconstructs the high-dimensional data", "The E-step randomly resets the cluster centers and freezes them, while the M-step only fine-tunes a kernel bandwidth"]
+    },
+    "answer": [1],
+    "hint": {
+      "zh": "EM = Expectation / Maximization：先「期望」出归属关系，再「最大化」参数。",
+      "en": "EM = Expectation / Maximization: first 'expect' the memberships, then 'maximize' over the parameters."
+    },
+    "explanation": {
+      "zh": "课件第20页讲解用 EM 求解 MOG：E 步在当前参数下估计每个数据点属于各高斯分量的（后验）概率；M 步在这些软归属下重新估计各分量的参数（混合权重、均值、协方差），使数据似然最大化；两步交替迭代直至收敛。删点补点、降维重建、冻结中心只调带宽都不是 EM 的步骤（见课件二第20页）。可配合仓库演示程序练习：code/nodejs/clustering-viz",
+      "en": "P.20 covers solving MOG with EM: the E-step estimates each point's (posterior) probability of belonging to each Gaussian component under the current parameters; the M-step re-estimates the component parameters (mixture weights, means, covariances) from those soft assignments to maximize the data likelihood, alternating until convergence. Deleting/adding points, reducing and reconstructing dimensions, or freezing centers while tuning a bandwidth are not EM steps (Deck 2, p.20). Try the live demo: code/nodejs/clustering-viz."
+    },
+    "ref": { "deck": 2, "page": 20 }
+  },
+  {
+    "id": "d2s2q6",
+    "type": "single",
+    "topic": "kmeans",
+    "question": {
+      "zh": "关于 K-means 聚类，下列说法正确的是？",
+      "en": "Which statement about K-means clustering is correct?"
+    },
+    "options": {
+      "zh": ["簇数 K 由算法在迭代过程中自动学习得到", "中心（质心）只在初始化时设定，之后保持不变", "事先给定簇数 K，迭代交替「把每个点分配给最近的中心」与「把各中心更新为所属点的均值」，以最小化簇内平方距离和", "逐层合并当前最接近的两个簇，最终形成层次化的嵌套结构"],
+      "en": ["The cluster count K is learned automatically during iteration", "The centers (centroids) are set only at initialization and never change afterwards", "K is given in advance; iteration alternates assigning each point to its nearest center with updating each center to the mean of its assigned points, minimizing the within-cluster sum of squared distances", "It merges the closest pair of clusters layer by layer, finally forming a hierarchical nested structure"]
+    },
+    "answer": [2],
+    "hint": {
+      "zh": "回忆 K-means 的两步交替：分配（assignment）与更新（update）。",
+      "en": "Recall K-means' two alternating steps: assignment and update."
+    },
+    "explanation": {
+      "zh": "课件第21-22页：K-means 需事先给定簇数 K，每轮先将每个点分配给最近的中心，再将各中心更新为所属点的均值，交替进行以最小化簇内平方距离和；中心会随迭代更新，「逐层合并最近两簇」是层次聚类的做法，「K 自动学习」也不是 K-means 的机制（见课件二第21-22页）。可配合仓库演示程序练习：code/nodejs/clustering-viz",
+      "en": "On pp.21-22, K-means takes the cluster count K in advance and alternates assigning every point to its nearest center with updating each center to the mean of its assigned points, minimizing the within-cluster sum of squared distances; centers do update across iterations, 'merging the closest pair of clusters layer by layer' is hierarchical clustering's approach, and K is not learned automatically (Deck 2, pp.21-22). Try the live demo: code/nodejs/clustering-viz."
+    },
+    "ref": { "deck": 2, "page": 21 }
+  },
+  {
+    "id": "d2s2q7",
+    "type": "multi",
+    "topic": "hierarchical-clustering",
+    "question": {
+      "zh": "关于自底向上的层次（凝聚）聚类，课件中有哪些表述？",
+      "en": "Which of the following statements about bottom-up (agglomerative) hierarchical clustering appear in the course?"
+    },
+    "options": {
+      "zh": ["它是自顶向下的方法，每步把一个簇分裂成两半", "过程是每步找到最接近的两个点/簇并合并，直到所有点合并为一个簇", "两个前提（prerequisites）之一：定义点与点之间的距离度量 d(xi, xj)", "两个前提（prerequisites）之二：定义簇与簇之间的距离度量（cluster linkage）"],
+      "en": ["It is a top-down method that splits a cluster in two at each step", "The procedure finds the closest pair of points/clusters and merges them at each step, until all points form a single cluster", "One of the two prerequisites: a distance measure d(xi, xj) between two points", "The other of the two prerequisites: a distance measure between clusters (cluster linkage)"]
+    },
+    "answer": [1, 2, 3],
+    "hint": {
+      "zh": "第24页列出 procedure 的两步和 two prerequisites 的两条。",
+      "en": "P.24 lists the two-step procedure and the 'two prerequisites'."
+    },
+    "explanation": {
+      "zh": "课件第23-24页：层次聚类采用自底向上（bottom-up）的凝聚路线，每步找到最接近的两个点/簇并合并，直到所有点合并为单个簇；两个前提是点间距离度量 d(xi,xj) 与簇间距离度量（cluster linkage）。「自顶向下、每步分裂」是相反的分裂式路线，与课件所选的 bottom-up 不符，故该项错误（见课件二第23-24页）。",
+      "en": "On pp.23-24, hierarchical clustering follows the bottom-up agglomerative route: at each step find the closest pair of points/clusters and merge, until all points form a single cluster; the two prerequisites are a point-to-point distance measure d(xi,xj) and a cluster-to-cluster distance measure (cluster linkage). 'Top-down, splitting at each step' is the opposite divisive route, inconsistent with the bottom-up choice in the slides, so that option is false (Deck 2, pp.23-24)."
+    },
+    "ref": { "deck": 2, "page": 24 }
+  },
+  {
+    "id": "d2s2q8",
+    "type": "judge",
+    "topic": "linkage",
+    "question": {
+      "zh": "层次聚类中「最近邻」（nearest neighbor）linkage 把两簇之间的距离定义为两簇中最远一对点之间的距离。",
+      "en": "In hierarchical clustering, the 'nearest neighbor' linkage defines the distance between two clusters as the distance between the farthest pair of points across the two clusters."
+    },
+    "options": {
+      "zh": ["对", "错"],
+      "en": ["True", "False"]
+    },
+    "answer": [1],
+    "hint": {
+      "zh": "「最近邻」顾名思义取最近的一对点；想想第25页树状图上的合并次序。",
+      "en": "'Nearest neighbor' takes the closest pair, as the name suggests; recall the merge order in the dendrogram on p.25."
+    },
+    "explanation": {
+      "zh": "课件第25页在层次聚类处标注了 Nearest neighbor 这一 cluster linkage：两簇间的距离取两簇中最近一对点之间的距离（也称 single linkage）；「最远一对点」是另一种（最远邻/complete）定义，并非「最近邻」的含义，故本题说法错误（见课件二第25页）。",
+      "en": "P.25 labels 'Nearest neighbor' as a cluster linkage: the distance between two clusters is taken as the distance of their closest pair of points (also called single linkage); the farthest pair is a different (complete/farthest-neighbor) definition, not what 'nearest neighbor' means, so the statement is false (Deck 2, p.25)."
+    },
+    "ref": { "deck": 2, "page": 25 }
+  }
+]

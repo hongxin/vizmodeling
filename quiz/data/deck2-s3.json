@@ -1,1 +1,163 @@
-[]
+[
+  {
+    "id": "d2s3q1",
+    "type": "single",
+    "topic": "digit-visualization-motivation",
+    "question": {
+      "zh": "降维一节以手写数字数据集的可视化为动机：每个「3」是 16×16 灰度图像，变量 xj（j=1,…,256）指的是什么？",
+      "en": "The dimensionality-reduction section is motivated by visualizing the handwritten digit dataset: each 'three' is a 16×16 grayscale image — what do the variables xj (j=1,…,256) denote?"
+    },
+    "options": {
+      "zh": ["笔画转折点的坐标", "每个像素的灰度值（每个样本是 256 维空间中的点）", "图像的行数与列数", "0 到 9 的类别标签"],
+      "en": ["The coordinates of stroke turning points", "The grayscale value of each pixel (each sample is a point in 256 dimensions)", "The number of rows and columns of the image", "The class label from 0 to 9"]
+    },
+    "answer": [1],
+    "hint": {
+      "zh": "第38页原文：variables xj, j = 1,…,256 are the grayscale values for each pixel。",
+      "en": "P.38 states verbatim: 'variables xj, j = 1,…,256 are the grayscale values for each pixel'."
+    },
+    "explanation": {
+      "zh": "课件第36页以手写数字数据集的可视化引出降维；第38页说明：130 个「3」取自 638 个「3」的手写数字子集，每个「3」是 16×16 灰度图，变量 xj（j=1,…,256）即各像素的灰度值。因此每个样本是 256 维的点，无法直接目视——这正是需要降维的动机。转折点坐标、行列数、类别标签都不是 xj 的含义（见课件二第36、38页）。",
+      "en": "P.36 motivates dimensionality reduction with the handwritten digit dataset; p.38 explains that 130 'threes' come from a subset of 638 such threes, each a 16×16 grayscale image whose variables xj (j=1,…,256) are the grayscale values of each pixel — every sample is thus a point in 256 dimensions that cannot be viewed directly, which is exactly why reduction is needed. Turning-point coordinates, row/column counts, and class labels are not what xj denotes (Deck 2, pp.36 & 38)."
+    },
+    "ref": { "deck": 2, "page": 36 }
+  },
+  {
+    "id": "d2s3q2",
+    "type": "single",
+    "topic": "feature-extraction",
+    "question": {
+      "zh": "课件第37页的特征抽取把数据分量划分为哪三部分？",
+      "en": "The feature-extraction discussion on p.37 splits the data components into which three parts?"
+    },
+    "options": {
+      "zh": ["常量分量、低频分量、高频分量", "均值、方差、协方差", "红色、绿色、蓝色三个通道", "训练集、验证集、测试集"],
+      "en": ["A constant component, a low-frequency component, and a high-frequency component", "Mean, variance, and covariance", "The red, green, and blue channels", "Training, validation, and test sets"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "第37页图中三个箭头标签：constant、Low frequency component、High frequency component。",
+      "en": "The three arrow labels on the p.37 figure: constant, Low frequency component, High frequency component."
+    },
+    "explanation": {
+      "zh": "课件第37页的标注图把数据分量分为 constant（常量分量）、low frequency component（低频分量，对应平缓的整体结构）与 high frequency component（高频分量，对应细节与噪声）三类，为特征抽取（如保留平缓的低频结构、舍弃高频细节）提供了依据。均值/方差/协方差、RGB 通道、数据集划分都与该分解无关（见课件二第37页）。",
+      "en": "The annotated figure on p.37 decomposes the data into a constant component, a low-frequency component (the smooth, global structure), and a high-frequency component (fine detail and noise), providing the basis for feature extraction (e.g., keeping the smooth low-frequency structure while discarding high-frequency detail). Mean/variance/covariance, RGB channels, and dataset splits are unrelated to this decomposition (Deck 2, p.37)."
+    },
+    "ref": { "deck": 2, "page": 37 }
+  },
+  {
+    "id": "d2s3q3",
+    "type": "single",
+    "topic": "svd",
+    "question": {
+      "zh": "课件用奇异值分解求解特征抽取：对中心化数据矩阵 Ŷ=USVᵀ，下列说法正确的是？",
+      "en": "The course solves feature extraction with Singular Value Decomposition: for the centered data matrix Ŷ=USVᵀ, which statement is correct?"
+    },
+    "options": {
+      "zh": ["奇异值可正可负，且排列顺序没有要求", "U、V 只是一般的可逆矩阵，不要求正交", "S 是对角矩阵，奇异值满足 s1≥s2≥…≥sd≥0；SVD 总存在且在符号意义下唯一", "SVD 只对对称方阵存在，且结果完全不唯一"],
+      "en": ["Singular values may be positive or negative, with no ordering required", "U and V are merely general invertible matrices, not necessarily orthogonal", "S is a diagonal matrix with singular values s1≥s2≥…≥sd≥0; the SVD always exists and is unique up to signs", "The SVD exists only for symmetric square matrices and its result is never unique"]
+    },
+    "answer": [2],
+    "hint": {
+      "zh": "第40页右侧三条：Unitary Matrices、Singular values（s1≥s2≥…≥sd≥0）、always exists & unique up to signs。",
+      "en": "Three points on the right of p.40: unitary matrices, singular values (s1≥s2≥…≥sd≥0), always exists & unique up to signs."
+    },
+    "explanation": {
+      "zh": "课件第40页：对中心化的 N×d 数据矩阵 Ŷ（设 N>d）作 SVD 得 Ŷ=USVᵀ，U 为 d×d、V 为 N×N 的正交（unitary）矩阵，S 为 d×N 对角矩阵，奇异值降序非负 s1≥s2≥…≥sd≥0；SVD 总存在，且在相差正负号的意义下唯一。「可正可负且无序」「不要求正交」「只对对称方阵存在且完全不唯一」均与课件矛盾（见课件二第40-41页）。",
+      "en": "On p.40, the centered N×d matrix Ŷ (N>d) factors as Ŷ=USVᵀ, where U is d×d and V is N×N orthogonal (unitary), S is a d×N diagonal matrix with singular values in descending non-negative order s1≥s2≥…≥sd≥0; the SVD always exists and is unique up to signs. 'Signed and unordered', 'not necessarily orthogonal', and 'exists only for symmetric square matrices and is never unique' all contradict the slides (Deck 2, pp.40-41)."
+    },
+    "ref": { "deck": 2, "page": 40 }
+  },
+  {
+    "id": "d2s3q4",
+    "type": "single",
+    "topic": "pca",
+    "question": {
+      "zh": "PCA 得到主成分 u1,u2,…,up 后，对新数据 ynew 如何计算其低维特征 wnew？",
+      "en": "After PCA yields the principal components u1,u2,…,up, how is the low-dimensional feature wnew computed for a new data point ynew?"
+    },
+    "options": {
+      "zh": ["直接截取 ynew 的前 p 个坐标分量", "对 ynew 单独重新执行一次完整的 SVD 分解", "用 ynew 替换掉某个主成分后重新求解变换", "固定变换 X（Xᵀ=U），用主成分作投影：wnew=Xᵀynew，各分量 wi=ui·ynew"],
+      "en": ["Simply truncate ynew to its first p coordinates", "Run a complete fresh SVD on ynew alone", "Replace one principal component with ynew and re-solve the transform", "Fix the transform X (Xᵀ=U) and project: wnew=Xᵀynew with components wi=ui·ynew"]
+    },
+    "answer": [3],
+    "hint": {
+      "zh": "第42页右侧公式：wnew 的第 i 行是 uᵢ 与 ynew 的内积。",
+      "en": "The formula on the right of p.42: row i of wnew is the inner product of uᵢ with ynew."
+    },
+    "explanation": {
+      "zh": "课件第42页：给定数据 Y，求解 arg min‖Y−XW‖ 得到变换 X（Xᵀ=U）与特征 W=SVᵀ，u1,…,up（Xᵀ 的行）即主成分；对新数据 ynew 固定变换 X，wnew=Xᵀynew，第 i 个分量 wi=ui·ynew，即向各主成分投影，无需重新分解、也不能靠截断原坐标或替换主成分得到（见课件二第42页）。可配合仓库演示程序练习：code/nodejs/dimreduction-viz",
+      "en": "On p.42, given data Y, solving arg min‖Y−XW‖ yields the transform X (Xᵀ=U) and features W=SVᵀ, where u1,…,up (the rows of Xᵀ) are the principal components; for new data ynew the transform X is fixed and wnew=Xᵀynew with the i-th component wi=ui·ynew — a projection onto the principal components, obtained neither by re-decomposition, crude truncation, nor replacing a component (Deck 2, p.42). Try the live demo: code/nodejs/dimreduction-viz."
+    },
+    "ref": { "deck": 2, "page": 42 }
+  },
+  {
+    "id": "d2s3q5",
+    "type": "single",
+    "topic": "isomap",
+    "question": {
+      "zh": "与直接在高维空间用欧氏距离相比，ISOMAP 降维的关键改进是什么？",
+      "en": "Compared with using Euclidean distances directly in the high-dimensional space, what is ISOMAP's key improvement?"
+    },
+    "options": {
+      "zh": ["保持数据的内在几何：使用流形上所有点对之间的测地距离（geodesic distances）", "先把数据随机投影到低维空间再做聚类", "只保留常量分量、丢弃其余全部分量", "只计算距离最远的两个点之间的距离"],
+      "en": ["Preserve the intrinsic geometry of the data: use the geodesic distances on the manifold between all pairs", "Randomly project the data to a low dimension first, then cluster", "Keep only the constant component and discard all the rest", "Compute only the distance between the two farthest points"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "第43页的两条要点：Preserve the intrinsic geometry；Use the geodesic distances on manifold。",
+      "en": "The two points on p.43: 'preserve the intrinsic geometry' and 'use the geodesic distances on manifold'."
+    },
+    "explanation": {
+      "zh": "课件第43页指出 ISOMAP 的两条要点：保持数据的内在几何（preserve the intrinsic geometry of the data）、使用流形上所有点对之间的测地距离（geodesic distances），即以沿流形的最短路径距离代替直线欧氏距离，再按三步算法（构建近邻图、求图上最短路、求低维嵌入）计算。第44-45页给出实例：698 幅 64×64 图像取 K=7、d=2 得到二维输出，另一例 N=2000、K=6。随机投影、只留常量、只算最远两点均与课件不符（见课件二第43-45页）。",
+      "en": "P.43 gives ISOMAP's two tenets — preserve the intrinsic geometry of the data, and use the geodesic distances on the manifold between all pairs — i.e., replacing straight-line Euclidean distances with shortest-path distances along the manifold, then running the three-step algorithm (build the neighborhood graph, compute shortest paths on it, compute the low-dimensional embedding). Pages 44-45 show examples: 698 64×64 images with K=7, d=2 yielding 2D outputs, and another with N=2000, K=6. Random projection, keeping only constants, or using only the farthest pair contradicts the slides (Deck 2, pp.43-45)."
+    },
+    "ref": { "deck": 2, "page": 43 }
+  },
+  {
+    "id": "d2s3q6",
+    "type": "judge",
+    "topic": "lle",
+    "question": {
+      "zh": "LLE（局部线性嵌入）假设数据在局部近似线性：每个点由其近邻的线性组合（重建权重）表示，降维后在低维空间中保持这些局部线性重建关系。",
+      "en": "LLE (locally linear embedding) assumes the data are locally linear: each point is represented by a linear combination (reconstruction weights) of its neighbors, and these local linear reconstruction relations are preserved in the low-dimensional space."
+    },
+    "options": {
+      "zh": ["对", "错"],
+      "en": ["True", "False"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "第46页引用 Roweis & Saul 的经典论文，方法名里的 locally linear 正是关键。",
+      "en": "P.46 cites the classic Roweis & Saul paper — 'locally linear' in the method's name is the key."
+    },
+    "explanation": {
+      "zh": "课件第46页给出 LLE 参考文献（Roweis & Saul 的 Locally Linear Embedding，Science 2000 等）：LLE 是非线性降维方法，假设流形局部线性，用近邻的线性组合（重建权重）表示每个点，并在低维嵌入中保持这些局部重建关系。题目表述与该思想一致，故为「对」（见课件二第46页）。",
+      "en": "P.46 lists the LLE references (Roweis & Saul's 'Locally Linear Embedding', Science 2000, among others): LLE is a nonlinear dimensionality-reduction method that assumes the manifold is locally linear, represents each point by a linear combination (reconstruction weights) of its neighbors, and preserves those local reconstruction relations in the low-dimensional embedding — matching the statement, hence True (Deck 2, p.46)."
+    },
+    "ref": { "deck": 2, "page": 46 }
+  },
+  {
+    "id": "d2s3q7",
+    "type": "judge",
+    "topic": "t-sne",
+    "question": {
+      "zh": "t-SNE 与 SNE 在低维嵌入中都使用高斯分布来度量点间相似度，因此二者没有任何区别。",
+      "en": "t-SNE and SNE both use a Gaussian to measure pairwise similarities in the low-dimensional embedding, so there is no difference between them at all."
+    },
+    "options": {
+      "zh": ["对", "错"],
+      "en": ["True", "False"]
+    },
+    "answer": [1],
+    "hint": {
+      "zh": "「t」指的是什么分布？见第47-49页的 t-Distributed。",
+      "en": "What distribution does the 't' stand for? See 't-Distributed' on pp.47-49."
+    },
+    "explanation": {
+      "zh": "课件第48页先讲 SNE（Stochastic Neighbor Embedding），第49页讲 t-SNE：名称中的 t 指在低维嵌入中改用 t 分布（t-Distribution，重尾）代替高斯分布来刻画相似度，以缓解点被过度挤压的拥挤问题；第47页展示 t-SNE 对手写数字图像的二维投射，第50页展示 5 万张 ILSVRC 2012 验证集图像 CNN 特征的 t-SNE 可视化。「都用高斯且没有区别」的说法与课件不符，故为「错」（见课件二第47-50页）。可配合仓库演示程序练习：code/nodejs/dimreduction-viz",
+      "en": "P.48 introduces SNE (Stochastic Neighbor Embedding) and p.49 t-SNE, whose 't' denotes replacing the Gaussian with a t-distribution (heavy-tailed) in the low-dimensional embedding when measuring similarities, easing the crowding of points; p.47 shows t-SNE's 2D projection of handwritten digit images and p.50 the t-SNE visualization of CNN codes of 50,000 ILSVRC 2012 validation images. 'Both use a Gaussian and there is no difference' contradicts the slides, hence False (Deck 2, pp.47-50). Try the live demo: code/nodejs/dimreduction-viz."
+    },
+    "ref": { "deck": 2, "page": 49 }
+  }
+]
