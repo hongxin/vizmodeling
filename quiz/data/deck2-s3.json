@@ -63,8 +63,8 @@
       "en": "Three points on the right of p.40: unitary matrices, singular values (s1≥s2≥…≥sd≥0), always exists & unique up to signs."
     },
     "explanation": {
-      "zh": "课件第40页：对中心化的 N×d 数据矩阵 Ŷ（设 N>d）作 SVD 得 Ŷ=USVᵀ，U 为 d×d、V 为 N×N 的正交（unitary）矩阵，S 为 d×N 对角矩阵，奇异值降序非负 s1≥s2≥…≥sd≥0；SVD 总存在，且在相差正负号的意义下唯一。「可正可负且无序」「不要求正交」「只对对称方阵存在且完全不唯一」均与课件矛盾（见课件二第40-41页）。",
-      "en": "On p.40, the centered N×d matrix Ŷ (N>d) factors as Ŷ=USVᵀ, where U is d×d and V is N×N orthogonal (unitary), S is a d×N diagonal matrix with singular values in descending non-negative order s1≥s2≥…≥sd≥0; the SVD always exists and is unique up to signs. 'Signed and unordered', 'not necessarily orthogonal', and 'exists only for symmetric square matrices and is never unique' all contradict the slides (Deck 2, pp.40-41)."
+      "zh": "课件第40页：对中心化的 d×N 数据矩阵 Ŷ（设 N>d）作 SVD 得 Ŷ=USVᵀ，U 为 d×d、V 为 N×N 的正交（unitary）矩阵，S 为 d×N 对角矩阵，奇异值降序非负 s1≥s2≥…≥sd≥0；SVD 总存在，且在相差正负号的意义下唯一。「可正可负且无序」「不要求正交」「只对对称方阵存在且完全不唯一」均与课件矛盾（见课件二第40-41页）。",
+      "en": "On p.40, the centered d×N matrix Ŷ (N>d) factors as Ŷ=USVᵀ, where U is d×d and V is N×N orthogonal (unitary), S is a d×N diagonal matrix with singular values in descending non-negative order s1≥s2≥…≥sd≥0; the SVD always exists and is unique up to signs. 'Signed and unordered', 'not necessarily orthogonal', and 'exists only for symmetric square matrices and is never unique' all contradict the slides (Deck 2, pp.40-41)."
     },
     "ref": { "deck": 2, "page": 40 }
   },
