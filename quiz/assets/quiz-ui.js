@@ -109,7 +109,7 @@ function viewOverview() {
     <div class="cards">${cards}</div>`;
   $app.querySelectorAll('[data-quiz]').forEach(el =>
     el.addEventListener('click', () => { location.hash = '#/quiz/' + el.dataset.quiz; }));
-  $app.getElementById('clear-btn').addEventListener('click', () => {
+  $app.querySelector('#clear-btn').addEventListener('click', () => {
     if (confirm(t('confirmClear'))) { store.clear(); render(); }
   });
 }
@@ -174,7 +174,7 @@ function drawQuestion() {
         <a class="btn ghost slidelink" href="${pdfUrl(q.ref.deck)}" target="_blank" rel="noopener">${esc(t('seeSlides'))}：${esc(t('deck'))}${q.ref.deck}${esc(t('page'))}${q.ref.page}</a>
         ${answered
           ? `<button class="btn primary" id="next-btn" type="button">${esc(isLast ? t('finish') : t('next'))}</button>`
-          : `<button class="btn primary" id="submit-btn" type="button" disabled>${esc(t('submit'))}</button>`}
+          : `<button class="btn primary" id="submit-btn" type="button" ${picked.size ? '' : 'disabled'}>${esc(t('submit'))}</button>`}
       </div>
     </div>`;
   if (!answered) {
@@ -184,14 +184,14 @@ function drawQuestion() {
       else { picked.clear(); picked.add(i); }
       drawQuestion();
     }));
-    const hb = $app.getElementById('hint-btn');
+    const hb = $app.querySelector('#hint-btn');
     if (hb) hb.addEventListener('click', () => {
       const rec = session.results.get(q.id) || { selected: [], correct: false, hintUsed: true };
       rec.hintUsed = true; rec.hintShown = true;
       session.results.set(q.id, rec);
       drawQuestion();
     });
-    const sb = $app.getElementById('submit-btn');
+    const sb = $app.querySelector('#submit-btn');
     sb.addEventListener('click', () => {
       const selected = [...picked];
       const correct = judgeAnswer(q, selected);
@@ -202,7 +202,7 @@ function drawQuestion() {
       drawQuestion();
     });
   } else {
-    $app.getElementById('next-btn').addEventListener('click', () => {
+    $app.querySelector('#next-btn').addEventListener('click', () => {
       if (isLast) finishQuiz(); else { session.idx++; drawQuestion(); }
     });
   }
@@ -256,12 +256,12 @@ function drawResult() {
     <table class="scoreboard" style="width:100%;text-align:left;font-size:.92rem">
       <tr><th>#</th><th>${esc(lang === 'zh' ? '题目' : 'Question')}</th><th>✓/✗</th></tr>${rows}
     </table>`;
-  $app.getElementById('retry-btn').addEventListener('click', () => {
+  $app.querySelector('#retry-btn').addEventListener('click', () => {
     const id = session.sectionId;
     session = null;
     viewQuiz(id);
   });
-  $app.getElementById('home-btn').addEventListener('click', () => { location.hash = '#/'; });
+  $app.querySelector('#home-btn').addEventListener('click', () => { location.hash = '#/'; });
 }
 
 // —— 视图：错题本（练习不记录） ——
