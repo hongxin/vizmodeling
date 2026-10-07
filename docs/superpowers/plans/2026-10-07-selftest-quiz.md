@@ -820,6 +820,7 @@ async function render() {
 
 // —— 视图：总览 ——
 function viewOverview() {
+  session = null; // 离开答题视图，确保下次从卡片进入是新会话
   const all = store.available ? store.load() : {};
   const totalQ = s => s.counts.single + s.counts.multi + s.counts.judge;
   const masteredCount = sections.filter(s => computeMastery(all[s.id], totalQ(s)) === 'mastered').length;
@@ -855,12 +856,18 @@ let session = null; // {sectionId, order, optOrder:Map(qid->idx数组), idx, pic
 async function viewQuiz(sectionId) {
   const meta = sections.find(s => s.id === sectionId);
   if (!meta) { viewOverview(); return; }
+  // 同节未完成会话复用（切语言/重渲染不洗牌不丢进度）；已完成则重放成绩单
+  if (session && session.sectionId === sectionId) {
+    session.finished ? drawResult() : drawQuestion();
+    return;
+  }
   const bank = await loadBank(sectionId);
   session = {
     sectionId: sectionId, meta, bank,
     order: shuffle(bank),
     optOrder: new Map(bank.map(q => [q.id, shuffle(q.options.zh.map((_, i) => i))])),
-    idx: 0, picked: new Set(), results: new Map(), done: new Set(), score: 0, finished: false,
+    idx: 0, picked: new Set(), pickedFor: null, results: new Map(), done: new Set(),
+    score: 0, correctCount: 0, finished: false, spAfter: null,
   };
   drawQuestion();
 }
@@ -868,7 +875,9 @@ async function viewQuiz(sectionId) {
 function drawQuestion() {
   const { order, idx } = session;
   const q = order[idx];
-  const picked = session.picked = new Set();
+  // 换题时才重置选择；重渲染（点选项/看提示/切语言）保留已选
+  if (session.pickedFor !== q.id) { session.picked = new Set(); session.pickedFor = q.id; }
+  const picked = session.picked;
   const answered = session.done.has(q.id);
   const r = session.results.get(q.id);
   const optIdx = session.optOrder.get(q.id);
@@ -940,6 +949,7 @@ function finishQuiz() {
   let correct = 0;
   for (const q of bank) if (results.get(q.id)?.correct) correct++;
   session.score = computeScore(correct, bank.length);
+  session.correctCount = correct;
 
   const all = store.available ? store.load() : {};
   const sp = all[session.sectionId] || { best: 0, attempts: 0, lastScore: 0, questions: {} };
@@ -954,19 +964,25 @@ function finishQuiz() {
   all[session.sectionId] = sp;
   if (store.available) store.save(all);
 
-  const rows = session.order.map((q, i) => {
-    const r = session.results.get(q.id);
+  session.spAfter = sp;
+  session.finished = true;
+  drawResult();
+}
+
+function drawResult() {
+  const { bank, order, results, score, correctCount, meta, spAfter } = session;
+  const rows = order.map((q, i) => {
+    const r = results.get(q.id);
     return `<tr><td>${i + 1}</td><td>${esc(q.question[lang])}</td>
       <td class="verdict ${r?.correct ? 'ok' : 'bad'}">${r?.correct ? '✓' : '✗'}</td></tr>`;
   }).join('');
-  const totalQ = bank.length;
-  const mastery = computeMastery(sp, totalQ);
+  const mastery = computeMastery(spAfter, bank.length);
   const badge = mastery === 'mastered' ? 'mastered' : 'in-progress';
   $app.innerHTML = `
     <div class="scoreboard">
-      <p>${esc(t('resultTitle'))} · ${esc(session.meta.title[lang])}</p>
-      <div class="big">${session.score}</div>
-      <p>${esc(t('attemptCorrect'))}：${correct} / ${totalQ}
+      <p>${esc(t('resultTitle'))} · ${esc(meta.title[lang])}</p>
+      <div class="big">${score}</div>
+      <p>${esc(t('attemptCorrect'))}：${correctCount} / ${bank.length}
         &nbsp;<span class="badge ${badge}">${esc(t(badge))}</span></p>
       <div class="actions" style="justify-content:center">
         <button class="btn primary" id="retry-btn" type="button">${esc(t('retry'))}</button>
@@ -976,7 +992,11 @@ function finishQuiz() {
     <table class="scoreboard" style="width:100%;text-align:left;font-size:.92rem">
       <tr><th>#</th><th>${esc(lang === 'zh' ? '题目' : 'Question')}</th><th>✓/✗</th></tr>${rows}
     </table>`;
-  $app.getElementById('retry-btn').addEventListener('click', () => viewQuiz(session.sectionId));
+  $app.getElementById('retry-btn').addEventListener('click', () => {
+    const id = session.sectionId;
+    session = null;
+    viewQuiz(id);
+  });
   $app.getElementById('home-btn').addEventListener('click', () => { location.hash = '#/'; });
 }
 
@@ -1124,3 +1144,4 @@ git push
 - **Spec 覆盖**：spec §3 内容蓝图 → Task 2-5；§4 架构/路由/判分/掌握度/存储 → Task 1/2/6；§5 错误处理（fetch 报错、题库校验、存储降级、v1 键）→ Task 1/2/6；§6 验证（单测/校验/手动清单）→ Task 1-7；§7 上线 → Task 7。无缺口。
 - **占位符扫描**：无 TBD/TODO；内容任务的题目本体按「模板+逐题命题锚点+质量规则」生成，属规格而非占位。
 - **类型一致性**：`shuffle/judgeAnswer/computeScore/computeMastery/createProgressStore/validateBank` 签名在 Task 1 定义、Task 2/6 按同签名调用；进度对象形状与 Global Constraints 一致；`sections.json` 字段（id/deck/file/title/counts）在 Task 2 定义、Task 6 消费一致。
+- **预检修正（执行前）**：修复 Task 6 UI 代码两处缺陷——①重渲染清空已选选项（`picked` 改为按题缓存，仅换题时重置）；②切语言/重渲染会重建答题会话导致重洗牌丢进度（`viewQuiz` 增加同节会话复用，`finishQuiz` 拆出 `drawResult`，`viewOverview` 清空会话）。
