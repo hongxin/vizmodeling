@@ -136,5 +136,53 @@
       "en": "The course shows US postage changes with a step chart: rates hold between adjustments and jump at them, matching the semantics of horizontal (constant) and vertical (jump) segments rather than the continuous trend of a line chart (Deck 1, pp.37-38)."
     },
     "ref": { "deck": 1, "page": 38 }
+  },
+  {
+    "id": "d1s2q7",
+    "type": "single",
+    "level": "challenge",
+    "topic": "step-vs-line",
+    "question": {
+      "zh": "课件用阶梯图展示美国邮费：区间内保持不变、调整时突变。如果要用图表表达某快递的分档计价「首重 1kg 以内 12 元，此后每增加 1kg 加收 4 元」，更合适的做法是？",
+      "en": "The course shows US postage rates with a step chart: constant within an interval, jumping at adjustments. To chart a courier's tiered pricing — '12 yuan for the first 1kg, then 4 yuan more for each additional kilogram' — which representation is more appropriate?"
+    },
+    "options": {
+      "zh": ["折线图，因为价格随重量连续平滑地变化", "折线图，因为把各档价格连成线后，相邻档之间是平滑过渡，符合实际计价过程", "阶梯图，因为价格在每一重量区间内保持不变、跨越整千克阈值时发生突变", "散点图，因为重量与价格之间没有函数关系"],
+      "en": ["A line chart, because the price varies continuously and smoothly with weight", "A line chart, because connecting the tiers yields smooth gradual transitions between them, matching how pricing actually works", "A step chart, because the price stays constant within each weight interval and jumps at each whole-kilogram threshold", "A scatter plot, because there is no functional relationship between weight and price"]
+    },
+    "answer": [2],
+    "hint": {
+      "zh": "先判断这个量在两次跳档之间是否随自变量变化，再决定用延续型还是离散型表达。",
+      "en": "First decide whether the quantity changes with the independent variable between two tier jumps, then choose continuous or discrete expression."
+    },
+    "explanation": {
+      "zh": "课件第36-38页引出折线图（延续型表达，边线显示变化趋势）与阶梯图（水平线表示数值持续不变、垂直线表示突变），并以美国邮费为例。延伸：选图的关键在数据语义而非数据多少——分档计价在每一重量区间内保持不变、跨越阈值时瞬间跳变，与邮费数据同构，因此阶梯图更合适；折线图的连线会暗示区间内价格在连续变化，与事实不符（见课件一第36-38页）。",
+      "en": "The course introduces the line chart on pp.36-38 (continuous expression, edges showing trends) and the step chart (horizontal segments for values held constant, vertical segments for sudden jumps), illustrated with US postage rates. Extension: the key to choosing a chart is the semantics of the data, not its volume — tiered pricing holds constant within each weight interval and jumps at each threshold, isomorphic to the postage data, so a step chart fits; a line chart's connecting segments would falsely suggest continuous change within each interval (Deck 1, pp.36-38)."
+    },
+    "ref": { "deck": 1, "page": 38 }
+  },
+  {
+    "id": "d1s2q8",
+    "type": "judge",
+    "level": "challenge",
+    "topic": "dual-axis",
+    "question": {
+      "zh": "在双 y 轴图中，两条折线是否交叉、何处交叉等视觉关系会随左右两条轴取值范围的不同选择而改变；因此在未说明两侧轴范围的情况下，不能仅凭两线是否交叉来判断哪个序列增长更快。",
+      "en": "In a dual y-axis chart, visual relationships such as whether and where the two lines cross change with the chosen ranges of the left and right axes; therefore, without knowing the two axis ranges, one cannot judge which series grows faster merely from whether the lines cross."
+    },
+    "options": {
+      "zh": ["对", "错"],
+      "en": ["True", "False"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "回忆柱形图的刻度为什么要从 0 开始；当两条线各用各的刻度时，再想想「交叉」由什么决定。",
+      "en": "Recall why a bar chart's scale must start at 0; then, when the two lines use separate scales, ask what determines a 'crossing'."
+    },
+    "explanation": {
+      "zh": "课件第30页引出柱形图数值轴（应变量）的刻度要求：从 0 开始，说明轴的起点与范围直接决定图形的视觉对比。延伸：双 y 轴图给两条序列各配一条可独立设定范围的数值轴，两线的交叉、张合等视觉关系并非数据固有，而是随两侧轴范围的选择而变化——压缩或拉伸任意一条轴，都能让原本不相交的两条线相交；因此阅读双轴图必须先核对两侧刻度，不能只凭线条是否交叉下结论（见课件一第30页）。",
+      "en": "The course requires on p.30 that the bar chart value axis (dependent variable) start at 0, showing that an axis's start and range directly determine visual comparison. Extension: a dual y-axis chart gives each series its own independently scaled axis, so whether the lines cross and how they diverge are not inherent to the data but artifacts of the two chosen ranges — compressing or stretching either axis can make two non-crossing lines cross; readers must check both scales before drawing conclusions from crossings (Deck 1, p.30)."
+    },
+    "ref": { "deck": 1, "page": 30 }
   }
 ]

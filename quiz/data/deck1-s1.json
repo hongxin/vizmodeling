@@ -159,5 +159,53 @@
       "en": "On pp.16-17, the four sets share nearly the same means, standard deviations, regression line Y=3+0.5X and R², yet show linear, curved, outlier-driven, and near-vertical patterns — a blind spot of statistics (Deck 1, pp.16-17)."
     },
     "ref": { "deck": 1, "page": 17 }
+  },
+  {
+    "id": "d1s1q8",
+    "type": "single",
+    "level": "challenge",
+    "topic": "datasaurus",
+    "question": {
+      "zh": "两组数据的均值、方差与相关系数几乎完全相同，有人据此断定「两组数据形态相同，无需再画散点图」。按照 Anscombe 四重奏及其后续延伸（如 Datasaurus Dozen）所揭示的规律，这种做法的风险在哪里？",
+      "en": "Two datasets have nearly identical means, variances, and correlation coefficients, and someone concludes that 'the two datasets have the same shape, so there is no need to plot scatterplots.' According to what Anscombe's quartet and its later extensions (such as the Datasaurus Dozen) reveal, where does the risk of this practice lie?"
+    },
+    "options": {
+      "zh": ["没有风险：统计摘要几乎相同就必然意味着散点形态相同", "风险在于：均值、方差、相关系数几乎相同的数据，散点形态仍可能截然不同，这样的数据甚至可以被刻意构造出来", "风险在于：不同形态的数据在这些统计量上必然存在明显差异，所以必须逐一核对统计量的计算过程", "没有风险：均值与方差已经完整刻画了分布形态，可视化只是一种美化手段"],
+      "en": ["No risk: nearly identical summary statistics necessarily imply identical scatter shapes", "The risk: datasets with nearly identical means, variances, and correlations can still have completely different shapes, and such datasets can even be deliberately constructed", "The risk: datasets with different shapes must differ noticeably in these statistics, so the computation of every statistic must be double-checked", "No risk: the mean and variance already fully characterize a distribution's shape, and visualization is merely decoration"]
+    },
+    "answer": [1],
+    "hint": {
+      "zh": "对比课件第16页的统计表与第17页的四张散点图，再想一想：有限的统计摘要能刻画数据形态的几个侧面？",
+      "en": "Compare the statistics table on p.16 with the four scatterplots on p.17, then ask: how many facets of a dataset's shape can a finite set of summary statistics capture?"
+    },
+    "explanation": {
+      "zh": "课件第16-17页引出 Anscombe 四重奏：四组数据的均值、方差、回归直线几乎一致，散点形态却完全不同。延伸：这一现象可以推向极端——Datasaurus Dozen（Matejka & Fitzmaurice, 2017）刻意构造出十余组统计量几乎完全相同、形态却千差万别（包括恐龙形状）的数据集，说明有限的统计摘要只刻画分布的个别侧面，不能替代对数据形态的直接视觉检查（见课件一第16-17页）。",
+      "en": "The course introduces Anscombe's quartet on pp.16-17: four datasets with nearly identical means, variances, and regression lines yet completely different scatter patterns. Extension: this can be pushed to the extreme — the Datasaurus Dozen (Matejka & Fitzmaurice, 2017) deliberately constructed a dozen datasets with nearly identical statistics but wildly different shapes (including a dinosaur), showing that a finite set of summary statistics captures only a few facets of a distribution and cannot replace direct visual inspection of the data's shape (Deck 1, pp.16-17)."
+    },
+    "ref": { "deck": 1, "page": 17 }
+  },
+  {
+    "id": "d1s1q9",
+    "type": "multi",
+    "level": "challenge",
+    "topic": "chart-integrity",
+    "question": {
+      "zh": "课件第10页提到了 E. Tufte，第30页要求柱形图的数值轴从 0 开始。延伸到 Tufte 提出的「图表诚信」思想（用 lie factor 度量图形所示变化与数据实际变化之比）：下列哪些做法会夸大视觉差异、误导读者？",
+      "en": "The course mentions E. Tufte on p.10 and requires the bar chart value axis to start at 0 on p.30. Extending to Tufte's idea of 'chart integrity' (the lie factor measures the ratio of the change shown graphically to the actual change in the data): which of the following practices exaggerate visual differences and mislead readers?"
+    },
+    "options": {
+      "zh": ["柱形图的纵轴不从 0 开始，而从接近数据最小值的刻度开始", "折线图中如实标注每个数据点的数值，并让横轴的时间间隔与实际时间成比例", "用带透视效果的 3D 饼图展示各部分占比", "用圆形的面积编码数值时，让直径（而非面积）与数值成正比"],
+      "en": ["Truncating a bar chart's y-axis so it starts near the data minimum instead of 0", "Labeling every data point truthfully on a line chart and keeping horizontal time intervals proportional to actual time", "Showing proportions with a 3D pie chart drawn in perspective", "Encoding values by circle area while making the diameter (rather than the area) proportional to the value"]
+    },
+    "answer": [0, 2, 3],
+    "hint": {
+      "zh": "想一想课件要求数值轴从 0 开始的理由：柱高（或面积）的视觉比例必须忠实于数据比例。哪些做法破坏了这种忠实？",
+      "en": "Recall why the value axis must start at 0: the visual proportion of bar heights (or areas) must stay faithful to the data proportion. Which practices break that faithfulness?"
+    },
+    "explanation": {
+      "zh": "课件第10页引出 E. Tufte（及其推崇的 Minard 图），第30页要求柱形图数值轴从 0 开始、柱高忠实代表数值。延伸：Tufte 在《The Visual Display of Quantitative Information》中提出 lie factor（图形所示变化与数据实际变化之比）来度量图表失真——截断纵轴会放大柱高差异、3D 透视使前排扇区在视觉上偏大、按直径而非面积缩放圆形会使视觉面积随数值的平方增长，这些做法都会夸大差异；如实标注数值并保持时间轴成比例则是诚信做法（见课件一第10、30页）。",
+      "en": "The course cites E. Tufte on p.10 (along with the Minard graphic he admired) and requires the bar chart value axis to start at 0 on p.30 so bar heights faithfully encode values. Extension: in The Visual Display of Quantitative Information, Tufte proposed the lie factor — the ratio of the change shown in the graphic to the actual change in the data — to measure distortion: truncating the y-axis inflates bar-height differences, 3D perspective makes front slices look larger, and scaling circles by diameter rather than area makes perceived area grow with the square of the value; all of these exaggerate differences, whereas truthful labeling with a proportional time axis is honest practice (Deck 1, pp.10, 30)."
+    },
+    "ref": { "deck": 1, "page": 30 }
   }
 ]

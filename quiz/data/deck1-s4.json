@@ -159,5 +159,53 @@
       "en": "On p.79, the KDE slide lists two kernels: Gaussian ((2π)^(−d/2)exp(−‖x‖²/2)) and Epanechnikov (a compactly supported quadratic kernel for ‖x‖<1) (Deck 1, p.79)."
     },
     "ref": { "deck": 1, "page": 79 }
+  },
+  {
+    "id": "d1s4q8",
+    "type": "single",
+    "level": "challenge",
+    "topic": "loess-span",
+    "question": {
+      "zh": "课件第65页在 R 的 scatter.smooth 中出现了可调参数 span=0.5。延伸到平滑方法的偏差-方差权衡：如果为了「更精确」而把 span 调得越来越小，LOESS 曲线的典型行为是？",
+      "en": "The tunable parameter span=0.5 appears in the R call scatter.smooth on p.65. Extending to the bias-variance tradeoff in smoothing: if span is made smaller and smaller to be 'more accurate', what is the typical behavior of the LOESS curve?"
+    },
+    "options": {
+      "zh": ["曲线越来越贴合数据的局部起伏，乃至追随噪声，出现类似过拟合的行为", "曲线越来越平滑，最终近似一条直线，把真实结构也一起抹平", "span 只影响计算速度，不改变曲线的形态", "曲线的形态只由核函数决定，与 span 无关"],
+      "en": ["The curve hugs local fluctuations more and more closely, even chasing the noise — behavior similar to overfitting", "The curve becomes smoother and smoother, eventually approaching a straight line that flattens real structure as well", "span only affects computation speed and never changes the curve's shape", "The curve's shape depends only on the kernel function, not on span"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "span 控制每次局部回归看多宽的邻域：窗口越窄，曲线会对数据中的什么成分越来越敏感？",
+      "en": "span controls how wide a neighborhood each local fit sees: as the window narrows, which component of the data does the curve become ever more sensitive to?"
+    },
+    "explanation": {
+      "zh": "课件第63-67页引出 LOESS（局部加权回归）与核加权平滑，第65页出现可调参数 span。延伸：span 控制参与每次局部拟合的邻域宽度，体现偏差-方差权衡——span 越小，邻域越窄，估计的方差越大，曲线越来越贴合局部起伏乃至追随噪声（过拟合）；span 越大，邻域越宽，估计越平滑但偏差越大，可能把真实结构一起抹平（欠拟合）。这与课件第60页多项式阶数 M 的欠拟合/过拟合权衡同构（见课件一第63-67页）。",
+      "en": "The course introduces LOESS (locally weighted regression) and kernel-weighted smoothing on pp.63-67, with the tunable span on p.65. Extension: span controls the width of the neighborhood entering each local fit and embodies the bias-variance tradeoff — a smaller span narrows the neighborhood, raises the variance of the estimate, and makes the curve hug local fluctuation and even chase noise (overfitting); a larger span widens the neighborhood, yielding a smoother estimate with larger bias that may flatten genuine structure (underfitting). This mirrors the under/overfitting tradeoff of polynomial order M on p.60 (Deck 1, pp.63-67)."
+    },
+    "ref": { "deck": 1, "page": 65 }
+  },
+  {
+    "id": "d1s4q9",
+    "type": "multi",
+    "level": "challenge",
+    "topic": "kde-bandwidth",
+    "question": {
+      "zh": "课件第79页给出核密度估计公式，并列出 Gaussian 与 Epanechnikov 两种核函数。延伸到带宽参数 h 的作用：下列哪些说法是正确的？",
+      "en": "The course gives the kernel density estimation formula on p.79 and lists both the Gaussian and Epanechnikov kernels. Extending to the role of the bandwidth parameter h: which of the following statements are correct?"
+    },
+    "options": {
+      "zh": ["带宽 h 趋于 0 时，每个样本点处都会耸起一个尖峰，密度估计退化为一排尖刺", "带宽 h 趋于无穷大时，估计被过度平滑，曲线趋于平缓、接近均匀分布的形态", "带宽一旦固定，估计曲线的形态就与样本量无关，因此 h 无需随数据多少调整", "在 Gaussian 核与 Epanechnikov 核等常用核之间更换，对估计结果的影响通常远小于带宽 h 的选择"],
+      "en": ["As h approaches 0, a sharp spike rises at every sample point and the estimate degenerates into a row of spikes", "As h approaches infinity, the estimate is oversmoothed and the curve flattens out toward a near-uniform shape", "Once the bandwidth is fixed, the shape of the estimate no longer depends on the sample size, so h never needs adjusting to the amount of data", "Swapping among commonly used kernels such as Gaussian and Epanechnikov usually matters far less for the estimate than the choice of bandwidth h"]
+    },
+    "answer": [0, 1, 3],
+    "hint": {
+      "zh": "把 h 想成每个核被「压扁或拉宽」的程度；再想想课件同时列出两种核函数——它们与 h 各自对结果的影响孰大孰小？",
+      "en": "Think of h as how much each kernel is 'squeezed or stretched'; the course lists two kernels — which influences the result more, the kernel or h?"
+    },
+    "explanation": {
+      "zh": "课件第78-79页引出核密度估计：在每个数据点处放置核函数并叠加，并列出 Gaussian 与 Epanechnikov 两种核。延伸：带宽 h 是核密度估计最关键的参数——h→0 时每个样本处耸起尖峰（退化为尖刺），h→∞ 时过度平滑、曲线趋近平坦；最优带宽通常随样本量增大而减小（如 Silverman 经验法则 h∝n^(−1/5)），因此「形态与样本量无关」不成立；而只要核函数连续、对称且积分为 1，常用核之间的更换对结果的影响通常远小于 h 的选择（Epanechnikov 核在均方积分误差意义下最优，但常用核之间的效率差异仅百分之几）（见课件一第78-79页）。",
+      "en": "The course introduces KDE on pp.78-79 — a kernel is placed at each data point and the kernels are summed — and lists the Gaussian and Epanechnikov kernels. Extension: bandwidth h is the most crucial parameter of KDE — as h→0 a spike rises at every sample (degenerating into spikes), and as h→∞ the estimate is oversmoothed toward a flat curve; the optimal bandwidth typically shrinks as the sample grows (e.g., Silverman's rule of thumb h∝n^(−1/5)), so 'the shape is independent of sample size' is wrong; and as long as the kernel is continuous, symmetric, and integrates to 1, swapping among common kernels usually matters far less than the choice of h (the Epanechnikov kernel is optimal in the mean integrated squared error sense, yet efficiency differences among common kernels are only a few percent) (Deck 1, pp.78-79)."
+    },
+    "ref": { "deck": 1, "page": 79 }
   }
 ]

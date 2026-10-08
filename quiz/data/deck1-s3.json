@@ -182,5 +182,53 @@
       "en": "On p.56 the straight line passes through the middle of the scatter to capture the overall trend, whereas interpolation must pass through all given points exactly — the essential difference between fitting and interpolation (Deck 1, p.56)."
     },
     "ref": { "deck": 1, "page": 56 }
+  },
+  {
+    "id": "d1s3q9",
+    "type": "single",
+    "level": "challenge",
+    "topic": "runge",
+    "question": {
+      "zh": "课件第39-51页讲了插值，第60-61页展示了 M=9 的高次多项式在数据点间剧烈振荡的过拟合图景。延伸到数值分析中的 Runge 现象：对等距节点不断增高多项式次数做插值，典型后果是？",
+      "en": "The course covers interpolation on pp.39-51 and shows on pp.60-61 the overfitting picture where the M=9 high-degree polynomial oscillates violently between data points. Extending to the Runge phenomenon in numerical analysis: what is the typical consequence of repeatedly raising the polynomial degree for interpolation on equally spaced nodes?"
+    },
+    "options": {
+      "zh": ["多项式在插值区间的端点附近出现越来越剧烈的振荡，尽管它仍通过所有数据点", "整体误差随次数提高单调减小，曲线在各处都越来越贴近原函数", "次数提高后，多项式不再通过全部插值节点", "只要不断增加等距节点，端点附近的振荡就会自然消失"],
+      "en": ["The polynomial oscillates more and more violently near the endpoints of the interpolation interval, even though it still passes through all data points", "The overall error decreases monotonically as the degree rises, and the curve hugs the original function ever more closely everywhere", "Beyond some degree, the polynomial no longer passes through all interpolation nodes", "Adding more and more equally spaced nodes makes the endpoint oscillations naturally disappear"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "注意振荡发生在区间的哪个部位；再想想增高次数会不会改变「插值多项式通过全部节点」这一性质。",
+      "en": "Note where in the interval the oscillation occurs; then ask whether raising the degree changes the fact that an interpolant passes through every node."
+    },
+    "explanation": {
+      "zh": "课件第39-51页引出插值（通过所有给定点）及由低次到平滑插值的演进，第60-61页展示高次多项式的剧烈振荡。延伸：数值分析中的 Runge 现象指出，对等距节点做高次多项式插值（经典例子是区间 [−1,1] 上的函数 1/(1+25x²)），多项式虽通过所有节点，在区间端点附近却出现剧烈振荡，且次数越高越严重——这正是实践中改用低次分段插值（如课件中的 Catmull-Rom）与样条、并在拟合中控制模型复杂度的重要动机（见课件一第39-51、61页）。",
+      "en": "The course introduces interpolation (passing through all given points) and its progression toward smooth interpolation on pp.39-51, and shows the violent oscillation of a high-degree polynomial on pp.60-61. Extension: the Runge phenomenon in numerical analysis states that high-degree polynomial interpolation on equally spaced nodes (the classic example being 1/(1+25x²) on [−1,1]) oscillates violently near the interval endpoints even though it passes through every node, and the oscillation worsens as the degree grows — a key motivation for using low-degree piecewise interpolation (such as the course's Catmull-Rom) and splines in practice, and for controlling model complexity in fitting (Deck 1, pp.39-51, 61)."
+    },
+    "ref": { "deck": 1, "page": 61 }
+  },
+  {
+    "id": "d1s3q10",
+    "type": "single",
+    "level": "challenge",
+    "topic": "model-selection",
+    "question": {
+      "zh": "课件第60页对比了不同阶数 M 的拟合效果：M=9 在训练点上的误差极小却剧烈振荡。延伸到模型选择方法：为了在一批数据上选出合适的多项式阶数，标准的做法是？",
+      "en": "The course compares fits across polynomial order M on p.60: M=9 has tiny error on the training points yet oscillates wildly. Extending to model selection: what is the standard way to choose a suitable polynomial order for a dataset?"
+    },
+    "options": {
+      "zh": ["选训练误差最小的阶数，因为训练误差越小，泛化能力一定越强", "选可用的最高阶数，因为参数越多，模型表达能力越强", "选最低阶数，因为模型越简单，泛化能力一定越强", "留出一部分数据作验证集（或用交叉验证），以验证误差而非训练误差来选择阶数"],
+      "en": ["Pick the order with the smallest training error, since lower training error always means better generalization", "Pick the highest available order, since more parameters always mean a more expressive model", "Pick the lowest order, since simpler models always generalize better", "Hold out part of the data as a validation set (or use cross-validation) and choose the order by validation error rather than training error"]
+    },
+    "answer": [3],
+    "hint": {
+      "zh": "M=9 的训练误差极小却过拟合，这说明训练误差能代表泛化能力吗？还有什么误差更可信？",
+      "en": "M=9 has tiny training error yet overfits — does training error represent generalization? Which kind of error would be more trustworthy?"
+    },
+    "explanation": {
+      "zh": "课件第60页引出阶数 M 的对比（M=0/1 欠拟合、M=3 较好、M=9 过拟合），第62页给出正则化解法。延伸：模型选择的另一标准途径是留出验证——训练误差随模型复杂度提高单调下降，无法反映泛化能力，因此把数据划出一部分作验证集，或用 k 折交叉验证轮流评估，以验证误差随复杂度先降后升的 U 形曲线选定阶数；固定选最高阶或最低阶都可能落在过拟合或欠拟合一侧（见课件一第60、62页）。",
+      "en": "The course compares orders M on p.60 (M=0/1 underfit, M=3 fits well, M=9 overfits) and gives the regularization remedy on p.62. Extension: another standard route is hold-out validation — training error falls monotonically with model complexity and cannot reflect generalization, so part of the data is held out as a validation set, or k-fold cross-validation evaluates each candidate in turn, and the order is chosen at the bottom of the U-shaped validation-error curve; fixing on the highest or lowest order risks landing on the overfitting or underfitting side (Deck 1, pp.60, 62)."
+    },
+    "ref": { "deck": 1, "page": 60 }
   }
 ]
