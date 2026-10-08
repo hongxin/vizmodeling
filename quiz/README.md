@@ -13,7 +13,7 @@ quiz/
 │   └── quiz.css
 ├── data/
 │   ├── sections.json   # 9 个小节的元数据（题数声明）
-│   └── deck1-s1.json … deck2-s5.json   # 题库（81 题（含 19 道挑战题），中英双语）
+│   └── deck1-s1.json … deck2-s5.json   # 题库（81 题，含 19 道挑战题，中英双语）
 └── tests/              # node:test 单测 + 题库校验器
 ```
 
