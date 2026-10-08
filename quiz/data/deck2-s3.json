@@ -159,5 +159,77 @@
       "en": "P.48 introduces SNE (Stochastic Neighbor Embedding) and p.49 t-SNE, whose 't' denotes replacing the Gaussian with a t-distribution (heavy-tailed) in the low-dimensional embedding when measuring similarities, easing the crowding of points; p.47 shows t-SNE's 2D projection of handwritten digit images and p.50 the t-SNE visualization of CNN codes of 50,000 ILSVRC 2012 validation images. 'Both use a Gaussian and there is no difference' contradicts the slides, hence False (Deck 2, pp.47-50). Try the live demo: code/nodejs/dimreduction-viz."
     },
     "ref": { "deck": 2, "page": 49 }
+  },
+  {
+    "id": "d2s3q8",
+    "type": "single",
+    "level": "challenge",
+    "topic": "pca-variance-ratio",
+    "question": {
+      "zh": "课件第40-42页以 SVD 求 PCA：奇异值按 s1≥s2≥…≥sd 降序排列，u1,…,up 为主成分。延伸到「保留多少个主成分」的标准依据：维数 p 应主要由什么决定？",
+      "en": "On pp.40-42 the course derives PCA via SVD: singular values are ordered s1≥s2≥…≥sd, and u1,…,up are the principal components. Extending to the standard criterion for 'how many components to keep': what should the dimension p mainly be decided by?"
+    },
+    "options": {
+      "zh": ["固定保留一半的成分：无论数据长什么样，d 维数据永远保留 d/2 个主成分", "优先保留奇异值最小的那些成分，因为它们对应数据中最「干净」的信号", "按方差解释比例决定：数据在第 i 个主成分方向上的方差与 si² 成正比，累计方差解释比例（前 p 个奇异值平方和占全部奇异值平方和的比例）达到设定阈值（如 90%）的最小 p 即为保留维数，也可辅以碎石图找拐点", "必须保留全部 d 个成分，否则 SVD 分解本身无法完成"],
+      "en": ["Always keep half of the components: whatever the data look like, d-dimensional data always keeps d/2 principal components", "Prefer keeping the components with the smallest singular values, since they carry the 'cleanest' signal in the data", "Decide by the variance-explained ratio: the data variance along the i-th principal component is proportional to si², and the smallest p whose cumulative ratio (the sum of the first p squared singular values over the total sum of squared singular values) reaches a preset threshold (e.g., 90%) is the dimension to keep; a scree plot can also help locate the knee", "All d components must be kept, otherwise the SVD factorization itself cannot be completed"]
+    },
+    "answer": [2],
+    "hint": {
+      "zh": "第40页特意把奇异值从大到小排列——前几个大奇异值对应数据方差的主要方向。想想「保留 90% 方差」这类经验的依据。",
+      "en": "P.40 deliberately orders the singular values from largest to smallest — the first large ones correspond to the directions of main variance. Consider what rules of thumb like 'keep 90% of the variance' rest on."
+    },
+    "explanation": {
+      "zh": "课件第40-42页引出SVD/PCA：奇异值降序非负、SVD 总存在且在符号意义下唯一，u1,…,up 为主成分，新数据以 w=Xᵀy 投影。延伸：数据在第 i 个主成分方向上的方差与 si² 成正比（即对应特征值），故保留维数的标准依据是累计方差解释比例：取最小的 p 使前 p 个奇异值平方和占总和的比例达到阈值（如 90%），或观察碎石图（scree plot）的拐点。「固定保留一半」「保留奇异值最小的成分」「必须保留全部 d 个」均与该标准做法矛盾（见课件二第40-42页）。可配合仓库演示程序练习：code/nodejs/dimreduction-viz",
+      "en": "On pp.40-42 the course derives SVD/PCA: singular values in descending non-negative order, the factorization always existing and unique up to signs; u1,…,up are the principal components and new data are projected via w=Xᵀy. Extension: the data variance along the i-th principal component is proportional to si² (the corresponding eigenvalue), so the standard criterion for the number of components is the cumulative variance-explained ratio: keep the smallest p such that the sum of the first p squared singular values reaches a threshold (e.g., 90%) of the total, or locate the knee of the scree plot. 'Always keep half', 'keep the components with the smallest singular values', and 'must keep all d' all contradict this standard practice (Deck 2, pp.40-42). Try the live demo: code/nodejs/dimreduction-viz."
+    },
+    "ref": { "deck": 2, "page": 40 }
+  },
+  {
+    "id": "d2s3q9",
+    "type": "single",
+    "level": "challenge",
+    "topic": "t-sne-perplexity",
+    "question": {
+      "zh": "课件第47-50页展示 t-SNE 的二维投射：手写数字图像与 5 万张 ILSVRC 2012 图像的 CNN 特征。延伸到 t-SNE 的关键超参数与读图禁忌：下列说法正确的是？",
+      "en": "On pp.47-50 the course shows 2D t-SNE projections: handwritten digit images and the CNN codes of 50,000 ILSVRC 2012 images. Extending to t-SNE's key hyperparameter and reading caveats: which statement is correct?"
+    },
+    "options": {
+      "zh": ["t-SNE 图中两个簇相距越远，原始高维空间中这两组数据就必然相距越远，簇间距可直接定量解读", "困惑度（perplexity）没有实际作用，无论取什么值输出都相同", "t-SNE 图中簇的表观大小忠实反映原始数据的局部密度与方差，可直接用于密度比较", "困惑度可粗略理解为每个点有效近邻的个数，取值过小偏重局部、过大偏重全局，需尝试多组取值；且图中簇间距离与簇的表观大小不可直接定量解读"],
+      "en": ["The farther apart two clusters are in a t-SNE plot, the farther apart the two groups must be in the original high-dimensional space, so inter-cluster distances can be read quantitatively", "Perplexity has no practical effect, and the output is identical whatever value it takes", "The apparent sizes of clusters in a t-SNE plot faithfully reflect the local density and variance of the original data and can be used directly for density comparison", "Perplexity can be viewed roughly as the effective number of neighbors of each point — too small biases toward local structure, too large toward global — and should be tried at several values; moreover, inter-cluster distances and apparent cluster sizes in the plot admit no direct quantitative reading"]
+    },
+    "answer": [3],
+    "hint": {
+      "zh": "困惑度（perplexity）大致规定了每个点「照顾」多少个邻居；再对照第47页与第50页的图——那些簇的大小与间距能照字面读出结论吗？",
+      "en": "Perplexity roughly sets how many neighbors each point 'attends to'; then compare the plots on p.47 and p.50 — can conclusions be read literally off those cluster sizes and spacings?"
+    },
+    "explanation": {
+      "zh": "课件第47-50页引出t-SNE：以 t 分布刻画低维相似度，并展示手写数字与 CNN 特征两例可视化。延伸：困惑度（perplexity）可视为每个点有效近邻个数的平滑度量，控制局部与全局结构的平衡，不同取值图形可能明显不同，实践中应多组尝试（Wattenberg 等《How to Use t-SNE Effectively》）；同时 t-SNE 图中簇的表观大小与簇间距离不具直接定量含义，不能据以断言原始密度或类间远近。「簇间距必然对应高维距离」「任何取值结果相同」「表观大小可作密度比较」均为误读（见课件二第47-50页）。可配合仓库演示程序练习：code/nodejs/dimreduction-viz",
+      "en": "On pp.47-50 the course introduces t-SNE: a t-distribution models low-dimensional similarity, with the handwritten-digit and CNN-code visualizations as two examples. Extension: perplexity can be viewed as a smooth measure of each point's effective number of neighbors, balancing local against global structure; different values can yield visibly different maps, so several should be tried (Wattenberg et al., 'How to Use t-SNE Effectively'); meanwhile apparent cluster sizes and inter-cluster distances in a t-SNE plot carry no direct quantitative meaning and must not be used to claim original densities or class separations. 'Inter-cluster distance necessarily mirrors high-dimensional distance', 'identical output for any value', and 'apparent sizes as density comparison' are all misreadings (Deck 2, pp.47-50). Try the live demo: code/nodejs/dimreduction-viz."
+    },
+    "ref": { "deck": 2, "page": 49 }
+  },
+  {
+    "id": "d2s3q10",
+    "type": "judge",
+    "level": "challenge",
+    "topic": "isomap-manifold-assumption",
+    "question": {
+      "zh": "ISOMAP 之所以用近邻图上的最短路径近似测地距离，前提是数据近似分布在某个低维流形上；若数据根本不满足这一流形假设（例如噪声使近邻图在流形之外「抄近道」连通了本不相邻的区域），估计出的「测地距离」就会失真，从而误导降维结果。",
+      "en": "ISOMAP approximates geodesic distances with shortest paths on a neighborhood graph on the premise that the data lie approximately on some low-dimensional manifold; if this manifold assumption simply fails for the data (e.g., noise lets the neighborhood graph 'short-circuit' outside the manifold, connecting regions that are not actually adjacent), the estimated 'geodesic distances' become distorted and mislead the embedding."
+    },
+    "options": {
+      "zh": ["对", "错"],
+      "en": ["True", "False"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "第43页两条要点「保持内在几何、用流形上的测地距离」成立的前提正是「数据确实在流形上」。",
+      "en": "The premise of the two points on p.43 — 'preserve the intrinsic geometry' and 'use geodesic distances on the manifold' — is precisely that the data do lie on a manifold."
+    },
+    "explanation": {
+      "zh": "课件第43-45页引出ISOMAP：保持数据内在几何，用流形上所有点对的测地距离（以近邻图最短路径近似），第44-45页给出图像数据实例。延伸：测地距离的估计建立在「数据分布在低维流形上」的流形假设之上；当假设不成立（如噪声或参数不当使近邻图穿过流形外的空间抄近道），最短路径不再近似真实测地距离，距离矩阵失真，后续嵌入随之被误导。题干所述与此一致，判断为「对」（见课件二第43-45页）。",
+      "en": "On pp.43-45 the course introduces ISOMAP: preserve the intrinsic geometry of the data and use geodesic distances between all pairs on the manifold (approximated by shortest paths on a neighborhood graph), with the image-data examples on pp.44-45. Extension: estimating geodesic distances rests on the manifold assumption that the data lie on a low-dimensional manifold; when the assumption fails (e.g., noise or poor parameters let the neighborhood graph short-circuit through regions off the manifold), shortest paths no longer approximate true geodesic distances, the distance matrix is distorted, and the subsequent embedding is misled. The statement matches this, so the judgment is True (Deck 2, pp.43-45)."
+    },
+    "ref": { "deck": 2, "page": 43 }
   }
 ]

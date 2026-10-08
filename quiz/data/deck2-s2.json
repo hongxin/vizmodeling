@@ -182,5 +182,77 @@
       "en": "P.25 labels 'Nearest neighbor' as a cluster linkage: the distance between two clusters is taken as the distance of their closest pair of points (also called single linkage); the farthest pair is a different (complete/farthest-neighbor) definition, not what 'nearest neighbor' means, so the statement is false (Deck 2, p.25)."
     },
     "ref": { "deck": 2, "page": 25 }
+  },
+  {
+    "id": "d2s2q9",
+    "type": "single",
+    "level": "challenge",
+    "topic": "kmeans-init",
+    "question": {
+      "zh": "课件第21-22页的 K-means 需要先选定 K 个初始中心再迭代。延伸到 K-means 的一个著名弱点与标准改进：初始中心选得不好会怎样，k-means++ 又是如何改进的？",
+      "en": "The K-means of pp.21-22 first picks K initial centers and then iterates. Extending to a well-known weakness of K-means and its standard fix: what happens with poorly chosen initial centers, and how does k-means++ improve on this?"
+    },
+    "options": {
+      "zh": ["K-means 对初始中心并不敏感：无论怎样初始化，它总能收敛到同一个全局最优划分", "k-means++ 的改进是把 K 个初始中心全部集中放进同一个密集簇，让它们尽快彼此靠近", "K-means 只保证收敛到某个局部最优，结果依赖初始中心；k-means++ 逐个选取初始中心，下一个以「与已选中心距离平方成比例」的概率落在较远的数据点附近，使初始中心彼此散开，通常得到更稳定、更好的聚类", "唯一可行的改进是把第一个初始中心永远固定在全体数据的均值处，其余中心任意选取"],
+      "en": ["K-means is insensitive to initial centers: no matter how it is initialized, it always converges to the same globally optimal partition", "k-means++ improves initialization by cramming all K initial centers into one dense cluster so that they quickly get close to each other", "K-means only guarantees convergence to a local optimum and its result depends on the initial centers; k-means++ picks initial centers one by one, sampling the next from data points with probability proportional to the squared distance from the already chosen centers, so the initial centers spread apart and usually yield a more stable, better clustering", "The only feasible improvement is to always fix the first initial center at the mean of all data and pick the remaining centers arbitrarily"]
+    },
+    "answer": [2],
+    "hint": {
+      "zh": "K-means 的迭代只让目标函数单调下降，并不保证全局最优——想想初始中心全挤在一处时会停在哪里。",
+      "en": "K-means iteration only monotonically decreases the objective, without guaranteeing a global optimum — think about where it stops when the initial centers all crowd in one spot."
+    },
+    "explanation": {
+      "zh": "课件第21-22页引出K-means：事先给定簇数 K，交替「分配到最近中心」「更新中心为均值」以最小化簇内平方距离和，初始化需选取 K 个中心。延伸：该迭代只保证收敛到局部最优，坏的初始化会得到质量差的次优划分；k-means++（Arthur & Vassilvitskii, 2007）按与已选中心距离平方成正比的概率依次采样初始中心，使其相互散开，是事实上的标准初始化方法。「必达全局最优」错误，「集中放进同一簇」恰与 k-means++ 相反，「固定首中心于均值是唯一改进」则排除了 k-means++ 等标准做法（见课件二第21-22页）。可配合仓库演示程序练习：code/nodejs/clustering-viz",
+      "en": "On pp.21-22 the course introduces K-means: K is given in advance, and the iteration alternates assigning points to the nearest center with updating centers to means to minimize the within-cluster sum of squared distances, starting from K chosen initial centers. Extension: the iteration only guarantees a local optimum, and a bad initialization yields a poor suboptimal partition; k-means++ (Arthur & Vassilvitskii, 2007) samples initial centers one by one with probability proportional to the squared distance from the already chosen ones, spreading them apart — the de facto standard initialization. 'Always reaches the global optimum' is wrong, 'cramming all centers into one cluster' is exactly the opposite of k-means++, and 'fixing the first center at the data mean is the only improvement' rules out standard practices such as k-means++ (Deck 2, pp.21-22). Try the live demo: code/nodejs/clustering-viz."
+    },
+    "ref": { "deck": 2, "page": 21 }
+  },
+  {
+    "id": "d2s2q10",
+    "type": "single",
+    "level": "challenge",
+    "topic": "em-local-optimum",
+    "question": {
+      "zh": "课件第18-20页用 EM 求解 MOG：E 步估计归属概率、M 步最大化似然，交替「直至收敛」。延伸到 EM 的收敛性质与实用对策：下列说法正确的是？",
+      "en": "On pp.18-20 the course solves MOG with EM: the E-step estimates membership probabilities, the M-step maximizes the likelihood, alternating 'until convergence'. Extending to the convergence property of EM and practical countermeasures: which statement is correct?"
+    },
+    "options": {
+      "zh": ["EM 的每步迭代不会降低数据似然，但一般只收敛到似然的局部极值（驻点），不同初始化可能落入不同局部最优；实践中常用多组随机初值运行并取似然最高者，或结合先验约束来缓解", "EM 保证收敛到全局最大似然，因此初始化方式完全无关紧要", "缓解局部最优的标准做法是彻底禁用随机性：固定同一个初始种子、只允许运行一次", "EM 每步都会降低数据似然，所以重复运行多次只会越来越差"],
+      "en": ["Each EM iteration never decreases the data likelihood, but in general it converges only to a local extremum (stationary point) of the likelihood; different initializations may land in different local optima, and in practice one runs multiple random restarts keeping the highest likelihood, or adds priors, to mitigate this", "EM is guaranteed to converge to the global maximum likelihood, so the initialization is completely irrelevant", "The standard way to mitigate local optima is to ban randomness outright: fix one initial seed and allow only a single run", "Each EM step decreases the data likelihood, so repeated runs only get worse and worse"]
+    },
+    "answer": [0],
+    "hint": {
+      "zh": "课件说「交替直至收敛」，但没说收敛到哪——一个每步都让似然不降的算法，通常会停在哪类点上？",
+      "en": "The slides say 'alternate until convergence' but not to what — an algorithm that never decreases the likelihood at each step typically stops at what kind of point?"
+    },
+    "explanation": {
+      "zh": "课件第18-20页引出MOG与EM：混合分布假设、两步生成过程、最大化数据似然，E/M 两步交替迭代直至收敛。延伸：EM 具有每步似然单调不降的性质，但一般只收敛到局部极值（驻点），初值不同结果可能不同；常用缓解手段是多组随机初值（取似然最高者）与引入先验/正则。「保证全局最优且初始化无关」错误，「禁用随机性只跑一次」并非缓解手段，「每步降低似然」更与单调不降的性质相反（见课件二第18-20页）。可配合仓库演示程序练习：code/nodejs/clustering-viz",
+      "en": "On pp.18-20 the course introduces MOG and EM: the mixture-distribution assumption, the 2-step generative process, maximizing the data likelihood, with E and M steps alternating until convergence. Extension: EM has the monotone non-decreasing likelihood property, but in general it converges only to a local extremum (stationary point), and different initializations may give different results; common mitigations are multiple random restarts (keeping the highest likelihood) and introducing priors or regularization. 'Guaranteed global optimum with irrelevant initialization' is wrong, 'ban randomness and run once' is no mitigation, and 'each step decreases the likelihood' contradicts the monotone non-decreasing property outright (Deck 2, pp.18-20). Try the live demo: code/nodejs/clustering-viz."
+    },
+    "ref": { "deck": 2, "page": 20 }
+  },
+  {
+    "id": "d2s2q11",
+    "type": "multi",
+    "level": "challenge",
+    "topic": "clustering-validation",
+    "question": {
+      "zh": "课件第21-25页讲了 K-means（簇数 K 事先给定）与自底向上的层次聚类，但没有展开「K 取多少合适、聚类质量如何评判」。延伸到不依赖外部标签的聚类内部评估：下列哪些说法是正确的？",
+      "en": "On pp.21-25 the course covers K-means (with K given in advance) and bottom-up hierarchical clustering, but does not expand on 'how many clusters to choose or how to judge clustering quality'. Extending to internal clustering validation that needs no external labels: which of the following statements are correct?"
+    },
+    "options": {
+      "zh": ["轮廓系数（silhouette）同时考虑同簇紧密与异簇分离，取值范围为 -1 到 1，越接近 1 表示聚类质量越好，无需真实标签即可计算", "肘部法（elbow method）必须依赖人工标注的真实类别标签，才能画出簇内平方误差和随簇数 k 变化的曲线", "肘部法画出 SSE 随 k 增大而下降的曲线，选取曲线由陡转缓的「肘部」作为簇数；SSE 只由数据与聚类结果本身算出，属内部评估手段", "稳定性分析——对数据施加扰动或子采样后重复聚类、比较结果的一致性——也是一种不依赖外部标签的评估思路"],
+      "en": ["The silhouette coefficient considers both within-cluster tightness and between-cluster separation, ranges from -1 to 1, and values closer to 1 indicate better clustering quality; it is computed without ground-truth labels", "The elbow method necessarily relies on manually labeled ground-truth classes before one can plot the curve of the within-cluster sum of squared errors against the number of clusters k", "The elbow method plots SSE decreasing as k grows and picks the 'elbow' where the curve bends from steep to shallow as the cluster count; SSE is computed from the data and the clustering alone, an internal criterion", "Stability analysis — perturbing or subsampling the data, re-clustering, and comparing the consistency of the results — is likewise an evaluation approach that needs no external labels"]
+    },
+    "answer": [0, 2, 3],
+    "hint": {
+      "zh": "「内部」评估的含义是只用数据本身（无真实标签）：逐项检查哪些指标只用到了数据与聚类结果。",
+      "en": "'Internal' evaluation means using the data alone (no ground-truth labels): check, item by item, which criteria need only the data and the clustering result."
+    },
+    "explanation": {
+      "zh": "课件第21-25页引出聚类方法：K-means 需事先给定簇数 K，层次聚类的合并过程以树状图呈现，课件未展开 K 的选取与质量评判。延伸：内部评估只依赖数据本身——轮廓系数（Rousseeuw, 1987）综合同簇紧密性与异簇分离性，取值 [-1,1]、越接近 1 越好；肘部法画簇内平方误差和 SSE 随 k 的曲线并取「肘部」，与 K-means 的目标函数直接衔接；稳定性分析对扰动/子采样数据重复聚类并比较一致性。三者均无需真实标签，故「肘部法必须依赖标注」一项错误（见课件二第21-25页）。可配合仓库演示程序练习：code/nodejs/clustering-viz",
+      "en": "On pp.21-25 the course presents the clustering methods: K-means takes the cluster count K in advance and hierarchical clustering's merges unfold as a dendrogram, while how to pick K or judge quality is left unexpanded. Extension: internal validation relies on the data alone — the silhouette coefficient (Rousseeuw, 1987) combines within-cluster tightness with between-cluster separation, ranges over [-1,1] with closer-to-1 better; the elbow method plots the within-cluster SSE against k and takes the 'elbow', connecting directly to K-means's objective; stability analysis re-clusters perturbed or subsampled data and compares consistency. None of the three needs ground-truth labels, so 'the elbow method necessarily relies on labels' is false (Deck 2, pp.21-25). Try the live demo: code/nodejs/clustering-viz."
+    },
+    "ref": { "deck": 2, "page": 24 }
   }
 ]

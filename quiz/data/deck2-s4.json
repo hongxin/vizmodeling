@@ -113,5 +113,53 @@
       "en": "P.60: 'smart city: precise traffic-flow prediction and analysis: graph convolution method (2020)'; p.61: 'Visual analysis of traffic data via spatio-temporal graphs and interactive topic modeling (ChinaVis 2018, JOV)'; p.62: 'case: cryptocurrency news visualization — Visual exploration of Internet news via sentiment score and topic models (CVMJ 2021)'. The three cases use graph convolution, spatio-temporal graphs with interactive topic modeling, and sentiment scores with topic models respectively — not merely pie charts, so the last option is false (Deck 2, pp.59-62)."
     },
     "ref": { "deck": 2, "page": 60 }
+  },
+  {
+    "id": "d2s4q6",
+    "type": "single",
+    "level": "challenge",
+    "topic": "lda-topic-count",
+    "question": {
+      "zh": "课件第52-53页用 LDA 主题模型做「统一的数据量化」，但主题个数 K 与 K-means 的簇数一样需事先给定。延伸到 LDA 实践中选择 K 的标准做法：下列说法正确的是？",
+      "en": "On pp.52-53 the course uses the LDA topic model for 'unified data quantification', yet the number of topics K, like the cluster count in K-means, must be given in advance. Extending to the standard practice for choosing K in LDA: which statement is correct?"
+    },
+    "options": {
+      "zh": ["主题个数 K 没有任何选择余地，所有数据集都必须取同一个固定值", "训练会自动收敛出唯一正确的主题数，无需做任何模型选择", "K 越大越好：主题越多模型必然越好，不存在过拟合问题", "在候选 K 上比较评价指标来调优：如留出数据的困惑度（perplexity，越低越好）、主题一致性（topic coherence，衡量主题词的语义连贯性，越高越好），并结合人工审读主题词；K 一味增大反而可能过拟合"],
+      "en": ["There is no freedom in choosing the number of topics K; every dataset must take the same fixed value", "Training automatically converges to the one correct number of topics, so no model selection is needed", "The larger K the better: more topics necessarily mean a better model, and no overfitting can occur", "Tune over candidate K values by comparing evaluation metrics — e.g., held-out perplexity (lower is better) and topic coherence (which measures the semantic coherence of a topic's words, higher is better) — combined with manually reading the topic word lists; an overly large K may instead overfit"]
+    },
+    "answer": [3],
+    "hint": {
+      "zh": "与 K-means 的 K 一样，LDA 的主题数是超参数：想想有哪些「不看标签也能衡量模型好坏」的量可用于比较不同 K。",
+      "en": "Like the K in K-means, the number of topics is a hyperparameter: think of quantities that 'measure model quality without labels' for comparing different K values."
+    },
+    "explanation": {
+      "zh": "课件第52-53页引出LDA主题模型与「统一的数据量化」，主题个数K需事先指定。延伸：实践中的标准做法是在候选 K 上调优比较——留出数据困惑度（perplexity）衡量模型对未见文本的预测能力，越低越好；主题一致性（topic coherence，基于主题词在语料中的共现等统计）衡量主题的可解释连贯性，越高越好；两者还常与人工审读主题词结合。K 一味增大会过拟合、指标未必更好。「固定值」「自动收敛出唯一值」「越大越好」均不成立（见课件二第52-53页）。",
+      "en": "On pp.52-53 the course introduces the LDA topic model and 'unified data quantification', with the number of topics K specified in advance. Extension: the standard practice is to tune over candidate K values and compare — held-out perplexity measures how well the model predicts unseen text, lower being better; topic coherence (based on statistics such as the co-occurrence of a topic's words in the corpus) measures interpretable coherence, higher being better; both are often combined with manually reading the topic word lists. An overly large K overfits and does not necessarily improve the metrics. 'A fixed value', 'automatically converges to the unique number', and 'the larger the better' are all false (Deck 2, pp.52-53)."
+    },
+    "ref": { "deck": 2, "page": 52 }
+  },
+  {
+    "id": "d2s4q7",
+    "type": "multi",
+    "level": "challenge",
+    "topic": "lda-vs-tfidf-embedding",
+    "question": {
+      "zh": "课件第51-53页用 LDA 把长短不一的手机应用清单统一量化为定长的主题分布向量。延伸到常见文本/词语表示方法（LDA、TF-IDF、词嵌入）的适用差异：下列哪些说法是正确的？",
+      "en": "On pp.51-53 the course uses LDA to uniformly quantify app lists of unequal length as fixed-length topic-distribution vectors. Extending to the differing niches of common text and word representations (LDA, TF-IDF, word embeddings): which of the following statements are correct?"
+    },
+    "options": {
+      "zh": ["LDA 输出「文档-主题」分布与「主题-词」分布，主题可被直接解读，适合发现文档集合的潜在主题结构——这正是课件统一量化所用的性质", "TF-IDF 给出的是稠密语义向量，「手机」与「应用」这类近义词会自动在向量空间中相互靠近", "TF-IDF 以词频与逆文档频率加权，长于刻划词语对单篇文档的重要性，实现简单高效，但其稀疏的词表维度本身不携带词间语义关系", "词嵌入（如 word2vec）把词映射为稠密向量以刻画语义相似性，适合近义词、类比等任务，但单个向量并不直接给出可读的「主题」结构"],
+      "en": ["LDA outputs document-topic and topic-word distributions whose topics can be read directly, fitting for discovering the latent topic structure of a document collection — exactly the property the course exploits for unified quantification", "TF-IDF yields dense semantic vectors in which near-synonyms such as 'phone' and 'app' automatically move close together in the vector space", "TF-IDF weights terms by term frequency and inverse document frequency, is good at capturing a term's importance to a single document, and is simple and efficient; yet its sparse vocabulary dimensions themselves carry no inter-word semantics", "Word embeddings (e.g., word2vec) map words to dense vectors capturing semantic similarity, fitting tasks like near-synonyms and analogies, but a single vector does not directly give a readable 'topic' structure"]
+    },
+    "answer": [0, 2, 3],
+    "hint": {
+      "zh": "三种表示各有所长：概率主题、词项重要性加权、稠密语义向量——注意别把词嵌入的性质安到 TF-IDF 头上。",
+      "en": "Each representation has its strength: probabilistic topics, term-importance weighting, dense semantic vectors — be careful not to ascribe word-embedding properties to TF-IDF."
+    },
+    "explanation": {
+      "zh": "课件第51-53页引出手机日志难点与LDA的统一量化。延伸：LDA以「文档=主题的混合、主题=词的分布」给出可解读的潜在结构；TF-IDF以词频与逆文档频率加权的稀疏向量刻划词语对文档的重要性，高效但不表达词间语义；词嵌入（word2vec等）以稠密向量使语义相近的词彼此靠近，适合近义与类比，却不直接输出可读主题。三者适用面不同、不可任意互换；「TF-IDF稠密且近义词自动靠近」混淆了它与词嵌入，故该项错误（见课件二第51-53页）。",
+      "en": "On pp.51-53 the course presents the mobile-log difficulty and LDA's unified quantification. Extension: LDA gives an interpretable latent structure via 'documents = mixtures of topics, topics = distributions over words'; TF-IDF captures a term's importance to a document with sparse vectors weighted by term frequency and inverse document frequency — efficient but silent about inter-word semantics; word embeddings (word2vec and the like) place semantically similar words near each other in dense vectors, fitting near-synonym and analogy tasks but not directly outputting readable topics. The three have different niches and are not interchangeable; 'TF-IDF is dense and pulls near-synonyms together' confuses it with word embeddings, so that option is false (Deck 2, pp.51-53)."
+    },
+    "ref": { "deck": 2, "page": 52 }
   }
 ]

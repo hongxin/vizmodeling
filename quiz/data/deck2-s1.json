@@ -159,5 +159,53 @@
       "en": "P.33 is the 'histogram matrix legend: histogram matrix of global birth rates' (with the reflection question on China's birth-rate trend since 1949); p.30 is the 'scatterplot matrix legend: scatterplot matrix of US state crime rates'. Both case datasets match the statement exactly, so the judgment is True (Deck 2, pp.30 and 33)."
     },
     "ref": { "deck": 2, "page": 33 }
+  },
+  {
+    "id": "d2s1q8",
+    "type": "single",
+    "level": "challenge",
+    "topic": "parallel-coordinates-axis-order",
+    "question": {
+      "zh": "同一组高维数据画成平行坐标图时，仅调换各平行轴的排列顺序，能发现的模式就可能明显不同。延伸到平行坐标的标准优化实践：为什么会这样、常用的改进手段是什么？",
+      "en": "With the same high-dimensional dataset drawn as a parallel coordinates plot, merely permuting the order of the parallel axes can change which patterns are discoverable. Extending to standard optimization practice for parallel coordinates: why does this happen, and what is the common remedy?"
+    },
+    "options": {
+      "zh": ["轴序完全无关紧要：折线要穿过所有轴，所以任何排列下任意两维之间的相关结构都同样一目了然", "两个变量的相关结构只有在对应两轴相邻时才容易被直接观察（相邻轴之间折线束的同向或交叉）；因此按相关性等度量重排轴序、让强相关的变量相邻，是发现模式的标准优化手段", "轴序的影响微乎其微，平行坐标的轴排列问题从未被研究过", "各轴必须严格按照变量在数据表中的列序排列，重排轴序属于对数据的人为篡改"],
+      "en": ["Axis order is completely irrelevant: since each polyline crosses all axes, the correlation structure between any two dimensions is equally visible under every permutation", "The correlation between two variables is easy to observe directly only when their axes are adjacent (the same-direction bundling or crossing of line segments between adjacent axes); hence reordering axes guided by measures such as correlation, so that strongly correlated variables sit next to each other, is the standard optimization for pattern discovery", "Axis order matters little, and the axis-ordering problem of parallel coordinates has never been studied", "The axes must follow the column order of the variables in the data table exactly; reordering them amounts to tampering with the data"]
+    },
+    "answer": [1],
+    "hint": {
+      "zh": "回忆第35页SAT图例：折线在哪两根轴之间的走向暴露了变量间的关系？不相邻的两维呢？",
+      "en": "Recall the SAT legend on p.35: between which two axes does a polyline's direction reveal a variable relationship? And what about two non-adjacent dimensions?"
+    },
+    "explanation": {
+      "zh": "课件第34-35页引出平行坐标图的基本框架与「美国各州高中生SAT平均成绩」图例：每个维度一根平行轴、每个数据项一条折线。延伸：两维之间的相关（正相关的同向束、负相关的交叉）只有在两轴相邻时才容易被直接读出，因此轴的排列顺序决定了哪些模式能被发现；实践中常以相关性等度量引导重排轴序（axis reordering），把强相关的变量排到相邻位置以突出结构。「任何排列同样清晰」「从未被研究」「必须保持列序」均与此矛盾（见课件二第34-35页）。",
+      "en": "On pp.34-35 the course gives the basic framework of parallel coordinates and the 'average SAT scores of US high-school students by state' legend: one parallel axis per dimension, one polyline per data item. Extension: the correlation between two dimensions — same-direction bundles for positive correlation, crossings for negative — is easy to read directly only when their axes are adjacent, so the axis order determines which patterns can be discovered; in practice axes are reordered guided by measures such as correlation (axis reordering) so that strongly correlated variables become adjacent and their structure stands out. 'Equally visible under every permutation', 'never studied', and 'must follow the table column order' all contradict this (Deck 2, pp.34-35)."
+    },
+    "ref": { "deck": 2, "page": 34 }
+  },
+  {
+    "id": "d2s1q9",
+    "type": "multi",
+    "level": "challenge",
+    "topic": "treemap-aspect-ratio",
+    "question": {
+      "zh": "课件第26-27页的 Treemap 用嵌套矩形的面积编码数值。延伸到 Treemap 的一个经典失真问题及其改进方向（如 squarified 算法）：下列哪些说法是正确的？",
+      "en": "The Treemap on pp.26-27 encodes values by the areas of nested rectangles. Extending to a classic distortion problem of Treemaps and its remedies (such as the squarified algorithm): which of the following statements are correct?"
+    },
+    "options": {
+      "zh": ["简单的递归切分（如 slice-and-dice 交替横竖切）可能产生极端扁长的矩形，人眼很难准确比较这类矩形的面积，造成视觉失真", "矩形的长宽比无关紧要，因为人眼对任何长宽比的矩形面积都能同样精确地估计", "squarified treemap 等改进算法在逐块摆放时优化矩形的长宽比、使其尽量接近正方形，从而降低面积误读、提高可读性", "解决长宽比问题的标准做法是放弃矩形，改用饼图扇区来编码层次结点的数值"],
+      "en": ["Simple recursive subdivisions (e.g., slice-and-dice alternating horizontal and vertical splits) can produce extremely elongated rectangles whose areas the human eye can hardly compare accurately, causing visual distortion", "The aspect ratio of a rectangle does not matter, because the eye estimates the areas of rectangles of any aspect ratio equally accurately", "Improved algorithms such as the squarified treemap optimize each rectangle's aspect ratio while placing tiles one by one, keeping them close to square, which reduces area misreading and improves readability", "The standard fix for the aspect-ratio problem is to abandon rectangles and encode the values of hierarchy nodes with pie-chart sectors instead"]
+    },
+    "answer": [0, 2],
+    "hint": {
+      "zh": "看第27页图例里的矩形：一条细缝般的矩形和一块近正方形的矩形，谁的面积更好估？改进算法的目标正是控制长宽比。",
+      "en": "Look at the tiles in the p.27 legend: between a slit-like rectangle and a nearly square one, whose area is easier to estimate? Improved algorithms aim exactly at controlling the aspect ratio."
+    },
+    "explanation": {
+      "zh": "课件第26-27页引出Treemap的基本框架与图例：层次结点映射为嵌套矩形、面积编码数值。延伸：经典 slice-and-dice 切分常产生极端扁长的矩形，而人对细长矩形的面积估计明显失真；Bruls、Huizing 与 van Wijk（2000）提出的 squarified treemap 以「长宽比尽量接近 1」为优化目标逐块摆放，成为广泛采用的标准改进。「长宽比无关紧要」与视知觉事实及这些改进的动机矛盾，「改用饼图扇区」也不是层次占比编码的通行做法（见课件二第26-27页）。",
+      "en": "On pp.26-27 the course gives Treemap's basic framework and legend: hierarchy nodes map to nested rectangles with area encoding value. Extension: the classic slice-and-dice subdivision often produces extremely elongated rectangles, and human area estimation of such slivers is markedly distorted; the squarified treemap proposed by Bruls, Huizing and van Wijk (2000) places tiles one by one with the optimization goal of keeping aspect ratios close to 1, becoming a widely adopted standard remedy. 'Aspect ratio does not matter' contradicts both the perceptual fact and the very motive of these improvements, and 'switch to pie sectors' is not the accepted practice for encoding hierarchical shares either (Deck 2, pp.26-27)."
+    },
+    "ref": { "deck": 2, "page": 26 }
   }
 ]

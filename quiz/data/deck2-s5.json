@@ -159,5 +159,29 @@
       "en": "On p.79, under 'visualization and knowledge engineering: big-data intelligence', the 'ternary space' comprises physical space, human society, and information space; the basic architecture and platform are to integrate data-driven, symbolic-logic and probabilistic models, connecting humans with information space through dialogue interactions such as visualization interaction and augmented reality. The statement matches the page, so the judgment is True (Deck 2, p.79)."
     },
     "ref": { "deck": 2, "page": 79 }
+  },
+  {
+    "id": "d2s5q8",
+    "type": "single",
+    "level": "challenge",
+    "topic": "human-in-the-loop",
+    "question": {
+      "zh": "课件第69页提出混合增强人工智能的混合形式——「人类智能+机器智能」（如达芬奇手术机器人），第79页主张以可视化交互等对话交互连接人与信息空间。延伸到人在回路（human-in-the-loop）系统的任务分配设计：下列哪种方式最符合人机各展所长的原则？",
+      "en": "On p.69 the course proposes hybrid-augmented intelligence's mixed form — 'human intelligence + machine intelligence' (e.g., the Da Vinci surgical robot) — and p.79 advocates connecting humans with information space through dialogue interactions such as visualization interaction. Extending to task allocation in human-in-the-loop system design: which option best follows the principle of playing to each side's strengths?"
+    },
+    "options": {
+      "zh": ["全部环节交给机器自动完成，人只在系统彻底瘫痪后才被动介入", "全部环节交给人手工处理，机器仅负责把结果排版成幻灯片", "重复、大规模的计算与模式检索交给机器；价值判断、例外情形的裁量与最终决策留给人，并借助可视化交互让人随时理解、监督并修正机器的输出", "人负责高速算术与海量检索，机器负责伦理权衡与价值判断"],
+      "en": ["Hand every step to the machine to automate; humans step in passively only after the system breaks down completely", "Hand every step to humans for manual processing; the machine merely formats the results into slides", "Give repetitive, large-scale computation and pattern retrieval to the machine; leave value judgments, discretion over exceptional cases, and final decisions to humans, with visualization interaction keeping humans able to understand, supervise, and correct the machine's output at any time", "Humans handle high-speed arithmetic and massive retrieval, while machines handle ethical trade-offs and value judgments"]
+    },
+    "answer": [2],
+    "hint": {
+      "zh": "想想达芬奇手术机器人：机器稳、准、不知疲倦，医生做判断、担责任——哪类环节天然属于人？",
+      "en": "Think of the Da Vinci surgical robot: the machine is steady, precise, and tireless, while the surgeon judges and bears responsibility — which steps naturally belong to the human?"
+    },
+    "explanation": {
+      "zh": "课件第69页引出混合增强智能「人类智能+机器智能」的混合形式（如达芬奇手术机器人——机器执行稳定精准的操作，医生掌控手术决策），第79页强调以可视化交互等对话交互连接人与信息空间。延伸：人在回路（HITL）系统的标准分工——机器承担重复、快速、大规模的计算与模式匹配，人承担价值判断、例外裁量与常识推理，可视化等交互界面维持人的知情、监督与修正权。「全自动、人只兜底」与「全人工」都放弃了混合增强，「人管计算、机器管伦理」恰好把分工说反（见课件二第69、79页）。",
+      "en": "On p.69 the course introduces hybrid-augmented intelligence's mixed form of 'human intelligence + machine intelligence' (e.g., the Da Vinci surgical robot — the machine performs the steady, precise operations while the surgeon commands the decisions), and p.79 stresses connecting humans with information space via dialogue interactions such as visualization interaction. Extension: the standard division of labor in human-in-the-loop (HITL) systems — machines take repetitive, fast, large-scale computation and pattern matching; humans take value judgments, discretion over exceptions, and common-sense reasoning, with interactive interfaces such as visualization keeping humans informed, supervising, and able to correct. 'Fully automatic with humans as last resort' and 'fully manual' both abandon hybrid augmentation, and 'humans compute while machines judge ethics' states the split exactly backwards (Deck 2, pp.69 & 79)."
+    },
+    "ref": { "deck": 2, "page": 69 }
   }
 ]
