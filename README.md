@@ -18,7 +18,7 @@ A short course of visual modeling
 - 2024-09-19 [Slides-2](https://github.com/hongxin/vizmodeling/blob/main/2024/vizmodeling-2.pdf)
 
 ## Self-Test
-Practice what you learned — 9 short bilingual quizzes (62 questions) with instant feedback, no account needed:
+Practice what you learned — 9 short bilingual quizzes (81 questions, incl. 19 challenge-tier) with instant feedback, no account needed:
 
 👉 https://hongxin.github.io/vizmodeling/quiz/
 
