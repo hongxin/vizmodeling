@@ -13,7 +13,7 @@ quiz/
 │   └── quiz.css
 ├── data/
 │   ├── sections.json   # 9 个小节的元数据（题数声明）
-│   └── deck1-s1.json … deck2-s5.json   # 题库（62 题，中英双语）
+│   └── deck1-s1.json … deck2-s5.json   # 题库（81 题（含 19 道挑战题），中英双语）
 └── tests/              # node:test 单测 + 题库校验器
 ```
 
@@ -27,7 +27,7 @@ cd quiz && npm test && npm run validate
 
 `validate` 会逐题校验结构（id/type/双语字段/答案下标/ref 页码）并与 `sections.json` 声明的题型配比核对——这是题库内容的质量闸门（代替运行时校验）。
 
-新增题目：按现有题目结构写入对应 `deckX-sY.json`，id 取 `d<课件>s<节>q<序号>`，同步更新 `sections.json` 的 `counts`，跑上述命令直至 `OK: 9 sections, 62 questions, 0 errors`（题数变化时以新总数为准）。
+新增题目：按现有题目结构写入对应 `deckX-sY.json`，id 取 `d<课件>s<节>q<序号>`，同步更新 `sections.json` 的 `counts`，跑上述命令直至 `OK: 9 sections, 81 questions, 0 errors`（题数变化时以新总数为准）。挑战题需带 `"level": "challenge"` 字段。
 
 ## 设计文档
 

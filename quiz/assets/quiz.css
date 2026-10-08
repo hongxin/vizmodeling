@@ -23,6 +23,7 @@ main { max-width: 760px; margin: 0 auto; padding: 20px 16px 60px; }
 .badge { display: inline-block; font-size: .75rem; border-radius: 999px; padding: 1px 10px; border: 1px solid var(--line); color: var(--muted); }
 .badge.in-progress { color: #9a6700; border-color: #d4a72c66; background: #fff8c5; }
 .badge.mastered { color: var(--ok); border-color: #1a7f3755; background: #dafbe1; }
+.badge.challenge { color: #8250df; border-color: #8250df55; background: #fbefff; }
 button.danger { background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: .8rem; }
 button.danger:hover { color: var(--bad); border-color: var(--bad); }
 

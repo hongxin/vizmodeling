@@ -5,10 +5,10 @@ import { readFileSync, existsSync } from 'node:fs';
 const dataDir = new URL('../data/', import.meta.url);
 const manifest = JSON.parse(readFileSync(new URL('sections.json', dataDir), 'utf8'));
 
-const SPEC_COUNTS = { // spec 第3节表格：id -> [single, multi, judge, 总数]
-  'deck1-s1': [4, 2, 1, 7], 'deck1-s2': [4, 0, 2, 6], 'deck1-s3': [5, 2, 1, 8], 'deck1-s4': [4, 2, 1, 7],
-  'deck2-s1': [4, 2, 1, 7], 'deck2-s2': [5, 2, 1, 8], 'deck2-s3': [5, 0, 2, 7], 'deck2-s4': [3, 2, 0, 5],
-  'deck2-s5': [4, 2, 1, 7],
+const SPEC_COUNTS = { // spec 第8节挑战题扩展层表格：id -> [single, multi, judge, 总数]
+  'deck1-s1': [5, 3, 1, 9], 'deck1-s2': [5, 0, 3, 8], 'deck1-s3': [7, 2, 1, 10], 'deck1-s4': [5, 3, 1, 9],
+  'deck2-s1': [5, 3, 1, 9], 'deck2-s2': [7, 3, 1, 11], 'deck2-s3': [7, 0, 3, 10], 'deck2-s4': [4, 3, 0, 7],
+  'deck2-s5': [5, 2, 1, 8],
 };
 
 test('sections.json 共9节、id/文件/计数符合spec', () => {

@@ -22,14 +22,14 @@ const T = {
     deck: '课件', page: '第', correct: '✓ 答对了', incorrect: '✗ 答错了', explanation: '解析', multiNote: '多选题：全部选对方可得分',
     resultTitle: '成绩单', yourScore: '得分', retry: '再测一次', backHome: '返回总览', attemptCorrect: '本次答对',
     reviewNote: '以下题目你曾答错。自由练习，作答不计入成绩。', reviewEmpty: '暂无错题，继续保持！', practiceOnly: '练习',
-    loadError: '题库加载失败：请刷新重试或检查网络。', noHintNote: '看过提示后答对的题不计入「独立掌握」。', langBtn: 'EN' },
+    loadError: '题库加载失败：请刷新重试或检查网络。', noHintNote: '看过提示后答对的题不计入「独立掌握」。', langBtn: 'EN', challenge: '挑战' },
   en: { overview: 'Sections', review: 'Wrong Questions', progress: 'Overall', masteredOf: 'Mastered', clearAll: 'Clear all progress', confirmClear: 'Clear all local progress? This cannot be undone.',
     questions: 'questions', best: 'Best', wrongBank: 'Wrong', notStarted: 'Not started', inProgress: 'In progress', mastered: 'Mastered',
     qOf: 'Question', of: ' of ', submit: 'Submit', next: 'Next', finish: 'Finish', hint: '💡 Hint', seeSlides: '📄 Slides',
     deck: 'Deck', page: ' p.', correct: '✓ Correct', incorrect: '✗ Incorrect', explanation: 'Explanation', multiNote: 'Multiple answers — select all correct options',
     resultTitle: 'Result', yourScore: 'Score', retry: 'Retry', backHome: 'Home', attemptCorrect: 'Correct this run',
     reviewNote: 'Questions you got wrong before. Practice freely — not recorded.', reviewEmpty: 'No wrong questions yet. Great job!', practiceOnly: 'Practice',
-    loadError: 'Failed to load questions. Refresh or check your network.', noHintNote: 'Answers correct after viewing a hint do not count as independent mastery.', langBtn: '中文' },
+    loadError: 'Failed to load questions. Refresh or check your network.', noHintNote: 'Answers correct after viewing a hint do not count as independent mastery.', langBtn: '中文', challenge: 'Challenge' },
 };
 const t = k => T[lang][k] ?? k;
 const badgeKey = m => m === 'in-progress' ? 'inProgress' : m === 'not-started' ? 'notStarted' : 'mastered';
@@ -166,7 +166,8 @@ function drawQuestion() {
     <div class="qbar"><div style="width:${Math.round((idx + (answered ? 1 : 0)) / order.length * 100)}%"></div></div>
     <div class="qcard">
       <div class="qmeta"><span>${esc(t('qOf'))} ${idx + 1}${esc(t('of'))}${order.length}</span>
-        <span>${esc(q.type === 'multi' ? t('multiNote') : '')}</span></div>
+        <span>${esc(q.type === 'multi' ? t('multiNote') : '')}</span>
+        ${q.level === 'challenge' ? `<span class="badge challenge">${esc(t('challenge'))}</span>` : ''}</div>
       <p class="qtext">${esc(q.question[lang])}</p>
       <div class="opts">${optsHtml}</div>
       ${hintText}${feedback}
@@ -286,7 +287,7 @@ async function viewReview() {
     <h3 style="color:var(--blue-dark)">${esc(s.title[lang])}</h3>
     ${qs.map(q => `
       <div class="review-item" data-qid="${q.id}">
-        <div class="qmeta note">${esc(t('practiceOnly'))}</div>
+        <div class="qmeta note">${esc(t('practiceOnly'))}${q.level === 'challenge' ? ` <span class="badge challenge">${esc(t('challenge'))}</span>` : ''}</div>
         <p class="qtext">${esc(q.question[lang])}</p>
         <div class="opts">${q.options.zh.map((_, i) =>
           `<button type="button" class="opt" data-opt="${i}">${esc(q.options[lang][i])}</button>`).join('')}</div>
